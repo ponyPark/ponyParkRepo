@@ -1,4 +1,4 @@
 <? 
 
-echo('true');
+echo('false');
 ?>

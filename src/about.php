@@ -48,30 +48,22 @@ September 14, 2013
 			</ol>
 		</nav>
 
-		<div class="hpContent">
-			<h2>Parking Availability</h2>
-			<p class = "details">Use the map below or the list view to the right to see the parking availability.</p>
-			<iframe width="640" height="480" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Southern+Methodist+University,+Dallas,+TX&amp;aq=1&amp;oq=southern+me&amp;sll=32.820665,-96.731542&amp;sspn=1.09636,2.112122&amp;ie=UTF8&amp;hq=Southern+Methodist+University,+Dallas,+TX&amp;t=m&amp;cid=13862021070155502638&amp;hnear=&amp;ll=32.85349,-96.784315&amp;spn=0.034609,0.054932&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br />
-			<div id="listView">
-				<!-- This list will be dynamically implemented from DB using javascript 
-					If a garage's rating is scarce/full make red
-					some - yellow
-					plenty/empty - green
-					This will likely be implement in iteration 2 because it requires calculation algorithim.  Hard code to examine aesthetic effects for now
+		<div class="hpContent" id = "whatsPonyPark">
+			<h2> What's PonyPark?</h2>
+			<p class = "details">We've all been in that dreadful position; you need to be somewhere, but you can't find a parking spot.  We hate it when that happens.  Fortunately for you, we chose to do something to help solve this problem....PonyPark. </p>
+			<p class = "details">
+				PonyPark is a parking finder service.  The service is based on realtime data submitted by real people.  The very people who use the service are the ones who post the information.  Our service was built specifically for the students, faculty, and community members of Southern Methodist University.  Our service allows users to see the availability as reported by other users.  When you are on your way to campus, simply check PonyPark for the availability, and trot right in to your parking spot.  Remember to report the availability once parked so that other users may benefit.
+			</p>
 
-				!-->
-				<ol>
-					<li style="border: 4px solid red;">Airline Garage <UL> <li>Scarce</li><li>2 Hours Ago</li></ul></li>
-					<li style="border: 4px solid red;">Binkley Garage <UL> <li>Full</li><li>20 Minutes Ago</li></ul></li>
-					<li style="border: 4px solid yellow;">Meadows Garage <UL> <li>Some</li><li>2 Minutes Ago</li></ul></li>
-					<li style="border: 4px solid green;">Moody Garage <UL> <li>Plenty</li><li>25 Minutes Ago</li></ul></li>
-				</ol>
+
+
+
+		</div>
+
+		<div class="hpContent" id = "whenExpanding">
+			<h2> Can I use PonyPark anywhere?</h2>
+			<p class = "details">As of right now, PonyPark is being made to the specifics of Southern Methodist University.  However, we shoot for the stars.  Future releases will support more places.
 			</div>
-
-
-
-
-	</div>
 
 
 
