@@ -34,7 +34,8 @@ nav li{
 	padding: 10px 10px 10px 10px;
 	border-radius: 15px;
 	border: 1px solid black;
-	margin-top: -500px
+	margin-top: -500px;
+	margin-left: 500px;
 
 }
 
@@ -134,7 +135,6 @@ html{
 
 	margin-left: auto;
     margin-right: auto;
-    width: 58%;
     border: solid;
     padding-left: 2%;
     padding-right: 2%;
@@ -179,6 +179,11 @@ footer{
 	margin-left: auto;
     margin-right: auto;
 	margin-top: 80px;
+}
+
+iframe{
+	
+	border: 1px solid black;
 }
 
 footer a {
