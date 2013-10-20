@@ -25,17 +25,17 @@ September 14, 2013
 		Already Registered? Log In.
 			<form id="signInForm" method="POST" action="verify.php">
 				<!--Also will need option for fbook/twitter login once we get that far -->
-			Username/Email:<input type="email" name="email" title="Enter the email address associated with your account" required> Password:<input type="password" name="pw" required>
+			Email:<input type="email" name="email" title="Enter the email address associated with your account" required> Password:<input type="password" name="pw" required>
 				<input type="submit" value="Log In">
 			</form>
 
 		</section>
 		<div id="userOptions">
-			<h2>Welcome back to PonyPark!</h2>
+			<h2>Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!</h2>
 			<ol id="userList">
 				<li><a href="http://nhl.com">Manage Account</a></li>
 				<li><a href="http://nhl.com">Favorite List</a></li>
-				<li><a href="http://nhl.com">Sign Out</a></li>
+				<li><a href="signOut.php">Sign Out</a></li>
 			</ol>
 		</div>
 

@@ -5,5 +5,10 @@ If not, it will echo false.  Otherwise, it will echo true.
 We need this so we can display the MyAccount/Favorites/Signout link on GUI end
 
 */
-echo('false');
+include 'phpapi.php';
+
+
+
+$phpInit = new phpapi();
+echo($phpInit->userStatus());
 ?>

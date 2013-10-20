@@ -3,7 +3,6 @@
  * Designed by BAM Software.
  * This file contains the api for all our php functions.
  * There are other php files that access these functions separately.
- * PONYPARK FALL 2013
  */
 class phpapi
 {
@@ -35,15 +34,12 @@ class phpapi
         $email = $_POST['email'];
         $pw = hash(md5, $_POST['pw']);
         $phone = $_POST['phone'];
-        $address = $_POST['address'];
-        $city = $_POST['city'];
-        $state = $_POST['state'];
-        $zip = $_POST['zip'];
+        $username = $fname. ' ' .$lname;
+
         $auth = 0;
-        $query = "INSERT INTO Users(MailingList,FirstName,LastName,Email,
-            Password,PhoneNumber,Address,City,State,ZipCode,Privilege) VALUES 
-            ('$mailList','$fname','$lname','$email','$pw','$phone','$address',
-            '$city','$state','$zip','$auth')";
+        $query = "INSERT INTO Users(Username,Email,
+            Password,PhoneNumber,UserType) VALUES 
+            ('$username','$email','$pw','$phone','$auth')";
         if(!mysql_query($query))
         {
             return false;
@@ -73,24 +69,32 @@ class phpapi
 
         $info = mysql_fetch_array( $result );
 
-        $ipaddress = substr((string)$_SERVER['REMOTE_ADDR'], 0,7);
-        
-        if($info['Privilege'] == 1 && $ipaddress == "129.119")
-        {
-            header ('Location: analytics.php');
-        }
-        else if(mysql_num_rows($result) > 0)
+        if(mysql_num_rows($result) > 0)
         {
             $_SESSION['logged'] = true;
             $_SESSION['userEmail'] = $info['Email'];
             //Added the user to the session since we use
             //that for adding favorites, etc.
             $_SESSION['userID'] = $info['UserID'];
-            header ('Location: order.php'); 
+            $_SESSION['userName'] = $info['Username'];
+            header ('Location: index.php'); 
         }
 
         
     }
+
+    public function userStatus(){
+        if($_SESSION['logged'] == true ) return "true";
+        else return "false";
+    }
+
+    public function signOut(){
+        $_SESSION = array();
+        session_destroy();
+        header ('Location: index.php');
+    }
+
+
     
     /**
      * A function to add a favorite cupcake to a certain user's database with two
