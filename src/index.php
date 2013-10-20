@@ -65,8 +65,9 @@ September 14, 2013
 
 				!-->
 				<ol>
-					<li style="border: 4px solid red;">Airline Garage <UL> <li>Scarce</li><li>2 Hours Ago</li></ul></li>
-					<li style="border: 4px solid red;">Binkley Garage <UL> <li>Full</li><li>20 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="http://nhl.com">Airline Garage </a><UL> <li>Scarce</li><li>2 Hours Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="http://nhl.com">Binkley Garage </a><UL> <li>Full</li><li>20 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="http://nhl.com">Commuter Lot </a><UL> <li>Full</li><li>3 Minutes Ago</li></ul></li>
 					<li style="border: 4px solid yellow;">Meadows Garage <UL> <li>Some</li><li>2 Minutes Ago</li></ul></li>
 					<li style="border: 4px solid green;">Moody Garage <UL> <li>Plenty</li><li>25 Minutes Ago</li></ul></li>
 				</ol>
