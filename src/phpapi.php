@@ -15,10 +15,10 @@ class phpapi
     {
         session_start();
 
-        $con = mysql_connect("localhost", "cupcake", "cupcake");
+        $con = mysql_connect("localhost", "ponypark", "ponypark");
         if(!$con)
             die('Could not connect: ' . mysql_error());
-        mysql_select_db("CustomCupcakes", $con)
+        mysql_select_db("PonyPark", $con)
         or die("Unable to select database: " . mysql_error());
     }
 
