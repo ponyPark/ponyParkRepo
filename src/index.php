@@ -63,13 +63,17 @@ September 14, 2013
 					plenty/empty - green
 					This will likely be implement in iteration 2 because it requires calculation algorithim.  Hard code to examine aesthetic effects for now
 
+					All garages will point to the same link: garage.php, but will have its garage ID (received from DB) appended to the link.  
+					For example, Garage with ID 7 will have the link garage.php?garageID=7
+					This will be very easy to have garage.php populate the request page because we just get all the info from the DB using the ID.
+
 				!-->
 				<ol>
-					<li style="border: 4px solid red;"><a href="http://nhl.com">Airline Garage </a><UL> <li>Scarce</li><li>2 Hours Ago</li></ul></li>
-					<li style="border: 4px solid red;"><a href="http://nhl.com">Binkley Garage </a><UL> <li>Full</li><li>20 Minutes Ago</li></ul></li>
-					<li style="border: 4px solid red;"><a href="http://nhl.com">Commuter Lot </a><UL> <li>Full</li><li>3 Minutes Ago</li></ul></li>
-					<li style="border: 4px solid yellow;">Meadows Garage <UL> <li>Some</li><li>2 Minutes Ago</li></ul></li>
-					<li style="border: 4px solid green;">Moody Garage <UL> <li>Plenty</li><li>25 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="garage.php">Airline Garage </a><UL> <li>Scarce</li><li>2 Hours Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="garage.php">Binkley Garage </a><UL> <li>Full</li><li>20 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="garage.php">Commuter Lot </a><UL> <li>Full</li><li>3 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid yellow;"><a href="garage.php">Meadows Garage</a> <UL> <li>Some</li><li>2 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid green;"><a href="garage.php">Moody Garage </a><UL> <li>Plenty</li><li>25 Minutes Ago</li></ul></li>
 				</ol>
 			</div>
 
