@@ -174,7 +174,7 @@ class phpapi
         $requestInfoJSON = $_POST['requestInfo'];
         if (empty($requestInfoJSON)) return false;
 
-        // Retrieve the values from the session and the post.
+        // Retrieve the UserID.
         $userID = $_SESSION['userID'];
 
         // Read the JSON.
@@ -192,6 +192,27 @@ class phpapi
             mysql_real_escape_string($requestInfo['address']) . "', $cost,'" . 
             $requestInfo['numLevels'] . "', $comments, 0)"; 
         $result = mysql_query($query);
+    }
+
+    /**
+     * Gets all the info on requests for parking garages that a user has made.
+     * @return JSON A list of requested garages by a user.
+     */
+    public function getRequests()
+    {
+        // Retrieve the UserID.
+        $userID = $_SESSION['userID'];
+
+        // Get the list of requests that a user has made.
+        $query = "SELECT Name, Address, Cost, NumberOfLevels, Comments, Status 
+            FROM Requests WHERE UserID = '$userID' ORDER BY RequestID DESC";
+        $result = mysql_query($query);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('RequestedGarages' => $rows));
     }
 }
 ?>
