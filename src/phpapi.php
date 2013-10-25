@@ -150,7 +150,6 @@ class phpapi
     public function addRating($parkingID)
     {
         $level = $_POST['level'];
-        $timestamp = /**/;
         $userID = $_SESSION['userID'];
         $rating = $_POST['rating'];
         $query = "INSERT INTO Ratings ($parkingID, $level, $timestamp, $userID, 
