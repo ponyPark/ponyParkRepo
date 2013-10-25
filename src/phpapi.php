@@ -147,7 +147,7 @@ class phpapi
 
     /**
      * A function to add a rating to the database.
-     * @param ...
+     * @param INT $parkingID The ID of the parking location.
      */
     public function addRating($parkingID)
     {
@@ -164,14 +164,6 @@ class phpapi
             Rating) VALUES ('$parkingID', '" . $ratingInfo['level'] . 
             "', NOW(), '$userID', '" . $ratingInfo['rating'] . "')";
         $result = mysql_query($query);
-    }
-
-    /**
-     * A function to add a rating to the database.
-     */
-    public function getRating()
-    {
-
     }
 }
 ?>
