@@ -106,6 +106,7 @@ class phpapi
     /**
      * A function to get information for a specific parking location given a
      * ParkingID.
+     * @param ...
      * @return JSON The information for the requested parking location.
      */
     public function getParkingInfo($parkingID)
@@ -146,14 +147,21 @@ class phpapi
 
     /**
      * A function to add a rating to the database.
+     * @param ...
      */
     public function addRating($parkingID)
     {
-        $level = $_POST['level'];
+        $ratingInfoJSON = $_POST['ratingInfo'];
+        if (empty($ratingInfoJSON)) return false;
+
+        // Retrieve the values from the session and the post.
         $userID = $_SESSION['userID'];
-        $rating = $_POST['rating'];
-        $query = "INSERT INTO Ratings ($parkingID, $level, $timestamp, $userID, 
-            $rating";
+
+        // Read the JSON.
+        $ratingInfo = (array) json_decode($ratingInfoJSON);
+
+        $query = "INSERT INTO Ratings ('$parkingID', $ratingInfo['level'], 
+            NOW(), '$userID', $ratingInfo['rating'])";
         $result = mysql_query($query);
     }
 
