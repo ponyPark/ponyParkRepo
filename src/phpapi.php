@@ -106,7 +106,7 @@ class phpapi
     /**
      * A function to get information for a specific parking location given a
      * ParkingID.
-     * @param ...
+     * @param INT $parkingID The ID of the parking location.
      * @return JSON The information for the requested parking location.
      */
     public function getParkingInfo($parkingID)
@@ -163,6 +163,34 @@ class phpapi
         $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
             Rating) VALUES ('$parkingID', '" . $ratingInfo['level'] . 
             "', NOW(), '$userID', '" . $ratingInfo['rating'] . "')";
+        $result = mysql_query($query);
+    }
+
+     /**
+     * A function to add a request for a parking garage.
+     */
+    public function addRequest()
+    {
+        $requestInfoJSON = $_POST['requestInfo'];
+        if (empty($requestInfoJSON)) return false;
+
+        // Retrieve the values from the session and the post.
+        $userID = $_SESSION['userID'];
+
+        // Read the JSON.
+        $requestInfo = (array) json_decode($requestInfoJSON);
+
+        //Change comments and cost if NULL
+        $cost = empty($requestInfo['cost']) ? "NULL" : "'" . $requestInfo['cost'] . "'";
+        $comments = empty($requestInfo['commments']) ? "NULL" : "'" .
+            mysql_real_escape_string($requestInfo['comments']) . "'";
+        
+        //Query to insert request into the table
+        $query = "INSERT INTO Requests (UserID, Name, Address, Cost, 
+            NumberOfLevels, Comments, Status) VALUES ('$userID', '" . 
+            mysql_real_escape_string($requestInfo['name']) . "','" .
+            mysql_real_escape_string($requestInfo['address']) . "', $cost,'" . 
+            $requestInfo['numLevels'] . "', $comments, 0)"; 
         $result = mysql_query($query);
     }
 }
