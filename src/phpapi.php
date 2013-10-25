@@ -214,5 +214,31 @@ class phpapi
             $rows[] = $temp;
         return json_encode(array('RequestedGarages' => $rows));
     }
+
+    /**
+     * Gets all requests with status of 0 for Admins to view.
+     * @return JSON A list of all the requests with status 0.
+     */
+    public function getAllRequests()
+    {
+        // Get the list of requests.
+        $query = "SELECT RequestID, Name, Address, Cost, NumberOfLevels, Comments, Status 
+            FROM Requests WHERE Status = 0 ORDER BY RequestID ASC";
+        $result = mysql_query($query);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('Requested' => $rows));        
+    }
+
+    /**
+     * Allows Admin to change status for parking location requests.
+     */
+    public function editRequests($requestID)
+    {
+
+    }
 }
 ?>
