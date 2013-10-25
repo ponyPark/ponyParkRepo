@@ -160,8 +160,9 @@ class phpapi
         // Read the JSON.
         $ratingInfo = (array) json_decode($ratingInfoJSON);
 
-        $query = "INSERT INTO Ratings ('$parkingID', $ratingInfo['level'], 
-            NOW(), '$userID', $ratingInfo['rating'])";
+        $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
+            Rating) VALUES ('$parkingID', '" . $ratingInfo['level'] . 
+            "', NOW(), '$userID', '" . $ratingInfo['rating'] . "')";
         $result = mysql_query($query);
     }
 
