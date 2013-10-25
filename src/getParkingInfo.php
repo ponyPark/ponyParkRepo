@@ -2,5 +2,5 @@
     include "phpapi.php";
     $parkingID = $_GET['parkingID'];
     $phpInit = new phpapi();
-    echo($phpInit->getParkingInfo());
+    echo($phpInit->getParkingInfo($parkingID));
 ?>
