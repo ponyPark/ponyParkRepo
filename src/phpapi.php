@@ -104,6 +104,25 @@ class phpapi
     }
 
     /**
+     * A function to get information for a specific parking location given a
+     * ParkingID.
+     * @return JSON The information for the requested parking location.
+     */
+    public function getParkingInfo($parkingID)
+    {
+        // Get the parking information for the requested garage.
+        $query = "SELECT *, (SELECT Ratings.Rating FROM Ratings WHERE 
+            ParkingLocations.ParkingID = Ratings.ParkingID ORDER BY Timestamp 
+            desc limit 1) Rating FROM ParkingLocations WHERE 
+            ParkingLocations.parkingID = '$parkingID'";
+        $result = mysql_query($query);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = mysql_fetch_assoc($result);
+        return json_encode(array('ParkingInfo' => $rows));
+    }
+
+    /**
      * A function to get the list of parking locations for map and list view. 
      * @return JSON A list of the different locations and their ratings.
      */
@@ -125,8 +144,26 @@ class phpapi
 
     }
 
-    
-    
+    /**
+     * A function to add a rating to the database.
+     */
+    public function addRating($parkingID)
+    {
+        $level = $_POST['level'];
+        $timestamp = /**/;
+        $userID = $_SESSION['userID'];
+        $rating = $_POST['rating'];
+        $query = "INSERT INTO Ratings ($parkingID, $level, $timestamp, $userID, 
+            $rating";
+        $result = mysql_query($query);
+    }
 
+    /**
+     * A function to add a rating to the database.
+     */
+    public function getRating()
+    {
+
+    }
 }
 ?>
