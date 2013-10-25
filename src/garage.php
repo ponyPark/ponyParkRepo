@@ -55,7 +55,7 @@ if($_SESSION['logged'] != true){
 		<div class="hpContent">
 			<h2 id="reportAva">Rate the Availability of a Garage</h2>
 			<p class = "details">Use the form below to rate the availbility of this garage.</p>
-			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="reportAva.php">
+			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
             </form>
 
 
