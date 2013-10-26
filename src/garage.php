@@ -1,22 +1,11 @@
 <!-- PonyPark by BAM Software 
 
-	Will need to have a php script that checks to see if the user is logged in and redirect them to the my account page.
+	
 
 -->
 
 
-<?
 
-session_start();
-//if($_SESSION['logged'] != true){
-    //we'll have to disable submit button if the user is not logged in.
-//}
-
-
-                    echo "<span id= 'garageID' style='display:none;'>" . $_GET["garageID"] . "</span>";
-
-
-?>
 
 <!DOCTYPE html>
 
@@ -31,9 +20,23 @@ session_start();
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</head>
 	<body>
+		<div>
+			<?
+
+				session_start();
+				//if($_SESSION['logged'] != true){
+				    //we'll have to disable submit button if the user is not logged in.
+				//}
+
+
+                echo "<span id= 'garageID' style='display:none;'>" . $_GET["garageID"] . "</span>";
+
+
+						?>
+		</div>
 			<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
 		<p id = "slogan">Trot Right In</p>
-		<section id="signIn" style="padding-bottom: 0px;">
+		<section id="signIn">
 			Already Registered? Log In.
 			<form id="signInForm" method="POST" action="verify.php">
 				<!--Also will need option for fbook/twitter login once we get that far -->
