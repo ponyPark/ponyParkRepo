@@ -13,6 +13,8 @@ USE PonyPark;
 
 CREATE TABLE IF NOT EXISTS `Users` (
   `UserID` int NOT NULL AUTO_INCREMENT,
+  `FirstName` varchar(50) NOT NULL,
+  `LastName` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(64) DEFAULT NULL,
   `PasswordSalt` varchar(50) DEFAULT NULL,
