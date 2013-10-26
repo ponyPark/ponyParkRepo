@@ -252,5 +252,48 @@ class phpapi
             mysql_query($query);
         }
     }
+
+    /**
+     * Add a favorite garage for a user.
+     * @param INT $parkingID The ID of the parking location.
+     */
+    public function addFavorites($parkingID)
+    {
+        // Retrieve the UserID.
+        $userID = $_SESSION['userID'];
+
+        //Get the highest priority plus 1
+        $query = "SELECT IFNULL(max(Priority)+1,1) priority FROM FavoriteGarages
+            WHERE UserID = '$userID'";
+        $priority = mysql_fetch_assoc(mysql_query($query));
+
+        //Add a favorite garage.
+        $query = "INSERT INTO FavoriteGarages(UserID, ParkingID, Priority)
+            VALUES('$userID', '$parkingID', '" . $priority["priority"] . "')";
+        $result = mysql_query($query);    
+    }
+
+    /**
+     * Get the favorite garages for a user.
+     * @return JSON The list of favorite garages.
+     */
+    public function getFavorites()
+    {
+        // Retrieve the UserID.
+        $userID = $_SESSION['userID'];
+
+        //Get the list of favorite garages.
+        $query = "SELECT * FROM FavoriteGarages WHERE UserID = '$userID' ORDER BY Priority";          
+        $result = mysql_query($query);    
+    
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('Favorites' => $rows));   
+
+
+    }
+
 }
 ?>
