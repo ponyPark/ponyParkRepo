@@ -8,9 +8,9 @@
 <?
 
 session_start();
-if($_SESSION['logged'] != true){
-    header ('Location: error.html');
-}
+//if($_SESSION['logged'] != true){
+    //we'll have to disable submit button if the user is not logged in.
+//}
 
 
                     echo "<span id= 'garageID' style='display:none;'>" . $_GET["garageID"] . "</span>";
@@ -26,16 +26,22 @@ if($_SESSION['logged'] != true){
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css">
 		<script type="text/javascript" src="js/garage.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</head>
 	<body>
-		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
+			<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
 		<p id = "slogan">Trot Right In</p>
-
+		<section id="signIn" style="padding-bottom: 0px;">
+			Already Registered? Log In.
+			<form id="signInForm" method="POST" action="verify.php">
+				<!--Also will need option for fbook/twitter login once we get that far -->
+			Email:<input type="email" name="email" title="Enter the email address associated with your account" required> Password:<input type="password" name="pw" required>
+				<input type="submit" value="Log In"></form>
 		</section>
-		<div id="userOptions" style="display: block;">
-			<h2>Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!</h2>
+		<div id="userOptions">
+			<h2>Welcome back to PonyPark, <? echo($_SESSION['userName']);?>!</h2>
 			<ol id="userList">
 				<li><a href="http://nhl.com">Manage Account</a></li>
 				<li><a href="http://nhl.com">Favorite List</a></li>

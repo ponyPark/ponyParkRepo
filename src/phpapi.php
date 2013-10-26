@@ -28,7 +28,6 @@ class phpapi
     public function addUser()
     {   
         //add a user to the system
-        $mailList = $_POST['mailingList'];
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
@@ -37,9 +36,9 @@ class phpapi
         $username = $fname. ' ' .$lname;
 
         $auth = 0;
-        $query = "INSERT INTO Users(Username,Email,
+        $query = "INSERT INTO Users(Email,
             Password,PhoneNumber,UserType) VALUES 
-            ('$username','$email','$pw','$phone','$auth')";
+            ('$email','$pw','$phone','$auth')";
         if(!mysql_query($query))
         {
             return false;
@@ -76,7 +75,7 @@ class phpapi
             //Added the user to the session since we use
             //that for adding favorites, etc.
             $_SESSION['userID'] = $info['UserID'];
-            $_SESSION['userName'] = $info['Username'];
+            $_SESSION['userName'] = 'Parking Pro';
             header ('Location: index.php'); 
         }
 

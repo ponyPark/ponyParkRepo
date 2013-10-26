@@ -166,6 +166,7 @@ html{
     margin-bottom: -50px;
     background-color: #B2B29E;
     
+    
 
 
 }
@@ -174,7 +175,7 @@ h2{
 
 	border: 1px solid black;
 	padding: 10px 10px 10px 10px;
-	background-color: #285DFF;;
+	background-color: #285DFF;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
 	color: white;
@@ -218,7 +219,7 @@ footer a {
 
 footer a:hover {
 
-	font-color: black;
+	color: black;
 	text-decoration: underline;
 }
 
