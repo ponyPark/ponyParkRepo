@@ -235,10 +235,22 @@ class phpapi
 
     /**
      * Allows Admin to change status for parking location requests.
+     * @param INT $requestID The requestID for a request to be reviewed.
+     * @param INT $status The status of the request to be reviewed.
      */
-    public function editRequests($requestID)
+    public function editRequests($requestID, $status)
     {
+        $query = "UPDATE Requests SET Status = $status WHERE RequestID = $requestID";
+        mysql_query($query);
 
+        if($status == 2)
+        {
+            $query = "INSERT INTO ParkingLocations (Name, Address, Cost, 
+                Comments, NumberOfLevels) SELECT Name, Address, Cost, 
+                Comments, NumberOfLevels FROM Requests WHERE RequestID = 
+                $requestID";
+            mysql_query($query);
+        }
     }
 }
 ?>
