@@ -140,7 +140,39 @@ class phpapi
         while($temp = mysql_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('ParkingLocations' => $rows));
+    }
 
+    /**
+     * Edit a parking location.
+     * @param INT $parkingID The ID of a parking location.
+     * @return boolean True on success, false on error.
+     */
+    public function editParkingLocation($parkingID)
+    {
+        // Get the JSON object for the edited parking location info.
+        $parkingInfoJSON = $_POST['parkingInfo'];
+        if (empty($parkingInfoJSON)) return false;
+
+        // Read the JSON.
+        $parkingInfo = (array) json_decode($parkingInfoJSON);
+        $name = mysql_real_escape_string($parkingInfo['name']);
+        $address = mysql_real_escape_string($parkingInfo['address']);
+        $cost = $parkingInfo['cost'];
+        $comments = mysql_real_escape_string($parkingInfo['comments']);
+        $numberOfLevels = $parkingInfo['numberOfLevels'];
+
+        //Change comments and cost if NULL
+        $cost = empty($cost) ? "NULL" : "'" . $cost . "'";
+        $comments = empty($comments) ? "NULL" : "'" . $comments . "'";
+
+        // Edit the parking location info.
+        $query = "UPDATE ParkingLocations SET Name = '$name', 
+            Address = '$address', Cost = '$cost', Comments = '$comments', 
+            NumberOfLevels = '$numberOfLevels' WHERE ParkingID = '$parkingID'";
+        if (mysql_query($query))
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -308,17 +340,17 @@ class phpapi
      * as an array. Assumes that 0 is Sunday, and goes to 6 for Saturday.
      * @return boolean True on success, false on error.
      */
-    public function addCommuteTime()
+    public function addCommuteTimes()
     {
         // Get the JSON object for the commute time.
-        $commuteTimeJSON = $_POST['commutes'];
-        if (empty($commuteTimeJSON)) return false;
+        $commuteTimesJSON = $_POST['commutes'];
+        if (empty($commuteTimesJSON)) return false;
 
         // Retrieve the UserID.
         $userID = $_SESSION['userID'];
 
         // Read the JSON.
-        $commutes = (array) json_decode($commuteTimeJSON);
+        $commutes = (array) json_decode($commuteTimesJSON);
 
         // Get the list of days that the commute time applies to.
         $days = (array) $commutes['days'];
@@ -372,8 +404,6 @@ class phpapi
         $query = "DELETE FROM CommuteTimes WHERE CommuteID = '$commuteID'";
         mysql_query($query);    
     }
-
-
 
 
 }
