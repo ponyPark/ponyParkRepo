@@ -330,4 +330,26 @@ class phpapi
             return false;
     }
 }
+
+    /**
+     * Gets a list of the commute times for the current user.
+     * @return JSON The list of commute times for that user.
+     */
+    public function getCommuteTimes()
+    {
+        // Retrieve the UserID.
+        $userID = $_SESSION['userID'];
+
+        //Get the list of commute times.
+        $query = "SELECT CommuteID, Time, Day, WarningTime FROM CommuteTimes 
+        WHERE UserID = '$userID'";          
+        $result = mysql_query($query);
+    
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('CommuteTimes' => $rows));
+    }
+
 ?>
