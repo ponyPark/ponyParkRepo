@@ -292,6 +292,17 @@ class phpapi
     }
 
     /**
+     * Delete a favorite garage for a user.
+     * @param INT $favoriteID The ID of the favorite parking location.
+     */
+    public function deleteFavorites($favoriteID)
+    {
+        //Delete a favorite garage.
+        $query = "DELETE FROM FavoriteGarages WHERE FavoriteID = '$favoriteID'";
+        mysql_query($query);    
+    }
+
+    /**
      * Add a commute time for a user. The user will be able to select multiple
      * days at a time for a single commute time. This function will handle that
      * as an array. Assumes that 0 is Sunday, and goes to 6 for Saturday.
@@ -329,7 +340,6 @@ class phpapi
         else
             return false;
     }
-}
 
     /**
      * Gets a list of the commute times for the current user.
@@ -352,4 +362,19 @@ class phpapi
         return json_encode(array('CommuteTimes' => $rows));
     }
 
+    /**
+     * Delete a commute for a user.
+     * @param INT $commuteID The ID of the commute for a user.
+     */
+    public function deleteCommuteTimes($commuteID)
+    {
+        //Delete a commute time.
+        $query = "DELETE FROM CommuteTimes WHERE CommuteID = '$commuteID'";
+        mysql_query($query);    
+    }
+
+
+
+
+}
 ?>
