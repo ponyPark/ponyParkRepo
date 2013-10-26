@@ -36,9 +36,9 @@ class phpapi
         $username = $fname. ' ' .$lname;
 
         $auth = 0;
-        $query = "INSERT INTO Users(Email,
+        $query = "INSERT INTO Users(FirstName, LastName, Email,
             Password,PhoneNumber,UserType) VALUES 
-            ('$email','$pw','$phone','$auth')";
+            ('$fname','$lname','$email','$pw','$phone','$auth')";
         if(!mysql_query($query))
         {
             return false;
@@ -53,8 +53,7 @@ class phpapi
     /**
      * A function to verify that a user is entering the right information when
      * logging in. By retrieving information from a query to the database. It 
-     * also saves the information into a session. If a user is an employee, they
-     * are sent to the analytics page.
+     * also saves the information into a session. 
      */
     public function verifyUser()
     {
@@ -75,7 +74,7 @@ class phpapi
             //Added the user to the session since we use
             //that for adding favorites, etc.
             $_SESSION['userID'] = $info['UserID'];
-            $_SESSION['userName'] = 'Parking Pro';
+            $_SESSION['userName'] = $info['FirstName'];
             header ('Location: index.php'); 
         }
 
