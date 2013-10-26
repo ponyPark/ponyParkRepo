@@ -14,11 +14,12 @@ function init() {
 	                //save the response from server
 	                //if userLogged.php outputs false, then the signin will display
 	                //if userLogged.php outputs true, then the favorites, logout, and manage account will display
-	            console.log(request.responseText);
 	       		data = request.responseText;
 	       		if(data === "true"){
 	        	$('#signIn').css('display','none');
 	        	$('#userOptions').css('display','block');
+	        	$('nav ol li:first-child a').attr("href", "index.php");
+	        	$('nav ol li:first-child a').text("Home");
 	        	}
 	        	if(data === "false"){
 	        	$('#signIn').css('display','block');
