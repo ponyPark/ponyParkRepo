@@ -161,7 +161,7 @@ class phpapi
         $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
             Rating) VALUES ('$parkingID', '" . $ratingInfo['level'] . 
             "', NOW(), '$userID', '" . $ratingInfo['rating'] . "')";
-        $result = mysql_query($query);
+        mysql_query($query);
     }
 
      /**
@@ -189,7 +189,7 @@ class phpapi
             mysql_real_escape_string($requestInfo['name']) . "','" .
             mysql_real_escape_string($requestInfo['address']) . "', $cost,'" . 
             $requestInfo['numLevels'] . "', $comments, 0)"; 
-        $result = mysql_query($query);
+        mysql_query($query);
     }
 
     /**
@@ -268,7 +268,7 @@ class phpapi
         //Add a favorite garage.
         $query = "INSERT INTO FavoriteGarages(UserID, ParkingID, Priority)
             VALUES('$userID', '$parkingID', '" . $priority["priority"] . "')";
-        $result = mysql_query($query);    
+        mysql_query($query);    
     }
 
     /**
@@ -288,10 +288,46 @@ class phpapi
         $rows = array();
         while($temp = mysql_fetch_assoc($result))
             $rows[] = $temp;
-        return json_encode(array('Favorites' => $rows));   
-
-
+        return json_encode(array('Favorites' => $rows));
     }
 
+    /**
+     * Add a commute time for a user. The user will be able to select multiple
+     * days at a time for a single commute time. This function will handle that
+     * as an array. Assumes that 0 is Sunday, and goes to 6 for Saturday.
+     * @return boolean True on success, false on error.
+     */
+    public function addCommuteTime()
+    {
+        // Get the JSON object for the commute time.
+        $commuteTimeJSON = $_POST['commutes'];
+        if (empty($commuteTimeJSON)) return false;
+
+        // Retrieve the UserID.
+        $userID = $_SESSION['userID'];
+
+        // Read the JSON.
+        $commutes = (array) json_decode($commuteTimeJSON);
+
+        // Get the list of days that the commute time applies to.
+        $days = (array) $commutes['days'];
+
+        // Get the time and warning time.
+        $time = $commutes['time'];
+        $warningTime = $commutes['warningTime'];
+
+        // Changes all values in the days array to (userID, time, warningTime,
+        // value) where value is a specific day
+        foreach ($days as &$value)
+            $value = "('$userID', '$time', '$warningTime', '$value')";
+
+        // Add the commute time.
+        $query = "INSERT INTO CommuteTimes (UserID, Time, WarningTime, Day)
+            VALUES " . implode(",", $days);
+        if (mysql_query($query))
+            return true;
+        else
+            return false;
+    }
 }
 ?>
