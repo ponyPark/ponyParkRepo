@@ -13,7 +13,6 @@ USE PonyPark;
 
 CREATE TABLE IF NOT EXISTS `Users` (
   `UserID` int NOT NULL AUTO_INCREMENT,
-  `Username` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Password` varchar(64) DEFAULT NULL,
   `PasswordSalt` varchar(50) DEFAULT NULL,
@@ -22,7 +21,6 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `ExternalType` varchar(10) NOT NULL,
   `ExternalID` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`UserID`),
-  UNIQUE KEY `Username` (`Username`),
   UNIQUE KEY `Email` (`Email`),
   UNIQUE KEY `ExternalType` (`ExternalType`,`ExternalID`)
 ) ENGINE=InnoDB;
@@ -39,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `ParkingLocations` (
   `Address` varchar(200) NOT NULL,
   `Cost` double DEFAULT NULL,
   `Comments` varchar(250) DEFAULT NULL,
-  `NumberOfLevels` int DEFAULT NULL,
+  `NumberOfLevels` int NOT NULL,
   PRIMARY KEY (`ParkingID`)
 ) ENGINE=InnoDB;
 
@@ -73,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `FavoriteGarages` (
   `ParkingID` int NOT NULL,
   `Priority` int NOT NULL,
   PRIMARY KEY (`FavoriteID`),
+  UNIQUE KEY `UserID` (`UserID`,`ParkingID`),
   CONSTRAINT FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`)
     ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT FOREIGN KEY (`ParkingID`) REFERENCES `ParkingLocations` (`ParkingID`)
@@ -88,13 +87,13 @@ CREATE TABLE IF NOT EXISTS `FavoriteGarages` (
 CREATE TABLE IF NOT EXISTS `Ratings` (
   `RatingID` int NOT NULL AUTO_INCREMENT,
   `ParkingID` int NOT NULL,
-  `UserID` int NOT NULL,
+  `UserID` int DEFAULT NULL,
   `Timestamp` datetime NOT NULL,
   `Rating` int NOT NULL,
-  `Level` int DEFAULT NULL,
+  `Level` int NOT NULL,
   PRIMARY KEY (`RatingID`),
   CONSTRAINT FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`)
-    ON DELETE CASCADE ON UPDATE CASCADE,
+    ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT FOREIGN KEY (`ParkingID`) REFERENCES `ParkingLocations` (`ParkingID`)
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
@@ -111,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `Requests` (
   `Name` varchar(50) NOT NULL,
   `Address` varchar(200) NOT NULL,
   `Cost` double DEFAULT NULL,
-  `NumberOfLevels` int DEFAULT NULL,
+  `NumberOfLevels` int NOT NULL,
   `Comments` varchar(250) DEFAULT NULL,
   `Status` int NOT NULL,
   PRIMARY KEY (`RequestID`),
