@@ -337,7 +337,7 @@ class phpapi
     /**
      * Add a commute time for a user. The user will be able to select multiple
      * days at a time for a single commute time. This function will handle that
-     * as an array. Assumes that 0 is Sunday, and goes to 6 for Saturday.
+     * as an array. Assumes that 1 is Sunday, 7 is Saturday.
      * @return boolean True on success, false on error.
      */
     public function addCommuteTimes()
