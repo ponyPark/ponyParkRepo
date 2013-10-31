@@ -65,6 +65,25 @@
 			<h2 id="reportAva">Rate the Availability of a Garage</h2>
 			<p class = "details">Use the form below to rate the availbility of this garage.</p>
 			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
+				<div>
+					<label>Level</label>
+					<select id="level">
+					</select>
+				</div>
+
+				<div>
+					<label for="full">Full</label>
+					<input type="radio" name="availability" id="full" value="full">
+					<label for="scarce">Scarce</label>
+					<input type="radio" name="availability" id="scarce" value="scarce">
+					<label for="some">Some</label>
+					<input type="radio" name="availability" id="some" value="some">
+					<label for="plenty">Plenty</label>
+					<input type="radio" name="availability" id="plenty" value="plenty">
+					<label for="empty">Empty</label>
+					<input type="radio" name="availability" id="empty" value="empty">
+				</div>
+
             </form>
 
 
