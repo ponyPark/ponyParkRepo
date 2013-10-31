@@ -8,10 +8,10 @@ function init() {
     		console.log(parkID);
 	       var request = new XMLHttpRequest();
 	       //change this URL depending on what Jessica sets it from PHPApi, just pass parkID as one of the git parameters.
-	       var url = '';
+	       var url = 'getParkingInfo.php';
 	       var data;
 
-	       request.open("GET", url, true);
+	       request.open("GET", url+'?parkingID='+parkID, true);
 	       request.send();
 	       request.onreadystatechange = function(e) {
 
@@ -20,7 +20,7 @@ function init() {
 	                //also change the innerHTML of elemnt with ID reportAva to "Rate the Availability of " + garage_name_from_xml_http_request
 	                //Do radio buttons for the availability.
 	                //You'll need to make sure you have a hidden field that passes the garageID to the DB side.
-
+	                data = JSON.parse(request.responseText);
 	      	}
 	   	}
 	        
