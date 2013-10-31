@@ -21,6 +21,10 @@ function init() {
 	                //Do radio buttons for the availability.
 	                //You'll need to make sure you have a hidden field that passes the garageID to the DB side.
 	                data = JSON.parse(request.responseText);
+
+	                document.getElementById('reportAva').innerHTML = "Rate the Availability of " + data.garage_name_from_xml_http_request;
+	                var form = document.getElementById('reportAvaForm');
+	                
 	      	}
 	   	}
 	        
