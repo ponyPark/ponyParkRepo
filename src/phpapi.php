@@ -50,6 +50,7 @@ class phpapi
     
     }
 
+
     /**
      * A function to verify that a user is entering the right information when
      * logging in. By retrieving information from a query to the database. It 
@@ -81,6 +82,35 @@ class phpapi
         
     }
 
+        public function verifyUserAndroid()
+    {
+        //verify a user and start a new session for Android
+        //This will output a JSON of all the user data so the android app can use it.
+        $pw = hash(md5, $_POST['pw']);
+        $query = "select * from Users where Email = '";
+        $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'";
+        $result = mysql_query($query);
+        if(mysql_num_rows($result) == 0)
+            //send an empty JSON object to indicate 'error'
+
+        $info = mysql_fetch_array( $result );
+
+        if(mysql_num_rows($result) > 0)
+        {
+
+            //we need to keep all the session varaibles despite outputting the JSON because the server will need to be "involved" as well.
+            $_SESSION['logged'] = true;
+            $_SESSION['userEmail'] = $info['Email'];
+            //Added the user to the session since we use
+            //that for adding favorites, etc.
+            $_SESSION['userID'] = $info['UserID'];
+            $_SESSION['userName'] = $info['FirstName'];
+            //output the JSON 
+        }
+
+        
+    }
+
     /**
      * A function to see if the user is logged in or not.  
      * @return boolean If false, the user is not logged in.
@@ -99,6 +129,12 @@ class phpapi
         $_SESSION = array();
         session_destroy();
         header ('Location: index.php');
+    }
+
+     public function signOutAndroid()
+    {
+        $_SESSION = array();
+        session_destroy();
     }
 
     /**
