@@ -90,24 +90,27 @@ class phpapi
         $query = "select * from Users where Email = '";
         $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'";
         $result = mysql_query($query);
-        if(mysql_num_rows($result) == 0)
-            //send an empty JSON object to indicate 'error'
-
-        $info = mysql_fetch_array( $result );
-
+        
         if(mysql_num_rows($result) > 0)
         {
+            //Get the user info.
+            $info = mysql_fetch_assoc($result);
 
-            //we need to keep all the session varaibles despite outputting the JSON because the server will need to be "involved" as well.
+            // We need to keep all the session varaibles despite outputting the 
+            // JSON because the server will need to be "involved" as well.
             $_SESSION['logged'] = true;
             $_SESSION['userEmail'] = $info['Email'];
-            //Added the user to the session since we use
-            //that for adding favorites, etc.
+            
+            // Added the user to the session since we use
+            // that for adding favorites, etc.
             $_SESSION['userID'] = $info['UserID'];
             $_SESSION['userName'] = $info['FirstName'];
-            //output the JSON 
+            
         }
 
+        // Change mysql result to array so that it can be exported in JSON.
+        // Returns an empty array if no info is inside.
+        return json_encode(array('UserInfo' => $info));
         
     }
 
