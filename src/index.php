@@ -16,6 +16,8 @@ September 14, 2013
 		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>	
 	</head>
 	<body>
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
@@ -55,7 +57,7 @@ September 14, 2013
 		<div class="hpContent">
 			<h2>Parking Availability</h2>
 			<p class = "details">Use the map below or the list view to the right to see the parking availability.</p>
-			<iframe width="640" height="480" frameborder="0" scrolling="no" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Southern+Methodist+University,+Dallas,+TX&amp;aq=1&amp;oq=southern+me&amp;sll=32.820665,-96.731542&amp;sspn=1.09636,2.112122&amp;ie=UTF8&amp;hq=Southern+Methodist+University,+Dallas,+TX&amp;t=m&amp;cid=13862021070155502638&amp;hnear=&amp;ll=32.85349,-96.784315&amp;spn=0.034609,0.054932&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br />
+			<div id="map-canvas"></div>
 			<div id="listView">
 				<!-- This list will be dynamically implemented from DB using javascript 
 					If a garage's rating is scarce/full make red
