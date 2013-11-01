@@ -105,7 +105,7 @@ public class Login extends Activity {
 							.toString();
 					password = json.getJSONObject("UserInfo").get("Password")
 							.toString();
-					phone = json.getJSONObject("UserInfo").get("Phone")
+					phone = json.getJSONObject("UserInfo").get("PhoneNumber")
 							.toString();
 					// Create login session
 					session.createLoginSession(fName, lName, email, password,
