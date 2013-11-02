@@ -15,7 +15,6 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css">
 		<script type="text/javascript" src="js/garage.js"></script>
-		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</head>
@@ -83,6 +82,8 @@
 					<label for="empty">Empty</label>
 					<input type="radio" name="availability" id="empty" value="empty">
 				</div>
+
+				<input type="submit" value="Rate" />
 
             </form>
 
