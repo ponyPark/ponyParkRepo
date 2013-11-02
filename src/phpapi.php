@@ -244,14 +244,13 @@ class phpapi
 
         // Retrieve the values from the session and the post.
         $userID = $_SESSION['userID'];
-        echo($_POST['availability']);
 
-        // Read the JSON.
 
         $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
             Rating) VALUES ('$parkingID', '" . $_POST['level'] . 
             "', NOW(), '$userID', '" . $_POST['availability'] . "')";
         mysql_query($query);
+        header ('Location: ratingsub.html'); //this will need to change 
     }
 
      /**

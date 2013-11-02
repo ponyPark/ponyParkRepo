@@ -71,16 +71,17 @@
 				</div>
 
 				<div>
+					<!--1 is worst 5 is best -->
 					<label for="full">Full</label>
-					<input type="radio" name="availability" id="full" value="full">
+					<input type="radio" name="availability" id="full" value="1">
 					<label for="scarce">Scarce</label>
-					<input type="radio" name="availability" id="scarce" value="scarce">
+					<input type="radio" name="availability" id="scarce" value="2">
 					<label for="some">Some</label>
-					<input type="radio" name="availability" id="some" value="some">
+					<input type="radio" name="availability" id="some" value="3">
 					<label for="plenty">Plenty</label>
-					<input type="radio" name="availability" id="plenty" value="plenty">
+					<input type="radio" name="availability" id="plenty" value="4">
 					<label for="empty">Empty</label>
-					<input type="radio" name="availability" id="empty" value="empty">
+					<input type="radio" name="availability" id="empty" value="5">
 				</div>
 
 				<input type="submit" value="Rate" />
