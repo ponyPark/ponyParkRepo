@@ -66,7 +66,7 @@
 			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
 				<div>
 					<label>Level</label>
-					<select id="level">
+					<select id="level" name="level">
 					</select>
 				</div>
 

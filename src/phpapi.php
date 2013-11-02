@@ -240,18 +240,17 @@ class phpapi
      */
     public function addRating($parkingID)
     {
-        $ratingInfoJSON = $_POST['ratingInfo'];
-        if (empty($ratingInfoJSON)) return false;
+        $ratingInfoJSON = $_POST;
 
         // Retrieve the values from the session and the post.
         $userID = $_SESSION['userID'];
+        echo($_POST['availability']);
 
         // Read the JSON.
-        $ratingInfo = (array) json_decode($ratingInfoJSON);
 
         $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
-            Rating) VALUES ('$parkingID', '" . $ratingInfo['level'] . 
-            "', NOW(), '$userID', '" . $ratingInfo['rating'] . "')";
+            Rating) VALUES ('$parkingID', '" . $_POST['level'] . 
+            "', NOW(), '$userID', '" . $_POST['availability'] . "')";
         mysql_query($query);
     }
 

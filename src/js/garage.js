@@ -22,7 +22,8 @@ function init() {
 	                //Do radio buttons for the availability.
 	                //You'll need to make sure you have a hidden field that passes the garageID to the DB side.
 	                data = request.responseText;
-	                data = ({"ParkingInfo":{"ParkingID":"1","Name":"Moody Garage","Address":"6004 Bishop Blvd","Cost":"2","NumberOfLevels":"4"}});
+	                data = JSON.parse(data);
+	                //data = ({"ParkingInfo":{"ParkingID":"1","Name":"Moody Garage","Address":"6004 Bishop Blvd","Cost":"2","NumberOfLevels":"4"}});
 	                console.log(data);
 	                document.getElementById('reportAva').innerHTML = "Rate the Availability of " + data.ParkingInfo.Name;
 	                var levels = document.getElementById('level');
