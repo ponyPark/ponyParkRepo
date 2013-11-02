@@ -31,14 +31,16 @@ class phpapi
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
-        $pw = hash(md5, $_POST['pw']);
+        $salt = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB), MCRYPT_DEV_RANDOM);
+        $pwps = $_POST['pw'] . $salt;
+        $pw = hash(md5, $pwps);
         $phone = $_POST['phone'];
         $username = $fname. ' ' .$lname;
 
         $auth = 0;
         $query = "INSERT INTO Users(FirstName, LastName, Email,
-            Password,PhoneNumber,UserType) VALUES 
-            ('$fname','$lname','$email','$pw','$phone','$auth')";
+            Password,PasswordSalt,PhoneNumber,UserType) VALUES 
+            ('$fname','$lname','$email','$pw','$salt','$phone','$auth')";
         if(!mysql_query($query))
         {
             return false;
@@ -59,15 +61,26 @@ class phpapi
     public function verifyUser()
     {
         //verify a user and start a new session
-        $pw = hash(md5, $_POST['pw']);
+        
         $query = "select * from Users where Email = '";
-        $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'";
+        $query = $query . $_POST['email']."'";
         $result = mysql_query($query);
-        if(mysql_num_rows($result) == 0)
+        $info = mysql_fetch_array( $result );
+        $salt = $info['PasswordSalt'];
+        $info = NULL;
+        $pwps = $_POST['pw'] . $salt;
+        $pw = hash(md5, $pwps);
+        $query = "select * from Users where Email = '";
+        $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'"; 
+        $result = mysql_query($query);
+
+
+        if(mysql_num_rows($result) == 0){
+            
             header ('Location: index.php?login=false');
+        }
 
         $info = mysql_fetch_array( $result );
-
         if(mysql_num_rows($result) > 0)
         {
             $_SESSION['logged'] = true;
@@ -86,9 +99,16 @@ class phpapi
     {
         //verify a user and start a new session for Android
         //This will output a JSON of all the user data so the android app can use it.
-        $pw = hash(md5, $_POST['pw']);
         $query = "select * from Users where Email = '";
-        $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'";
+        $query = $query . $_POST['email']."'";
+        $result = mysql_query($query);
+        $info = mysql_fetch_array( $result );
+        $salt = $info['PasswordSalt'];
+        $info = NULL;
+        $pwps = $_POST['pw'] . $salt;
+        $pw = hash(md5, $pwps);
+        $query = "select * from Users where Email = '";
+        $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'"; 
         $result = mysql_query($query);
         
         if(mysql_num_rows($result) > 0)
