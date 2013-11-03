@@ -33,21 +33,43 @@ function init() {
 
     }
     var map;
+    var geocoder;
+ 
     function drawMap() {
-        var myLatlng = new google.maps.LatLng(32.846230, -96.782460);
+        geocoder = new google.maps.Geocoder();
+        var myLatlng = new google.maps.LatLng(32.84200, -96.782460);
         var mapOptions = {
-            zoom: 12,
+            zoom: 16,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
         }
         var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            title: "Airline Garage"
-        });
+        var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":null},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":null}]};
+        var garages = data.ParkingLocations;
 
-        marker.setMap(map);
+        var component = {'postalCode': "75205"};
+        var infowindow = new google.maps.InfoWindow();
+        var marker, i;
+        for (i = 0, j = garages.length; i < j; i++) {
+            var address = garages[i].Address;
+            
+            geocoder.geocode( { 'address': address, 'componentRestrictions': component}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                console.log(i);
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                });
+            } else {
+                alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
+
+            
+            }
+
+
         map.panTo(myLatlng);
     }
 
