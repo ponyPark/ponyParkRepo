@@ -7,6 +7,12 @@ nav {
 	/*allows to pick position of nav bar to top of the page */
 }
 
+#map-canvas { 
+	height: 100%;
+	width: 70%;
+	position: absolute;
+}
+
 #slogan {
 	text-transform:uppercase;
 	border: 1px solid black;
@@ -31,7 +37,7 @@ nav li{
 
 #listView{
 	position: relative;
-	bottom: 488px;
+	top: 0px;
 	left: 75%;
 	-moz-border-radius: 15px;
 	padding: 10px 10px 10px 10px;
