@@ -62,6 +62,7 @@ function init() {
                 }
                 if (data === "false") {
                     $('#signIn').css('display', 'block');
+                    $('#reportAvaDivElem').css('display','none');
                     $('#userOptions').css('display', 'none');
                 }
 

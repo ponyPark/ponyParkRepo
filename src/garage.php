@@ -60,7 +60,7 @@
 			</ol>
 		</nav>
 
-		<div class="hpContent">
+		<div class="hpContent" id="reportAvaDivElem">
 			<h2 id="reportAva">Rate the Availability of a Garage</h2>
 			<p class = "details">Use the form below to rate the availbility of this garage.</p>
 			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
