@@ -98,21 +98,54 @@ function init() {
                 //if userLogged.php outputs false, then the signin will display
                 //if userLogged.php outputs true, then the favorites, logout, and manage account will display
                 var data = JSON.parse(request.responseText);
-                //var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":null},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":null}]};
+                //var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":"1"},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":"5"}]};
                 var garages = data.ParkingLocations;
                 var list = document.getElementById("garageList");
 
                 for (var i = 0, j = garages.length; i < j; i++) {
-                    var parent = $('<li />', {
-                        style: "border: 4px solid black;"});
-                    var anchor = $('<a />', {
-                        href: "garage.php?garageID=" + garages[i].ParkingID,
-                        text: garages[i].Name}).appendTo(parent);
+                    var g = garages[i];
+                    var rating = parseInt(g.Rating);
+
+                    var parent;
                     var child = $('<ul />');
                     var c1 = $('<li />', {
-                        text: garages[i].Address}).appendTo(child);
-                    var c2 = $('<li />', {
-                        text: garages[i].Rating}).appendTo(child);
+                        text: g.Address}).appendTo(child);
+                    var c2;
+                    if (rating === 1) {
+                        parent = $('<li />', {
+                            style: "border: 4px solid red;"});
+                        c2 = $('<li />', {
+                            text: 'Availability: Full'}).appendTo(child);
+                    }
+                    else if (rating === 2) {
+                        parent = $('<li />', {
+                            style: "border: 4px solid red;"});
+                        c2 = $('<li />', {
+                            text: 'Availability: Scarce'}).appendTo(child);
+                    }
+                    else if (rating === 3) {
+                        parent = $('<li />', {
+                            style: "border: 4px solid yellow;"});
+                        c2 = $('<li />', {
+                            text: 'Availability: Some'}).appendTo(child);
+                    }
+                    else if (rating === 4) {
+                        parent = $('<li />', {
+                            style: "border: 4px solid green;"});
+                        c2 = $('<li />', {
+                            text: 'Availability: Plenty'}).appendTo(child);
+                    }
+                    else {
+                        parent = $('<li />', {
+                            style: "border: 4px solid green;"});
+                        c2 = $('<li />', {
+                            text: 'Availability: Empty'}).appendTo(child);
+                    }
+
+                    var anchor = $('<a />', {
+                        href: "garage.php?garageID=" + g.ParkingID,
+                        text: g.Name}).appendTo(parent);
+
                     child.appendTo(parent);
                     parent.appendTo(list);
                 }
