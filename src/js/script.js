@@ -111,6 +111,8 @@ function init() {
                     var child = $('<ul />');
                     var c1 = $('<li />', {
                         text: garages[i].Address}).appendTo(child);
+                    var c2 = $('<li />', {
+                        text: garages[i].Rating}).appendTo(child);
                     child.appendTo(parent);
                     parent.appendTo(list);
                 }
