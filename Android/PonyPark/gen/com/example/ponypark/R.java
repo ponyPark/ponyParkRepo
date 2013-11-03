@@ -231,6 +231,7 @@ containing a value of this type.
     public static final class id {
         public static final int action_about=0x7f050017;
         public static final int action_account=0x7f050015;
+        public static final int action_accountNon=0x7f05001a;
         public static final int action_fav=0x7f050016;
         public static final int action_logout=0x7f050018;
         public static final int action_settings=0x7f050019;
@@ -270,15 +271,16 @@ containing a value of this type.
         public static final int non_account=0x7f0a0002;
     }
     public static final class string {
-        public static final int action_Login=0x7f06001c;
-        public static final int action_fav=0x7f06001e;
-        public static final int action_forgot_password=0x7f060032;
-        public static final int action_help=0x7f06001d;
-        public static final int action_logout=0x7f060020;
-        public static final int action_manage=0x7f06001f;
+        public static final int action_Login=0x7f06001d;
+        public static final int action_LoginNon=0x7f06001c;
+        public static final int action_fav=0x7f06001f;
+        public static final int action_forgot_password=0x7f060033;
+        public static final int action_help=0x7f06001e;
+        public static final int action_logout=0x7f060021;
+        public static final int action_manage=0x7f060020;
         public static final int action_settings=0x7f06001a;
-        public static final int action_sign_in_register=0x7f060030;
-        public static final int action_sign_in_short=0x7f060031;
+        public static final int action_sign_in_register=0x7f060031;
+        public static final int action_sign_in_short=0x7f060032;
         public static final int app_name=0x7f060019;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -303,9 +305,9 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f060013;
-        public static final int btnAlready=0x7f060027;
-        public static final int btnNon=0x7f060028;
-        public static final int btnSignUp=0x7f060026;
+        public static final int btnAlready=0x7f060028;
+        public static final int btnNon=0x7f060029;
+        public static final int btnSignUp=0x7f060027;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -373,26 +375,26 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060012;
-        public static final int email=0x7f060024;
-        public static final int error_field_required=0x7f060037;
-        public static final int error_incorrect_password=0x7f060036;
-        public static final int error_invalid_email=0x7f060034;
-        public static final int error_invalid_password=0x7f060035;
-        public static final int firstName=0x7f060022;
+        public static final int email=0x7f060025;
+        public static final int error_field_required=0x7f060038;
+        public static final int error_incorrect_password=0x7f060037;
+        public static final int error_invalid_email=0x7f060035;
+        public static final int error_invalid_password=0x7f060036;
+        public static final int firstName=0x7f060023;
         public static final int hello_world=0x7f06001b;
-        public static final int lastName=0x7f060023;
-        public static final int login=0x7f06002a;
-        public static final int login_progress_signing_in=0x7f060033;
-        public static final int myFavs=0x7f06002b;
-        public static final int password=0x7f060025;
-        public static final int phone=0x7f060029;
+        public static final int lastName=0x7f060024;
+        public static final int login=0x7f06002b;
+        public static final int login_progress_signing_in=0x7f060034;
+        public static final int myFavs=0x7f06002c;
+        public static final int password=0x7f060026;
+        public static final int phone=0x7f06002a;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f06002e;
-        public static final int prompt_password=0x7f06002f;
-        public static final int signUp=0x7f060021;
-        public static final int title_activity_login=0x7f06002c;
-        public static final int title_activity_register=0x7f06002d;
+        public static final int prompt_email=0x7f06002f;
+        public static final int prompt_password=0x7f060030;
+        public static final int signUp=0x7f060022;
+        public static final int title_activity_login=0x7f06002d;
+        public static final int title_activity_register=0x7f06002e;
     }
     public static final class style {
         public static final int ActionBar_Solid_Ponypark=0x7f090004;
