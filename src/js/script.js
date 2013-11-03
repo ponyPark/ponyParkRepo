@@ -97,8 +97,8 @@ function init() {
                 //save the response from server
                 //if userLogged.php outputs false, then the signin will display
                 //if userLogged.php outputs true, then the favorites, logout, and manage account will display
-                //data = JSON.parse(request.responseText);
-                var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":null},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":null}]};
+                var data = JSON.parse(request.responseText);
+                //var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":null},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":null}]};
                 var garages = data.ParkingLocations;
                 var list = document.getElementById("garageList");
 
@@ -106,7 +106,7 @@ function init() {
                     var parent = $('<li />', {
                         style: "border: 4px solid black;"});
                     var anchor = $('<a />', {
-                        href: "garage.php?garageID=",
+                        href: "garage.php?garageID=" + garages[i].ParkingID,
                         text: garages[i].Name}).appendTo(parent);
                     var child = $('<ul />');
                     var c1 = $('<li />', {
