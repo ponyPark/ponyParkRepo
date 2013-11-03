@@ -188,10 +188,10 @@ class phpapi
     {
         
         //Get the most recent Rating, Name, and Address for every garage.
-        $query = "SELECT ParkingLocations.Name, ParkingLocations.Address,
-            (SELECT Ratings.Rating FROM Ratings WHERE ParkingLocations.ParkingID
-            = Ratings.ParkingID ORDER BY Timestamp desc limit 1) Rating FROM
-            ParkingLocations ORDER BY ParkingLocations.Name";
+        $query = "SELECT ParkingLocations.ParkingID, ParkingLocations.Name, 
+            ParkingLocations.Address, (SELECT Ratings.Rating FROM Ratings WHERE 
+            ParkingLocations.ParkingID = Ratings.ParkingID ORDER BY Timestamp 
+            desc limit 1) Rating FROM ParkingLocations ORDER BY ParkingLocations.Name";
         $result = mysql_query($query);
 
         // Change mysql result to array so that it can be exported in JSON.
