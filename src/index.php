@@ -16,8 +16,8 @@ September 14, 2013
 		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>	
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpuJSTZynN7SwEyy1dYFYR9ysrWJ3Aq0I&sensor=false"></script>	
+		
 	</head>
 	<body>
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
