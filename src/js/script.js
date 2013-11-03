@@ -74,12 +74,45 @@ function init() {
     function addMarker(map, item, location) {
       var marker = new google.maps.Marker({ map : map, position : location});
       marker.setTitle(item.Name);
-      var contentString = '<ol><li><a href="garage.php?garageID=' + item.ParkingID + '">' + item.Name + '</a></ul><li>' + item.Address + '</li><li>' + item.Rating + '</li></ol>';
-      var infowindow = new google.maps.InfoWindow( {
+      var rating = parseInt(item.Rating);
+      console.log(rating);
+      var ava;
+      var bgc;
+      switch (rating)
+      {
+        case 1:
+            ava = "Full";
+            bgc = "#FF8C8C";
+            break;
+        case 2:
+            ava = "Scarce";
+            bgc = "#FF8C8C";
+            break;
+        case 3:
+            ava = "Some";
+            bgc = "#FFF78C";
+            break;
+        case 4:
+            ava = "Plenty";
+            bgc = "#A8FFAB";
+            break;
+        case 5:
+            ava = "Empty";
+            bgc = "#A8FFAB";
+            break;
+      }
+
+      var contentString = '<ol><li><a href="garage.php?garageID=' + item.ParkingID + '">' + item.Name + '</a></ul><li>' + item.Address + '</li><li>Availability: ' + ava + '</li></ol>';
+      var infowindow = new InfoBubble( {
         content : contentString,
-        size : new google.maps.Size(100, 300)
+        size : new google.maps.Size(100, 300),
+        backgroundColor: bgc,
+        maxWidth: 300,
+        minWidth: 50,
+        maxHeight: 80
       });
       new google.maps.event.addListener(marker, "click", function() {
+
         infowindow.open(map, marker);
       });
     }
@@ -97,8 +130,8 @@ function init() {
                 //save the response from server
                 //if userLogged.php outputs false, then the signin will display
                 //if userLogged.php outputs true, then the favorites, logout, and manage account will display
-                var data = JSON.parse(request.responseText);
-                //var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":"1"},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":"5"}]};
+                //var data = JSON.parse(request.responseText);
+                var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":"1"},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":"5"}]};
                 var garages = data.ParkingLocations;
                 var list = document.getElementById("garageList");
 

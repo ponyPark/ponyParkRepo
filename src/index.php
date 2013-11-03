@@ -13,11 +13,11 @@ September 14, 2013
 		<title>PonyPark | Trot Right In</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css">
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpuJSTZynN7SwEyy1dYFYR9ysrWJ3Aq0I&sensor=false"></script>
+		<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpuJSTZynN7SwEyy1dYFYR9ysrWJ3Aq0I&sensor=false"></script>	
-		
 	</head>
 	<body>
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
@@ -54,7 +54,7 @@ September 14, 2013
 			</ol>
 		</nav>
 
-		<div class="hpContent" id="frontpg">
+		<div class="hpContent">
 			<h2>Parking Availability</h2>
 			<p class = "details">Use the map below or the list view to the right to see the parking availability.</p>
 			<div id="map-canvas"></div>
@@ -71,7 +71,11 @@ September 14, 2013
 
 				!-->
 				<ol id="garageList">
-
+					<li style="border: 4px solid red;"><a href="garage.php">Airline Garage </a><UL> <li>Scarce</li><li>2 Hours Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="garage.php">Binkley Garage </a><UL> <li>Full</li><li>20 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid red;"><a href="garage.php">Commuter Lot </a><UL> <li>Full</li><li>3 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid yellow;"><a href="garage.php">Meadows Garage</a> <UL> <li>Some</li><li>2 Minutes Ago</li></ul></li>
+					<li style="border: 4px solid green;"><a href="garage.php">Moody Garage </a><UL> <li>Plenty</li><li>25 Minutes Ago</li></ul></li>
 				</ol>
 			</div>
 
