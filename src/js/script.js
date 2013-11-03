@@ -132,8 +132,8 @@ function init() {
                 //save the response from server
                 //if userLogged.php outputs false, then the signin will display
                 //if userLogged.php outputs true, then the favorites, logout, and manage account will display
-                //var data = JSON.parse(request.responseText);
-                var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":"1"},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":"5"}]};
+                var data = JSON.parse(request.responseText);
+                //var data = {"ParkingLocations":[{"Name":"Binkley Garage","Address":"300 Ownby Drive","Rating":"1"},{"Name":"Moody Garage","Address":"6004 Bishop Blvd","Rating":"5"}]};
                 var garages = data.ParkingLocations;
                 var list = document.getElementById("garageList");
 
