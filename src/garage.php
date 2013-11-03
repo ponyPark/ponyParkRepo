@@ -93,6 +93,15 @@
 
 		</div>
 
+		<div class="hpContent" id="notloggedGarageReport" style="display:none;">
+			<h2>Not Logged in</h2>
+			Login to report availability of a garage
+		</div>
+
+		<div class="hpContent">
+			This box will be populated with more info about the garage in future iterations
+		</div>
+
 
 
 	</body>

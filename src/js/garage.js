@@ -64,6 +64,7 @@ function init() {
                     $('#signIn').css('display', 'block');
                     $('#reportAvaDivElem').css('display','none');
                     $('#userOptions').css('display', 'none');
+                    $('#notloggedGarageReport').css('display', 'block');
                 }
 
             }
