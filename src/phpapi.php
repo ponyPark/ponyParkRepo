@@ -47,7 +47,7 @@ class phpapi
         }
         else
         {
-            return; 
+            return true; 
         }
     
     }

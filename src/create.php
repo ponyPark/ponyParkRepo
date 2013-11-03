@@ -5,8 +5,14 @@ include 'phpapi.php';
 
 
 $phpInit = new phpapi();
-$phpInit->addUser();
-$phpInit->verifyUser();
+if (!$phpInit->addUser())
+{
+    header('Location: signup.php?error=true');
+}
+else
+{
+    $phpInit->verifyUser();
+}
 
 
 ?>
