@@ -54,7 +54,7 @@ September 14, 2013
 			</ol>
 		</nav>
 
-		<div class="hpContent">
+		<div class="hpContent" id="frontpg">
 			<h2>Parking Availability</h2>
 			<p class = "details">Use the map below or the list view to the right to see the parking availability.</p>
 			<div id="map-canvas"></div>
