@@ -114,6 +114,10 @@ nav li{
 
 }
 
+#frontpg{
+	height: 1300px;
+}
+
 nav li a {
 	position: relative;
 	left: 400px;
