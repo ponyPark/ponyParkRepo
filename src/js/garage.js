@@ -26,6 +26,7 @@ function init() {
 	                //data = ({"ParkingInfo":{"ParkingID":"1","Name":"Moody Garage","Address":"6004 Bishop Blvd","Cost":"2","NumberOfLevels":"4"}});
 	                console.log(data);
 	                document.getElementById('reportAva').innerHTML = "Rate the Availability of " + data.ParkingInfo.Name;
+                    document.getElementById('address').innerHTML = data.ParkingInfo.Address;
 	                var levels = document.getElementById('level');
 	                var numLevels = parseInt(data.ParkingInfo.NumberOfLevels, 10);
 	                for (var i = 1; i <= numLevels; i++) {
