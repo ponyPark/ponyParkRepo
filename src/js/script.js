@@ -74,7 +74,7 @@ function init() {
     function addMarker(map, item, location) {
       var marker = new google.maps.Marker({ map : map, position : location});
       marker.setTitle(item.Name);
-      var contentString = '<ol><li><a href="garage.php">' + item.Name + '</a></ul><li>' + item.Address + '</li><li>' + item.Rating + '</li></ol>';
+      var contentString = '<ol><li><a href="garage.php?garageID=' + item.ParkingID + '">' + item.Name + '</a></ul><li>' + item.Address + '</li><li>' + item.Rating + '</li></ol>';
       var infowindow = new google.maps.InfoWindow( {
         content : contentString,
         size : new google.maps.Size(100, 300)
