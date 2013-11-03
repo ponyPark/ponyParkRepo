@@ -59,7 +59,12 @@ if($_SESSION['logged'] === true){
 
 		<div class="hpContent">
 			<h2>Signup to Join PonyPark</h2>
-			<p class = "details">Use the signup form below to create a PonyPark Account.  You can also log in with your Facebook/Goggle Account.</p>
+			<p class = "details">Use the signup form below to create a PonyPark Account.  You can also log in with your Facebook/Goggle Account.
+				<?php
+					if ($_GET['error'] == "true")
+						echo "<br><br><font color='#CC0000'>That email address is already in use.</font>";
+				?>
+			</p>
 			<form id="createAccount" name="createAcct" method="POST" action="create.php">
                 <input type="text" name="fname" pattern="[a-zA-Z]+" title="Letters only" placeholder="First Name" required>
                 <input type="text" name="lname" placeholder="Last Name" title="Letters only" pattern="[a-zA-Z]+"required>
