@@ -35,6 +35,7 @@ function init() {
     var map;
     var geocoder;
     var garages;
+    var infowindow;
  
     function drawMap(garages) {
         geocoder = new google.maps.Geocoder();
@@ -103,18 +104,19 @@ function init() {
       }
 
       var contentString = '<ol><li><a href="garage.php?garageID=' + item.ParkingID + '">' + item.Name + '</a></ul><li>' + item.Address + '</li><li>Availability: ' + ava + '</li></ol>';
-      var infowindow = new InfoBubble( {
-        content : contentString,
-        size : new google.maps.Size(100, 300),
-        backgroundColor: bgc,
-        maxWidth: 300,
-        minWidth: 50,
-        maxHeight: 80
-      });
       new google.maps.event.addListener(marker, "click", function() {
-
+        if (infowindow)
+            infowindow.close();
+        infowindow = new InfoBubble({
+            content : contentString,
+            size : new google.maps.Size(100, 300),
+            backgroundColor: bgc,
+            maxWidth: 300,
+            minWidth: 50,
+            maxHeight: 80
+            });
         infowindow.open(map, marker);
-      });
+        });
     }
 
     function loadList() {
