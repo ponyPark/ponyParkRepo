@@ -70,7 +70,7 @@ September 14, 2013
 					This will be very easy to have garage.php populate the request page because we just get all the info from the DB using the ID.
 
 				!-->
-				<ol>
+				<ol id="garageList">
 					<li style="border: 4px solid red;"><a href="garage.php">Airline Garage </a><UL> <li>Scarce</li><li>2 Hours Ago</li></ul></li>
 					<li style="border: 4px solid red;"><a href="garage.php">Binkley Garage </a><UL> <li>Full</li><li>20 Minutes Ago</li></ul></li>
 					<li style="border: 4px solid red;"><a href="garage.php">Commuter Lot </a><UL> <li>Full</li><li>3 Minutes Ago</li></ul></li>
