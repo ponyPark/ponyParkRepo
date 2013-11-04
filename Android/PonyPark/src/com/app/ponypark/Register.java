@@ -163,7 +163,7 @@ public class Register extends Activity {
 	}
 
 	public final boolean isPhoneValid(String no) {
-		String expression = "^[0-9-+]{9,15}$";
+		String expression = "^[0-9-+]{9,10}$";
 		CharSequence inputStr = no;
 		Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(inputStr);
