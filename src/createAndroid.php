@@ -10,7 +10,7 @@ $phpInit->verifyUserAndroid();
 $phpInit = new phpapi();
 if (!$phpInit->addUser())
 {
-    echo('ERROR');
+    echo('Email already exists');
 }
 else
 {
