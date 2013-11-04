@@ -77,6 +77,9 @@ public class Register extends Activity {
 
 						signUpError.setText("Error occured in registration");
 					}
+				} else {
+
+					signUpError.setText("Error occured in registration");
 				}
 			}
 		});
@@ -164,7 +167,12 @@ public class Register extends Activity {
 		CharSequence inputStr = no;
 		Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(inputStr);
-		txtPhone.setError("Incorrect phone number");
-		return (matcher.matches()) ? true : false;
+		if (matcher.matches())
+			return true;
+		else {
+
+			txtPhone.setError("Incorrect phone number");
+			return false;
+		}
 	}
 }
