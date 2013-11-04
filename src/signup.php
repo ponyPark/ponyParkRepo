@@ -31,7 +31,12 @@ if($_SESSION['logged'] === true){
 		<p id = "slogan">Trot Right In</p>
 
 		<div class="hpContent" id="signInHP">
+
 		Already Registered? Log In.
+		<?
+                if ($_GET["login"] === "false")
+                    echo "<span id= 'badLogin' >Incorrect login information.<BR>Please try again.</span>";
+            ?>
 			<form id="signInForm" method="POST" action="verify.php">
 				<!--Also will need option for fbook/twitter login once we get that far -->
 			<input type="email" name="email" title="Enter the email address associated with your account" placeholder="Email Address" required><input type="password" name="pw" placeholder = "Password" required>

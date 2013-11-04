@@ -77,7 +77,7 @@ class phpapi
 
         if(mysql_num_rows($result) == 0){
             
-            header ('Location: index.php?login=false');
+            header ('Location: signup.php?login=false');
         }
 
         $info = mysql_fetch_array( $result );
