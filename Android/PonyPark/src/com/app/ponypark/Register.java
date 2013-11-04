@@ -5,6 +5,9 @@
  */
 package com.app.ponypark;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.json.JSONObject;
 import com.example.ponypark.R;
 import android.app.Activity;
@@ -61,11 +64,12 @@ public class Register extends Activity {
 				email = txtEmail.getText().toString();
 				phone = txtPhone.getText().toString();
 				password = txtPassword.getText().toString();
-				//Form validation
+				// Form validation
 				if (fName.length() != 0 && lName.length() != 0
 						&& email.length() != 0 && phone.length() != 0
 						&& password.length() != 0) {
-					if (emailValid(email) && passValid(password)) {
+					if (emailValid(email) && passValid(password)
+							&& isPhoneValid(phone)) {
 						background task = new background();
 
 						task.execute((Object[]) null);
@@ -107,8 +111,9 @@ public class Register extends Activity {
 
 			UserActions user = new UserActions();
 			user.signUp(fName, lName, email, password, phone);
-			
-			//TODO we need to add ability to get success,failure,or already a user
+
+			// TODO we need to add ability to get success,failure,or already a
+			// user
 			session.createLoginSession(email, password, fName, lName, password);
 			// Close Registration Screen
 			success = true;
@@ -130,19 +135,36 @@ public class Register extends Activity {
 			}
 		}
 	}
-	public final static boolean emailValid(CharSequence target) {
+
+	public final boolean emailValid(CharSequence target) {
 		if (target == null) {
 			return false;
 		} else {
-			return android.util.Patterns.EMAIL_ADDRESS.matcher(target)
-					.matches();
+
+			if (android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()) {
+				return true;
+
+			} else {
+				txtEmail.setError("Incorrect email address");
+				return false;
+			}
 		}
 	}
+
 	public final boolean passValid(CharSequence target) {
 		if (TextUtils.isEmpty(target) || target.length() < 8) {
 			txtPassword.setError("You must have 8 characters in your password");
 			return false;
 		} else
 			return true;
+	}
+
+	public final boolean isPhoneValid(String no) {
+		String expression = "^[0-9-+]{9,15}$";
+		CharSequence inputStr = no;
+		Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(inputStr);
+		txtPhone.setError("Incorrect phone number");
+		return (matcher.matches()) ? true : false;
 	}
 }

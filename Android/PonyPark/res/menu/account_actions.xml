@@ -5,7 +5,7 @@
         android:id="@+id/action_account"
         android:icon="@drawable/ic_action_accounts"
         android:showAsAction="always"
-        android:title="@string/action_Login"/>
+        android:title="@string/action_LoginNon"/>
     <item
         android:id="@+id/action_fav"
         android:icon="@drawable/ic_action_favourite"
