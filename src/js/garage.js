@@ -5,7 +5,6 @@ function init() {
 
 
     		var parkID = document.getElementById('garageID').innerHTML;
-    		console.log(parkID);
 	       var request = new XMLHttpRequest();
 	       //change this URL depending on what Jessica sets it from PHPApi, just pass parkID as one of the git parameters.
 	       var url = 'getParkingInfo.php';
@@ -26,8 +25,18 @@ function init() {
 	                //data = ({"ParkingInfo":{"ParkingID":"1","Name":"Moody Garage","Address":"6004 Bishop Blvd","Cost":"2","NumberOfLevels":"4"}});
 	                console.log(data);
 	                document.getElementById('reportAva').innerHTML = "Rate the Availability of " + data.ParkingInfo.Name;
-                    document.getElementById('address').innerHTML = data.ParkingInfo.Address;
-	                var levels = document.getElementById('level');
+                    document.getElementById('address').innerHTML = data.ParkingInfo.Address + "<BR>Dallas, Texas 75205";
+                    $('#moreGInfo').text(data.ParkingInfo.Name + " is located at " + data.ParkingInfo.Address + " in Dallas, Texas on the Southern Methodist University Campus");
+	                var text = "NONE";
+                    if(data.ParkingInfo.Rating === '1') text = "FULL";
+                    if(data.ParkingInfo.Rating === '2') text = "SCARCE";
+                    if(data.ParkingInfo.Rating === '3') text = "SOME";
+                    if(data.ParkingInfo.Rating === '4') text = "PLENTY";
+                    if(data.ParkingInfo.Rating === '5') text = "EMPTY";
+                    if(text === "NONE") $('#ratingofG').text("There is no rating available for this garage. You can help by loggin in and rating above.");
+                    console.log(text);
+                    $('#ratingGinInfo').text(text);
+                    var levels = document.getElementById('level');
 	                var numLevels = parseInt(data.ParkingInfo.NumberOfLevels, 10);
 	                for (var i = 1; i <= numLevels; i++) {
 	                	$('<option />', {

@@ -30,15 +30,15 @@ if($_SESSION['logged'] === true){
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
 		<p id = "slogan">Trot Right In</p>
 
-		<section id="signIn">
+		<div class="hpContent" id="signInHP">
 		Already Registered? Log In.
 			<form id="signInForm" method="POST" action="verify.php">
 				<!--Also will need option for fbook/twitter login once we get that far -->
-			Email:<input type="email" name="email" title="Enter the email address associated with your account" required> Password:<input type="password" name="pw" required>
-				<input type="submit" value="Log In">
+			<input type="email" name="email" title="Enter the email address associated with your account" placeholder="Email Address" required><input type="password" name="pw" placeholder = "Password" required>
+				<input type="submit" value="Log In" class="submit">
 			</form>
 
-		</section>
+		</div>
 		<div id="userOptions">
 			<h2>Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!</h2>
 			<ol id="userList">
@@ -57,8 +57,7 @@ if($_SESSION['logged'] === true){
 			</ol>
 		</nav>
 
-		<div class="hpContent">
-			<h2>Signup to Join PonyPark</h2>
+		<div class="hpContent" id="singUpHP">
 			<p class = "details">Use the signup form below to create a PonyPark Account.  You can also log in with your Facebook/Goggle Account.
 				<?php
 					if ($_GET['error'] == "true")
@@ -71,7 +70,7 @@ if($_SESSION['logged'] === true){
                 <input type="email" name="email" placeholder="Email Address" required>
                 <input type="password" name="pw" placeholder="Password" pattern=".{8,}" title="Need at least 8 characters"required>
                 <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" required>
-                <input class="submitButton" type="submit" value="Sign Up">
+                <input class="submitButton" type="submit" value="Sign Up" class="submit" id="cSub">
             </form>
 
 
