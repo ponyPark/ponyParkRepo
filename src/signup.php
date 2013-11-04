@@ -55,7 +55,7 @@ if($_SESSION['logged'] === true){
 
 		<nav>
 			<ol>
-				<li><a href="signup.php">Signup</a></li>
+				<li><a href="signup.php">Join</a></li>
 				<li><a href="about.php">About</a></li>
 				<li><a href="http://nhl.com">Contact</a></li>
 				<li><a href="http://nhl.com">Request</a></li>

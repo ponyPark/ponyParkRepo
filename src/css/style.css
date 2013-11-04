@@ -2,7 +2,9 @@ nav {
 	position: absolute;
 	top: 50px;
 	left: 0;
-	width: 1000px;
+	width: 880px;
+	margin-left: auto;
+	margin-right: auto;
 	padding-bottom: 2px;
 	/*allows to pick position of nav bar to top of the page */
 }
@@ -14,11 +16,20 @@ nav {
 }
 
 #slogan {
-	text-transform:uppercase;
-	border: 1px solid black;
-	display: inline;
-	padding: 10px 10px 10px 10px;
-	font-size: 200%;
+	margin-left: 60px;
+	margin-top: -30px;
+	display: block;
+	font-size: 150%;
+	font-style: italic;
+}
+
+h1 {
+position: relative;
+top: 0px;
+width: 98px;
+z-index: 1;
+
+
 }
 
 nav ol, nav ul{
@@ -41,7 +52,7 @@ nav li a {
 	color: black;
 	margin-right: 100px;
 	text-decoration: none;
-	font-size: 25px
+	font-size: 25px;
 	/*Further separates the links from one another and the top of browser*/
 }
 
@@ -160,7 +171,7 @@ html{
 
 #signIn {
 	position: absolute;
-	left: 30%;
+	left: 500px;
 	top:10px;
 	z-index: 1; 
 	float: right;
@@ -185,8 +196,8 @@ html{
     padding-left: 2%;
     padding-right: 2%;
     padding-bottom: 5px;
-   	margin-top: 100px;
-    margin-bottom: -50px;
+   	margin-top: 50px;
+    margin-bottom: 50px;
     background-color: #B2B29E;
     
     
@@ -214,12 +225,7 @@ a img {
 
 
 
-h1 {
-position: relative;
-top: 0px;
 
-
-}
 
 footer{
 	font-size: x-small;

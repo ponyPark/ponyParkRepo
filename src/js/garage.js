@@ -33,7 +33,7 @@ function init() {
                     if(data.ParkingInfo.Rating === '3') text = "SOME";
                     if(data.ParkingInfo.Rating === '4') text = "PLENTY";
                     if(data.ParkingInfo.Rating === '5') text = "EMPTY";
-                    if(text === "NONE") $('#ratingofG').text("There is no rating available for this garage. You can help by loggin in and rating above.");
+                    if(text === "NONE") $('#ratingofG').text("There is no rating available for this garage. You can help by logging in and rating above.");
                     console.log(text);
                     $('#ratingGinInfo').text(text);
                     var levels = document.getElementById('level');

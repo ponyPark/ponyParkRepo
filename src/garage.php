@@ -36,7 +36,7 @@
 			<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
 		<p id = "slogan">Trot Right In</p>
 		<section id="signIn">
-		Welcome to PonyPark, Guest! Please <a href="signup.php">Signup</a> or <a href="signup.php">Signin</a>
+		Welcome to PonyPark, Guest! Please <a href="signup.php">Join</a> or <a href="signup.php">Sign in</a>
 		</section>
 		<div id="userOptions">
 			Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!
@@ -49,7 +49,7 @@
 
 		<nav>
 			<ol>
-				<li><a href="signup.php">Signup</a></li>
+				<li><a href="signup.php">Join</a></li>
 				<li><a href="about.php">About</a></li>
 				<li><a href="http://nhl.com">Contact</a></li>
 				<li><a href="http://nhl.com">Request</a></li>
@@ -92,7 +92,7 @@
 
 		<div class="hpContent" id="notloggedGarageReport" style="display:none;">
 			<h2>PonyPark Needs You!</h2>
-			Please help contribute to PonyPark.  Either signin or login to submit garage availability.
+			Please help contribute to PonyPark.  PonyPark relies on users just like you to report the current parking conditions on campus.  All you need to do is join or sign in to get started!
 		</div>
 
 		<div class="hpContent">
