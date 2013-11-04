@@ -36,14 +36,10 @@
 			<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
 		<p id = "slogan">Trot Right In</p>
 		<section id="signIn">
-			Already Registered? Log In.
-			<form id="signInForm" method="POST" action="verify.php">
-				<!--Also will need option for fbook/twitter login once we get that far -->
-			Email:<input type="email" name="email" title="Enter the email address associated with your account" required> Password:<input type="password" name="pw" required>
-				<input type="submit" value="Log In"></form>
+		Welcome to PonyPark, Guest! Please <a href="signup.php">Signup</a> or <a href="signup.php">Signin</a>
 		</section>
 		<div id="userOptions">
-			<h2>Welcome back to PonyPark, <? echo($_SESSION['userName']);?>!</h2>
+			Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!
 			<ol id="userList">
 				<li><a href="http://nhl.com">Manage Account</a></li>
 				<li><a href="http://nhl.com">Favorite List</a></li>
@@ -63,29 +59,29 @@
 		<div class="hpContent" id="reportAvaDivElem">
 			<h2 id="reportAva">Rate the Availability of a Garage</h2>
 			<h3 id="address"></h3>
-			<p class = "details">Use the form below to rate the availbility of this garage.</p>
+			<p class = "details">Please answer the two simple questions below to report the availability of this garage.</p>
 			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
 				<div>
-					<label>Level</label>
+					<label>Which level did you park your car?</label>
 					<select id="level" name="level">
 					</select>
 				</div>
-
+				<p class = "details">How would you rate the availability of parking?</p>
 				<div>
 					<!--1 is worst 5 is best -->
-					<label for="full">Full</label>
-					<input type="radio" name="availability" id="full" value="1">
-					<label for="scarce">Scarce</label>
-					<input type="radio" name="availability" id="scarce" value="2">
-					<label for="some">Some</label>
-					<input type="radio" name="availability" id="some" value="3">
-					<label for="plenty">Plenty</label>
-					<input type="radio" name="availability" id="plenty" value="4">
-					<label for="empty">Empty</label>
-					<input type="radio" name="availability" id="empty" value="5">
+					<label for="full" title="There was no place to park.">Full</label>
+					<input type="radio" name="availability" id="full" value="1" title="There was no place to park." checked>
+					<label for="scarce" title="Found a spot, but others may not be so lucky.">Scarce</label>
+					<input type="radio" name="availability" id="scarce" value="2" title="Found a spot, but others may not be so lucky.">
+					<label for="some" title="There were a lot of cars, but I found a spot.">Some</label>
+					<input type="radio" name="availability" id="some" value="3" title="There were a lot of cars, but I found a spot.">
+					<label for="plenty" title="I had no trouble finding a spot.">Plenty</label>
+					<input type="radio" name="availability" id="plenty" value="4" title="I had no trouble finding a spot.">
+					<label for="empty" title="The garage is basically empty, plenty of spots.">Empty</label>
+					<input type="radio" name="availability" id="empty" value="5" title="The garage is basically empty, plenty of spots.">
 				</div>
 
-				<input type="submit" value="Rate" />
+				<input type="submit" value="Rate" class="submit"/>
 
             </form>
 
@@ -95,12 +91,14 @@
 		</div>
 
 		<div class="hpContent" id="notloggedGarageReport" style="display:none;">
-			<h2>Not Logged in</h2>
-			Login to report availability of a garage
+			<h2>PonyPark Needs You!</h2>
+			Please help contribute to PonyPark.  Either signin or login to submit garage availability.
 		</div>
 
 		<div class="hpContent">
-			This box will be populated with more info about the garage in future iterations
+			<p id="moreGInfo"></p>
+			<p id="ratingofG">The current rating of the garage is <span id="ratingGinInfo"></span></p>
+
 		</div>
 
 

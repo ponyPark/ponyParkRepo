@@ -23,21 +23,11 @@ September 14, 2013
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
 		<p id = "slogan">Trot Right In</p>
 
-		<section id="signIn">
-		Already Registered? Log In.
-		<?
-                if ($_GET["login"] === "false")
-                    echo "<span id= 'badLogin' >Incorrect login information.  Please try again.</span>";
-            ?>
-			<form id="signInForm" method="POST" action="verify.php">
-				<!--Also will need option for fbook/twitter login once we get that far -->
-			Email:<input type="email" name="email" title="Enter the email address associated with your account" required> Password:<input type="password" name="pw" required>
-				<input type="submit" value="Log In">
-			</form>
-
+			<section id="signIn">
+		Welcome to PonyPark, Guest! Please <a href="signup.php">Signup</a> or <a href="signup.php">Signin</a>
 		</section>
 		<div id="userOptions">
-			<h2>Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!</h2>
+			Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!
 			<ol id="userList">
 				<li><a href="http://nhl.com">Manage Account</a></li>
 				<li><a href="http://nhl.com">Favorite List</a></li>
@@ -46,6 +36,7 @@ September 14, 2013
 		</div>
 
 		<nav>
+
 			<ol>
 				<li><a href="signup.php">Signup</a></li>
 				<li><a href="about.php">About</a></li>
