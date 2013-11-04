@@ -121,8 +121,12 @@ public class MainActivity extends FragmentActivity implements
 		sub = menu.addSubMenu("More");
 		sub.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 		sub.getItem().setIcon(R.drawable.ic_action_person);
-		//Inflate non user account menu
-		inflater.inflate(R.menu.non_account, sub);
+		if (session.isLoggedIn()) {
+			sub.add("" + user.get(Register.KEY_fName));
+			inflater.inflate(R.menu.account_actions, sub);
+		} else {
+			inflater.inflate(R.menu.non_account, sub);
+		}
 		return super.onCreateOptionsMenu(sub);
 	}
 
@@ -149,11 +153,7 @@ public class MainActivity extends FragmentActivity implements
 		case R.id.action_about:
 			Toast.makeText(context,"About Box", Toast.LENGTH_SHORT).show();
 			return true;
-		case R.id.action_logout:
-			session.logoutUser();
-			invalidateOptionsMenu();
-			return true;
-		case R.id.action_account:
+		case R.id.action_accountNon:
 			if (isNetworkAvailable()) {
 				Intent i = new Intent(getApplicationContext(), Login.class);
 				startActivity(i);
@@ -161,8 +161,15 @@ public class MainActivity extends FragmentActivity implements
 				displayAlert();
 			}
 			return true;
+		case R.id.action_logout:
+			session.logoutUser();
+			invalidateOptionsMenu();
+			return true;
+		case R.id.action_account:
+			Toast.makeText(context,"My Account", Toast.LENGTH_SHORT).show();
+			return true;
 		case R.id.action_fav:
-			Toast.makeText(context,"About Box", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context,"My Favorites", Toast.LENGTH_SHORT).show();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
