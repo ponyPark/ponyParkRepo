@@ -61,6 +61,21 @@ if($_SESSION['logged'] === true)
                 <input type="email" name="email" placeholder="Email Address" required>
                 <input type="password" name="pw" placeholder="Password" pattern=".{8,}" title="Need at least 8 characters"required>
                 <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" required>
+                <!-- Will uncomment later when finished with server-side processing of captcha
+                <br><br>
+                <script type="text/javascript">
+                 var RecaptchaOptions = {
+                    theme : 'white'
+                 };
+                 </script>
+                <script type='text/javascript' src='http://www.google.com/recaptcha/api/challenge?k=6LfeVsgSAAAAACXVEPcFgYrFI3143x3cPT1ZKgxq'></script>
+                <noscript>
+                    <iframe src='http://www.google.com/recaptcha/api/noscript?k=6LfeVsgSAAAAACXVEPcFgYrFI3143x3cPT1ZKgxq' height='300' width='500' frameborder='0'></iframe><br>
+                    <textarea name='recaptcha_challenge_field' rows='3' cols='40'></textarea>
+                    <input type='hidden' name='recaptcha_response_field' value='manual_challenge'>
+                </noscript>
+                <br>
+                -->
                 <input class="submitButton" type="submit" value="Sign Up" class="submit" id="cSub">
             </form>
 		</div>
