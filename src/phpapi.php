@@ -12,6 +12,7 @@ class phpapi
      */
     function phpapi()
     {
+        ob_start();
         session_start();
 
         $con = mysql_connect("localhost", "ponypark", "ponypark");
@@ -85,21 +86,23 @@ class phpapi
         $result = mysql_query($query);
 
 
-        if(mysql_num_rows($result) == 0){
-            
-            header ('Location: signup.php?login=false');
-        }
-
-        $info = mysql_fetch_array( $result );
-        if(mysql_num_rows($result) > 0)
+        if(mysql_num_rows($result) == 0)
         {
+            header ('Location: signup.php?login=false');
+            return false;
+        }
+        else
+        {
+            $info = mysql_fetch_array( $result );
             $_SESSION['logged'] = true;
             $_SESSION['userEmail'] = $info['Email'];
             //Added the user to the session since we use
             //that for adding favorites, etc.
             $_SESSION['userID'] = $info['UserID'];
             $_SESSION['userName'] = $info['FirstName'];
-            header ('Location: index.php'); 
+
+            header ('Location: index.php');
+            return true;
         }
 
         

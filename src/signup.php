@@ -21,6 +21,7 @@ if($_SESSION['logged'] === true)
 		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="js/verifySignup.js"></script>
 	</head>
 	<body>
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
@@ -53,11 +54,8 @@ if($_SESSION['logged'] === true)
 
 		<div class="hpContent" id="singUpHP">
 			<p class = "details">Use the signup form below to create a PonyPark Account.</p>
-			<?php
-				if ($_GET['error'] === "true")
-					echo "<span id='badSignup'>That email address is already in use.</span>";
-			?>
-			<form id="createAccount" name="createAcct" method="POST" action="create.php">
+			<span id="signupResult"></span>
+			<form id="createAccount" name="createAcct" method="POST">
                 <input type="text" name="fname" pattern="[a-zA-Z]+" title="Letters only" placeholder="First Name" required>
                 <input type="text" name="lname" placeholder="Last Name" title="Letters only" pattern="[a-zA-Z]+"required>
                 <input type="email" name="email" placeholder="Email Address" required>

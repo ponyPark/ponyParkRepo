@@ -108,7 +108,7 @@ nav li a:hover {
 	text-decoration: underline;
 }
 
-#badSignup{
+#signupResult{
     display: block;
     font-weight: bold;
     color: black;
