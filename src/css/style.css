@@ -108,6 +108,13 @@ nav li a:hover {
 	text-decoration: underline;
 }
 
+#badSignup{
+    display: block;
+    font-weight: bold;
+    color: black;
+    text-decoration: underline;
+}
+
 #createAccount input{
 	padding: 10px 10px 10px 10px;
 	width: 300px;
