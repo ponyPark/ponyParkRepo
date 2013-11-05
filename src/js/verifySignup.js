@@ -17,11 +17,11 @@ jQuery(document).ready(function() {
                 }
                 else if (output === "login_success")
                 {
-                    window.location.replace("/");
+                    window.location.replace("index.php");
                 }
                 else
                 {
-                    window.location.replace("/signup.php?login=false");
+                    window.location.replace("signup.php?login=false");
                 }
             }
         });
