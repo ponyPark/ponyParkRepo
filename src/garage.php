@@ -70,16 +70,20 @@
 				<p class = "details">How would you rate the availability of parking?</p>
 				<div>
 					<!--1 is worst 5 is best -->
-					<label for="full" title="There was no place to park.">Full</label>
-					<input type="radio" name="availability" id="full" value="1" title="There was no place to park." checked>
-					<label for="scarce" title="Found a spot, but others may not be so lucky.">Scarce</label>
-					<input type="radio" name="availability" id="scarce" value="2" title="Found a spot, but others may not be so lucky.">
-					<label for="some" title="There were a lot of cars, but I found a spot.">Some</label>
-					<input type="radio" name="availability" id="some" value="3" title="There were a lot of cars, but I found a spot.">
-					<label for="plenty" title="I had no trouble finding a spot.">Plenty</label>
-					<input type="radio" name="availability" id="plenty" value="4" title="I had no trouble finding a spot.">
-					<label for="empty" title="The garage is basically empty, plenty of spots.">Empty</label>
-					<input type="radio" name="availability" id="empty" value="5" title="The garage is basically empty, plenty of spots.">
+                    <input type="radio" name="availability" id="full" value="1" title="There was no place to park." checked>
+					<label for="full" title="There was no place to park.">Full garage</label>
+                    <br>
+                    <input type="radio" name="availability" id="scarce" value="2" title="Found a spot, but others may not be so lucky.">
+					<label for="scarce" title="Found a spot, but others may not be so lucky.">Scarce parking spots</label>
+                    <br>
+                    <input type="radio" name="availability" id="some" value="3" title="There were a lot of cars, but I found a spot.">
+					<label for="some" title="There were a lot of cars, but I found a spot.">Some parking spots</label>
+                    <br>
+                    <input type="radio" name="availability" id="plenty" value="4" title="I had no trouble finding a spot.">
+					<label for="plenty" title="I had no trouble finding a spot.">Plenty parking spots</label>
+                    <br>
+                    <input type="radio" name="availability" id="empty" value="5" title="The garage is basically empty, plenty of spots.">
+					<label for="empty" title="The garage is basically empty, plenty of spots.">Empty garage</label>
 				</div>
 
 				<input type="submit" value="Rate" class="submit"/>
