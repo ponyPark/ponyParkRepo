@@ -23,6 +23,22 @@ class phpapi
     }
 
     /**
+     * Verify the response to the captcha.
+     * @return boolean True if the answer was correct, false otherwise.
+     */
+    public function checkCaptcha()
+    {
+        require_once("library/recaptchalib.php");
+        $captcha=recaptcha_check_answer("6LfeVsgSAAAAAM0146TD70YoisPsPDkRmYGg_zg6", 
+            $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"], 
+            $_POST["recaptcha_response_field"]);
+        if ($captcha->is_valid)
+            return true;
+        else
+            return false;
+    }
+
+    /**
      * The function to add a user into the database using the information
      * sent through the POST. Using queries to insert into the table.
      */
@@ -60,7 +76,6 @@ class phpapi
         {
             return true; 
         }
-    
     }
 
 

@@ -61,7 +61,7 @@ if($_SESSION['logged'] === true)
                 <input type="email" name="email" placeholder="Email Address" required>
                 <input type="password" name="pw" placeholder="Password" pattern=".{8,}" title="Need at least 8 characters"required>
                 <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" required>
-                <!-- Will uncomment later when finished with server-side processing of captcha
+                <!-- Uncomment this to enable captcha. Also go to create.php to uncomment a line.
                 <br><br>
                 <script type="text/javascript">
                  var RecaptchaOptions = {
