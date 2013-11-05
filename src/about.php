@@ -66,7 +66,8 @@ September 14, 2013
 
 	<footer>
 		PonyPark | Southern Methodist University | Dallas, Texas 2013
-		<p id ="footerLinks"> <a href="http://nhl.com">Contact Us</a> <a href="http://nhl.com">Policies</a>
+		<p id ="footerLinks"> <a href="http://nhl.com">Contact Us</a> <a href="http://nhl.com">Policies</a></p>
+	</footer>
 
 </html>
 
