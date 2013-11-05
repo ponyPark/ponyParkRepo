@@ -21,24 +21,25 @@ September 14, 2013
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
 		<p id = "slogan">Trot Right In</p>
 
-			<section id="signIn">
+		<section id="signIn">
 		Welcome to PonyPark, Guest! Please <a href="signup.php">Join</a> or <a href="signup.php">Sign in</a>
 		</section>
 		<div id="userOptions">
 			Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!
 			<ol id="userList">
-				<li><a href="http://nhl.com">Manage Account</a></li>
-				<li><a href="http://nhl.com">Favorite List</a></li>
+				<li><a href="maccount.php">Manage Account</a></li>
+				<li><a href="favlist.php">Favorite List</a></li>
 				<li><a href="signOut.php">Sign Out</a></li>
 			</ol>
 		</div>
 
 		<nav>
+
 			<ol>
 				<li><a href="signup.php">Join</a></li>
 				<li><a href="about.php">About</a></li>
-				<li><a href="http://nhl.com">Contact</a></li>
-				<li><a href="http://nhl.com">Request</a></li>
+				<li><a href="contact.php">Contact</a></li>
+				<li><a href="request.php">Request</a></li>
 			</ol>
 		</nav>
 

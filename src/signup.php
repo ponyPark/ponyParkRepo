@@ -44,21 +44,14 @@ if($_SESSION['logged'] === true){
 			</form>
 
 		</div>
-		<div id="userOptions">
-			<h2>Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!</h2>
-			<ol id="userList">
-				<li><a href="http://nhl.com">Manage Account</a></li>
-				<li><a href="http://nhl.com">Favorite List</a></li>
-				<li><a href="signOut.php">Sign Out</a></li>
-			</ol>
-		</div>
 
 		<nav>
+
 			<ol>
 				<li><a href="signup.php">Join</a></li>
 				<li><a href="about.php">About</a></li>
-				<li><a href="http://nhl.com">Contact</a></li>
-				<li><a href="http://nhl.com">Request</a></li>
+				<li><a href="contact.php">Contact</a></li>
+				<li><a href="request.php">Request</a></li>
 			</ol>
 		</nav>
 
