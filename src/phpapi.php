@@ -27,20 +27,30 @@ class phpapi
      */
     public function addUser()
     {   
-        //add a user to the system
+        // Obtain user info
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
-        $salt = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB), MCRYPT_DEV_RANDOM);
-        $pwps = $_POST['pw'] . $salt;
-        $pw = hash(md5, $pwps);
+        $raw_pw = $_POST['pw'];
         $phone = $_POST['phone'];
-        $username = $fname. ' ' .$lname;
 
+        // Check to make sure all required values have been inputted.
+        if (empty($fname) || empty($lname) || empty($email) || strlen($raw_pw)<8)
+        {
+            return false;
+        }
+
+        // Salt and hash the password.
+        $salt = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB), MCRYPT_DEV_RANDOM);
+        $pwps = $raw_pw . $salt;
+        $pw = hash(md5, $pwps);
+        
+        // Insert the user into the database.
         $auth = 0;
+        $externalType = "native";
         $query = "INSERT INTO Users(FirstName, LastName, Email,
-            Password,PasswordSalt,PhoneNumber,UserType) VALUES 
-            ('$fname','$lname','$email','$pw','$salt','$phone','$auth')";
+            Password,PasswordSalt,PhoneNumber,UserType,ExternalType) VALUES 
+            ('$fname','$lname','$email','$pw','$salt','$phone','$auth','$externalType')";
         if(!mysql_query($query))
         {
             return false;
