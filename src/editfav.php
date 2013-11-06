@@ -13,7 +13,7 @@ September 14, 2013
 		<title>PonyPark | Trot Right In</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css">
-		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript" src="js/favorite.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</head>
@@ -44,11 +44,12 @@ September 14, 2013
 		</nav>
 
 		<div class="hpContent">
-			<h2>Manage Account</h2>
-			<p class = "details">Please choose what you would like to modify:
-				<ul>
-					<li><a href="editfav.php">Favorites</a></li>
-				</ol></p>
+			<h2>Edit Favorite Garages</h2>
+			<p class = "details">Please check the garages you wish to keep in your favorites.
+				
+				<ul id="favList">
+				</ul>
+				</p>
 
 
 
