@@ -39,10 +39,8 @@ function init() {
         var url = 'getParkingLocations.php';
         var data;
 
-        request.open("GET", url, true);
+        request.open("GET", url, false);
         request.send();
-        request.onreadystatechange = function (e) {
-
             if (request.readyState === 4) {
                 //save the response from server
                 //if userLogged.php outputs false, then the signin will display
@@ -60,7 +58,7 @@ function init() {
                         text: g.Address}).appendTo(child);
                     var c2 = $('<li />').appendTo(child);
                     var link = $('<a />',{
-                        href: "http://nhl.com",
+                        href: "addFavorites.php?parkingID=" + g.ParkingID,
                         text: "Add To Favorites"}).appendTo(c2);
                         parent = $('<li />', {
                             id: "FavoriteParkingGarageID" + g.ParkingID,
@@ -70,7 +68,6 @@ function init() {
                     parent.appendTo(list);
                 }
             }
-        }
 
     }
     function changeLink(){
@@ -84,20 +81,20 @@ function init() {
         request.onreadystatechange = function (e) {
 
             if (request.readyState === 4) {
-                //save the response from server
-                //if userLogged.php outputs false, then the signin will display
-                //if userLogged.php outputs true, then the favorites, logout, and manage account will display
+
                 var data = JSON.parse(request.responseText);
                 var garages = data.Favorites;
+                console.log(garages);
+                console.log(garages.length);
                 
 
                 for (var i = 0, j = garages.length; i < j; i++) {
                     var g = garages[i];
-                    var whereToLink = $("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child");
-                    whereToLink.text("");
+                    console.log($("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child").text());
+                    $("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child").text("");
                     var link = $('<a />',{
                         href: "deleteFavorites.php?favoriteID=" + g.FavoriteID,
-                        text: "Remove From Favorites"}).appendTo(whereToLink);
+                        text: "Remove From Favorites"}).appendTo($("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child"));
 
                 }
             }
