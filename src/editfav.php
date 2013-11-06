@@ -45,7 +45,10 @@ September 14, 2013
 
 		<div class="hpContent">
 			<h2>Edit Favorite Garages</h2>
-			<p class = "details">Please check the garages you wish to keep in your favorites.
+
+			<p class = "details"><? 
+			if($_GET['stat'] == 1) echo("**Your Favorite Modification Was Successful**<BR>"); ?>
+				Please check the garages you wish to keep in your favorites.
 				
 				<ul id="favList">
 				</ul>

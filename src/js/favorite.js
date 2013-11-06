@@ -96,7 +96,7 @@ function init() {
                     var whereToLink = $("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child");
                     whereToLink.text("");
                     var link = $('<a />',{
-                        href: "http://nhl.com",
+                        href: "deleteFavorites.php?favoriteID=" + g.FavoriteID,
                         text: "Remove From Favorites"}).appendTo(whereToLink);
 
                 }
