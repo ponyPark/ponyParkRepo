@@ -113,36 +113,6 @@ function init() {
 
 
     }
-    function changeLink(){
-
-        var request = new XMLHttpRequest();
-        var url = 'getFavorites.php';
-        var data;
-
-        request.open("GET", url, true);
-        request.send();
-        request.onreadystatechange = function (e) {
-
-            if (request.readyState === 4) {
-
-                var data = JSON.parse(request.responseText);
-                var garages = data.Favorites;
-
-                
-
-                for (var i = 0, j = garages.length; i < j; i++) {
-                    var g = garages[i];
-                    console.log($("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child").text());
-                    $("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child").text("");
-                    var link = $('<a />',{
-                        href: "deleteFavorites.php?favoriteID=" + g.FavoriteID,
-                        text: "Remove From Favorites"}).appendTo($("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child"));
-
-                }
-            }
-        }
-
-    }
 
     userLogged();
     loadFavorites();
