@@ -52,6 +52,7 @@ September 14, 2013
 				
 				<ul id="favList">
 				</ul>
+				<a class="submit" href="favlist.php">Done</a>
 				</p>
 
 
