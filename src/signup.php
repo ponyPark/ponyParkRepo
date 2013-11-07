@@ -60,7 +60,7 @@ if($_SESSION['logged'] === true)
                 <input type="text" name="lname" placeholder="Last Name" title="Letters only" pattern="[a-zA-Z]+"required>
                 <input type="email" name="email" placeholder="Email Address" required>
                 <input type="password" name="pw" placeholder="Password" pattern=".{8,}" title="Need at least 8 characters"required>
-                <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" required>
+                <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only">
                 <!-- Uncomment this to enable captcha. Also go to create.php to uncomment a line.
                      NOTE: The captcha will not work unless you are accessing PonyPark from localhost (can't be a custom virtual host name). It will work fine on the production server.
                 <br><br>
