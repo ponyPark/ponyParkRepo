@@ -84,13 +84,10 @@ function init() {
 
                 var data = JSON.parse(request.responseText);
                 var garages = data.Favorites;
-                console.log(garages);
-                console.log(garages.length);
                 
 
                 for (var i = 0, j = garages.length; i < j; i++) {
                     var g = garages[i];
-                    console.log($("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child").text());
                     $("#FavoriteParkingGarageID" + g.ParkingID + " ul  li:last-child").text("");
                     var link = $('<a />',{
                         href: "deleteFavorites.php?favoriteID=" + g.FavoriteID,

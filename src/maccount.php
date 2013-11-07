@@ -48,6 +48,7 @@ September 14, 2013
 			<p class = "details">Please choose what you would like to modify:
 				<ul>
 					<li><a href="editfav.php">Favorites</a></li>
+					<li><a href="ctimes.php">Commute Times</a></li>
 				</ol></p>
 
 
