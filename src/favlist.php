@@ -45,7 +45,7 @@ September 14, 2013
 
 		<div class="hpContent" >
 			<h2>Favorite List</h2>
-			<p class = "details">
+			<p class = "details" id="favGLDisp">
 				Below are your favorite garages.  Click on a garage to get more detailed real time info.  Click <a href="editfav.php">Here</a> to edit your favorites.
 
 				<ul id="favListDisp">

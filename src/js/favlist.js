@@ -52,6 +52,14 @@ function init() {
             }
         var list = document.getElementById("favListDisp");
         request = new XMLHttpRequest();
+            if(favorites.length === 0){
+                $('#favGLDisp').text("Oops, you don't have any favorites.  Please add some by clicking ")
+                var anchor = $('<a />', {
+                                href: "editfav.php",
+                                text: "here."}).appendTo($('#favGLDisp'));
+
+
+            }
         for(var i = 0, j = favorites.length; i < j; i++){
             var f = favorites[i];
             var url = 'getParkingInfo.php?parkingID=' + f.ParkingID;
