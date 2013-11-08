@@ -75,7 +75,14 @@ function init() {
     function addMarker(map, item, location) {
       var marker = new google.maps.Marker({ map : map, position : location});
       marker.setTitle(item.Name);
-      var rating = parseInt(item.Rating);
+      var average_rating = parseInt(item.Average_Rating);
+      var latest_rating = parseInt(item.Latest_Rating);
+      var rating = !average_rating ? latest_rating : average_rating;
+      var rating_message;
+      if (average_rating)
+          rating_message = "Average from past 2 hours: ";
+      else
+          rating_message = "Most recent rating: ";
       console.log(rating);
       var ava;
       var bgc;
@@ -103,7 +110,7 @@ function init() {
             break;
       }
 
-      var contentString = '<ol><li><a href="garage.php?garageID=' + item.ParkingID + '">' + item.Name + '</a></ul><li>' + item.Address + '</li><li>Availability: ' + ava + '</li></ol>';
+      var contentString = '<ol><li><a href="garage.php?garageID=' + item.ParkingID + '">' + item.Name + '</a></ul><li>' + item.Address + '</li><li>' + rating_message + ': ' + ava + '</li></ol>';
       new google.maps.event.addListener(marker, "click", function() {
         if (infowindow)
             infowindow.close();
@@ -139,7 +146,16 @@ function init() {
 
                 for (var i = 0, j = garages.length; i < j; i++) {
                     var g = garages[i];
-                    var rating = parseInt(g.Rating);
+                    var average_rating = parseInt(g.Average_Rating);
+                    console.log(average_rating);
+                    var latest_rating = parseInt(g.Latest_Rating);
+                    console.log(latest_rating);
+                    var rating = !average_rating ? latest_rating : average_rating;
+                    var rating_message;
+                    if (average_rating)
+                        rating_message = "Average from past 2 hours: ";
+                    else
+                        rating_message = "Most recent rating: ";
 
                     var parent;
                     var child = $('<ul />');
@@ -150,31 +166,31 @@ function init() {
                         parent = $('<li />', {
                             style: "border: 4px solid red;"});
                         c2 = $('<li />', {
-                            text: 'Availability: Full'}).appendTo(child);
+                            text: rating_message + 'Full'}).appendTo(child);
                     }
                     else if (rating === 2) {
                         parent = $('<li />', {
                             style: "border: 4px solid red;"});
                         c2 = $('<li />', {
-                            text: 'Availability: Scarce'}).appendTo(child);
+                            text: rating_message + 'Scarce'}).appendTo(child);
                     }
                     else if (rating === 3) {
                         parent = $('<li />', {
                             style: "border: 4px solid yellow;"});
                         c2 = $('<li />', {
-                            text: 'Availability: Some'}).appendTo(child);
+                            text: rating_message + 'Some'}).appendTo(child);
                     }
                     else if (rating === 4) {
                         parent = $('<li />', {
                             style: "border: 4px solid green;"});
                         c2 = $('<li />', {
-                            text: 'Availability: Plenty'}).appendTo(child);
+                            text: rating_message + 'Plenty'}).appendTo(child);
                     }
                     else {
                         parent = $('<li />', {
                             style: "border: 4px solid green;"});
                         c2 = $('<li />', {
-                            text: 'Availability: Empty'}).appendTo(child);
+                            text: rating_message + 'Empty'}).appendTo(child);
                     }
 
                     var anchor = $('<a />', {
