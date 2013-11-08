@@ -212,14 +212,28 @@ class phpapi
     }
 
     /**
-     * A function to get the ratings for a specific parking location given a
-     * ParkingID.
+     * A function to get the ratings for a specific parking location's levels 
+     * given a ParkingID.
      * @param INT $parkingID The ID of the parking location.
-     * @return JSON The information for the requested parking location.
+     * @return JSON The information for the requested parking location's levels.
      */
-    public function getLevelRatings($parkingID)
+    public function getLevelRatings($parkingID, $level)
     {
+        // Get the parking information for the requested garage.
+        $query = "SELECT (SELECT floor(avg(Rating)) AS Rating FROM
+            Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
+            Ratings.ParkingID = ParkingLocations.ParkingID AND Ratings.Level = 
+            1) AS Average_Rating, (SELECT Rating FROM Ratings WHERE 
+            ParkingLocations.ParkingID = Ratings.ParkingID AND Ratings.Level = 
+            '$level' ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating FROM 
+            ParkingLocations WHERE ParkingLocations.parkingID = '$parkingID'";
+        $result = mysql_query($query);
 
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('LevelInfo' => $rows));
     }
 
     /**
