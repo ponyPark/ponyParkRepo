@@ -215,11 +215,17 @@ class phpapi
     public function getParkingLocations()
     {
         
-        //Get the most recent Rating, Name, and Address for every garage.
+        //Get the average ratings from the past 2 hours or the most recent
+        //Rating if the previous is NULL. Also get the Name, and Address for
+        //every garage.
         $query = "SELECT ParkingLocations.ParkingID, ParkingLocations.Name, 
-            ParkingLocations.Address, (SELECT Ratings.Rating FROM Ratings WHERE 
-            ParkingLocations.ParkingID = Ratings.ParkingID ORDER BY Timestamp 
-            desc limit 1) Rating FROM ParkingLocations ORDER BY ParkingLocations.Name";
+            ParkingLocations.Address, (SELECT floor(avg(Rating)) AS Rating FROM
+            Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
+            Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
+            (SELECT Rating FROM Ratings WHERE ParkingLocations.ParkingID
+            = Ratings.ParkingID ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating
+            FROM ParkingLocations ORDER BY ParkingLocations.Name";
+
         $result = mysql_query($query);
 
         // Change mysql result to array so that it can be exported in JSON.
