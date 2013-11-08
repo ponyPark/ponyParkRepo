@@ -28,11 +28,12 @@ function init() {
                     document.getElementById('address').innerHTML = data.ParkingInfo.Address + "<BR>Dallas, Texas 75205";
                     $('#moreGInfo').text(data.ParkingInfo.Name + " is located at " + data.ParkingInfo.Address + " in Dallas, Texas on the Southern Methodist University Campus");
 	                var text = "NONE";
-                    if(data.ParkingInfo.Rating === '1') text = "FULL";
-                    if(data.ParkingInfo.Rating === '2') text = "SCARCE";
-                    if(data.ParkingInfo.Rating === '3') text = "SOME";
-                    if(data.ParkingInfo.Rating === '4') text = "PLENTY";
-                    if(data.ParkingInfo.Rating === '5') text = "EMPTY";
+                    var rating = data.ParkingInfo.Average_Rating ? data.ParkingInfo.Average_Rating : data.ParkingInfo.Latest_Rating;
+                    if(rating === '1') text = "FULL";
+                    if(rating === '2') text = "SCARCE";
+                    if(rating === '3') text = "SOME";
+                    if(rating === '4') text = "PLENTY";
+                    if(rating === '5') text = "EMPTY";
                     if(text === "NONE") $('#ratingofG').text("There is no rating available for this garage. You can help by logging in and rating above.");
                     console.log(text);
                     $('#ratingGinInfo').text(text);
