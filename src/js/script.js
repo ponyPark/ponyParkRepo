@@ -80,10 +80,9 @@ function init() {
       var rating = !average_rating ? latest_rating : average_rating;
       var rating_message;
       if (average_rating)
-          rating_message = "Average from past 2 hours: ";
+          rating_message = "Average from past 2 hours";
       else
-          rating_message = "Most recent rating: ";
-      console.log(rating);
+          rating_message = "Most recent rating";
       var ava;
       var bgc;
       switch (rating)
