@@ -197,15 +197,29 @@ class phpapi
     public function getParkingInfo($parkingID)
     {
         // Get the parking information for the requested garage.
-        $query = "SELECT *, (SELECT Ratings.Rating FROM Ratings WHERE 
-            ParkingLocations.ParkingID = Ratings.ParkingID ORDER BY Timestamp 
-            desc limit 1) Rating FROM ParkingLocations WHERE 
-            ParkingLocations.parkingID = '$parkingID'";
+        $query = "SELECT *, (SELECT floor(avg(Rating)) AS Rating FROM
+            Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
+            Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
+            (SELECT Rating FROM Ratings WHERE ParkingLocations.ParkingID
+            = Ratings.ParkingID ORDER BY Timestamp DESC LIMIT 1) AS 
+            Latest_Rating FROM ParkingLocations WHERE ParkingLocations.parkingID
+            = '$parkingID'";
         $result = mysql_query($query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = mysql_fetch_assoc($result);
         return json_encode(array('ParkingInfo' => $rows));
+    }
+
+    /**
+     * A function to get the ratings for a specific parking location given a
+     * ParkingID.
+     * @param INT $parkingID The ID of the parking location.
+     * @return JSON The information for the requested parking location.
+     */
+    public function getLevelRatings($parkingID)
+    {
+
     }
 
     /**
