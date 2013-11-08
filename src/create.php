@@ -4,9 +4,9 @@ include 'phpapi.php';
 $phpInit = new phpapi();
 
 // Stop processing the user add request if the user failed the captcha test.
-// **Uncomment the line below to enable captcha processing.**
 
-//if (!$phpInit->checkCaptcha()) die("captcha_failure");
+// **Uncomment the line below to enable captcha processing.**
+if (!$phpInit->checkCaptcha()) die("captcha_failure");
 
 if (!$phpInit->addUser())
 {
