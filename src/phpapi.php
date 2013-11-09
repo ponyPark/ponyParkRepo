@@ -98,7 +98,7 @@ class phpapi
             //Query to see if the user already exists
             $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
                 ExternalType = '$externalType'";
-            $result = mysql_query($query)
+            $result = mysql_query($query);
 
             //If the user doesn't exist.
             if(mysql_num_rows($result)==0)
