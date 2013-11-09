@@ -45,11 +45,11 @@ class phpapi
     public function addUser()
     {   
         // Obtain user info
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $email = $_POST['email'];
+        $fname = mysql_real_escape_string($_POST['fname']);
+        $lname = mysql_real_escape_string($_POST['lname']);
+        $email = mysql_real_escape_string($_POST['email']);
+        $phone = mysql_real_escape_string($_POST['phone']);
         $raw_pw = $_POST['pw'];
-        $phone = $_POST['phone'];
 
         // Check to make sure all required values have been inputted.
         if (empty($fname) || empty($lname) || empty($email) || strlen($raw_pw)<8)
@@ -83,24 +83,38 @@ class phpapi
      * A function to verify that a user is entering the right information when
      * logging in. By retrieving information from a query to the database. It 
      * also saves the information into a session. 
+     * @return boolean True on successful login, false otherwise.
      */
     public function verifyUser()
     {
-        //verify a user and start a new session
-        
-        $query = "select * from Users where Email = '";
-        $query = $query . $_POST['email']."'";
-        $result = mysql_query($query);
-        $info = mysql_fetch_array( $result );
+        // Check that email and password are not empty.
+        $email = mysql_real_escape_string($_POST['email']);
+        $raw_password = $_POST['pw'];
+        if (empty($email) || empty($raw_password))
+        {
+            header ('Location: signup.php?login=false');
+            return false;
+        }
+
+        // Obtain the salt for the user.
+        $query = "SELECT * FROM Users WHERE Email = '$email' AND 
+            ExternalType = 'native'";
+        $info = mysql_fetch_array(mysql_query($query));
         $salt = $info['PasswordSalt'];
         $info = NULL;
-        $pwps = $_POST['pw'] . $salt;
+
+        // Add the salt to the password, and hash the whole thing.
+        $pwps = $raw_password . $salt;
         $pw = hash(md5, $pwps);
-        $query = "select * from Users where Email = '";
-        $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'"; 
+
+        // Validate the user. Using the native system.
+        $query = "SELECT * FROM Users WHERE Email = '$email' AND    
+            ExternalType = 'native' AND Password = '$pw'"; 
         $result = mysql_query($query);
 
-
+        // Redirect the user to an error if validation was unsucessful.
+        // Otherwise, set the logged in state by setting session variables,
+        // then redirect the user to the home page.
         if(mysql_num_rows($result) == 0)
         {
             header ('Location: signup.php?login=false');
@@ -108,7 +122,7 @@ class phpapi
         }
         else
         {
-            $info = mysql_fetch_array( $result );
+            $info = mysql_fetch_array($result);
             $_SESSION['logged'] = true;
             $_SESSION['userEmail'] = $info['Email'];
             //Added the user to the session since we use
@@ -119,24 +133,31 @@ class phpapi
             header ('Location: index.php');
             return true;
         }
-
-        
     }
 
-        public function verifyUserAndroid()
+    /**
+     * verify a user and start a new session for Android
+     * @return JSON All the user data so the android app can use it
+     */
+    public function verifyUserAndroid()
     {
-        //verify a user and start a new session for Android
-        //This will output a JSON of all the user data so the android app can use it.
-        $query = "select * from Users where Email = '";
-        $query = $query . $_POST['email']."'";
-        $result = mysql_query($query);
-        $info = mysql_fetch_array( $result );
+        $email = mysql_real_escape_string($_POST['email']);
+        $raw_password = $_POST['pw'];
+
+        // Obtain the salt for the user.
+        $query = "SELECT * FROM Users WHERE Email = '$email' AND 
+            ExternalType = 'native'";
+        $info = mysql_fetch_array(mysql_query($query));
         $salt = $info['PasswordSalt'];
         $info = NULL;
-        $pwps = $_POST['pw'] . $salt;
+        
+        // Add the salt to the password, and hash the whole thing.
+        $pwps = $raw_password . $salt;
         $pw = hash(md5, $pwps);
-        $query = "select * from Users where Email = '";
-        $query = $query . $_POST['email'] . "' and Password = '" . $pw ."'"; 
+
+        // Validate the user. Using the native system.
+        $query = "SELECT * FROM Users WHERE Email = '$email' AND    
+            ExternalType = 'native' AND Password = '$pw'"; 
         $result = mysql_query($query);
         
         if(mysql_num_rows($result) > 0)
@@ -159,7 +180,6 @@ class phpapi
         // Change mysql result to array so that it can be exported in JSON.
         // Returns an empty array if no info is inside.
         return json_encode(array('UserInfo' => $info));
-        
     }
 
     /**
