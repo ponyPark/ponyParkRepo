@@ -78,6 +78,55 @@ class phpapi
         }
     }
 
+    public function checkGoogleUser()
+    {
+        
+        if(!isset($_SESSION['logged']) || !isset($_SESSION['userEmail']) || 
+            !isset($_SESSION['userID']) || !isset($_SESSION['userName']))
+        {
+            // Obtain user info
+            $fname = mysql_real_escape_string($_POST['fname']);
+            $lname = mysql_real_escape_string($_POST['lname']);
+            $email = mysql_real_escape_string($_POST['email']);
+            $externalID = mysql_real_escape_string($_POST['externalID']);
+            $auth = 0;
+            $externalType = "Google";
+
+            if(empty($email) || empty($externalID))
+                return false;
+
+            //Query to see if the user already exists
+            $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
+                ExternalType = '$externalType'";
+            $result = mysql_query($query)
+
+            //If the user doesn't exist.
+            if(mysql_num_rows($result)==0)
+            {
+                //Add the info into the users table.
+                $query = "INSERT INTO Users(FirstName, LastName, Email, UserType,
+                    ExternalType, ExternalID) VALUES ('$fname','$lname','$email','$auth',
+                    '$externalType', '$externalID')";
+                mysql_query($query);
+
+                //Get everything from the row just inserted.
+                $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
+                    ExternalType = '$externalType'";
+                $result = mysql_query($query);
+            }
+
+            $info = mysql_fetch_array($result);
+            $_SESSION['logged'] = true;
+            $_SESSION['userEmail'] = $info['Email'];
+            
+            //Added the user to the session since we use
+            //that for adding favorites, etc.
+            $_SESSION['userID'] = $info['UserID'];
+            $_SESSION['userName'] = $info['FirstName'];
+
+            header ('Location: index.php');
+        }
+    }
 
     /**
      * A function to verify that a user is entering the right information when
@@ -197,9 +246,13 @@ class phpapi
      */
     public function signOut()
     {
-        $_SESSION = array();
-        session_destroy();
-        header ('Location: index.php');
+        if(isset($_SESSION['logged']) || isset($_SESSION['userEmail']) || 
+            isset($_SESSION['userID']) || isset($_SESSION['userName']))
+        {
+            $_SESSION = array();
+            session_destroy();
+            header ('Location: index.php');
+        }     
     }
 
      public function signOutAndroid()
