@@ -222,7 +222,11 @@ class phpapi
             Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
             (SELECT Rating FROM Ratings WHERE ParkingLocations.ParkingID
             = Ratings.ParkingID ORDER BY Timestamp DESC LIMIT 1) AS 
-            Latest_Rating FROM ParkingLocations WHERE ParkingLocations.parkingID
+            Latest_Rating, (SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
+            CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hours ago'), 
+            '>24 hours ago') FROM Ratings WHERE Ratings.ParkingID = 
+            ParkingLocations.ParkingID ORDER BY timestamp DESC LIMIT 1) AS 
+            Last_Rated FROM ParkingLocations WHERE ParkingLocations.parkingID
             = '$parkingID'";
         $result = mysql_query($query);
 
@@ -237,15 +241,20 @@ class phpapi
      * @param INT $parkingID The ID of the parking location.
      * @return JSON The information for the requested parking location's levels.
      */
-    public function getLevelRatings($parkingID, $level)
+    public function getLevelRating($parkingID, $level)
     {
         // Get the parking information for the requested garage.
         $query = "SELECT (SELECT floor(avg(Rating)) AS Rating FROM
             Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
             Ratings.ParkingID = ParkingLocations.ParkingID AND Ratings.Level = 
-            1) AS Average_Rating, (SELECT Rating FROM Ratings WHERE 
+            '$level') AS Average_Rating, (SELECT Rating FROM Ratings WHERE 
             ParkingLocations.ParkingID = Ratings.ParkingID AND Ratings.Level = 
-            '$level' ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating FROM 
+            '$level' ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating,
+            (SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
+            CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hours ago'), 
+            '>24 hours ago') FROM Ratings WHERE Ratings.ParkingID = 
+            ParkingLocations.ParkingID AND Ratings.Level = '$level' 
+            ORDER BY timestamp DESC LIMIT 1) AS Last_Rated FROM 
             ParkingLocations WHERE ParkingLocations.parkingID = '$parkingID'";
         $result = mysql_query($query);
 
@@ -264,15 +273,19 @@ class phpapi
     {
         
         //Get the average ratings from the past 2 hours or the most recent
-        //Rating if the previous is NULL. Also get the Name, and Address for
+        //Rating if the previous is NULL. Also get the ID, Name, and Address for
         //every garage.
         $query = "SELECT ParkingLocations.ParkingID, ParkingLocations.Name, 
-            ParkingLocations.Address, (SELECT floor(avg(Rating)) AS Rating FROM
+            ParkingLocations.Address, (SELECT floor(avg(Rating)) FROM
             Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
             Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
             (SELECT Rating FROM Ratings WHERE ParkingLocations.ParkingID
-            = Ratings.ParkingID ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating
-            FROM ParkingLocations ORDER BY ParkingLocations.Name";
+            = Ratings.ParkingID ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating, 
+            (SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
+            CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hours ago'), 
+            '>24 hours ago') FROM Ratings WHERE Ratings.ParkingID = 
+            ParkingLocations.ParkingID ORDER BY timestamp DESC LIMIT 1) AS 
+            Last_Rated FROM ParkingLocations ORDER BY ParkingLocations.Name";
 
         $result = mysql_query($query);
 
