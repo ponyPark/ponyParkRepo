@@ -22,6 +22,7 @@ if($_SESSION['logged'] === true)
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/verifySignup.js"></script>
+		<script type="text/javascript" src="js/google.js"></script>
 	</head>
 	<body>
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
@@ -29,16 +30,29 @@ if($_SESSION['logged'] === true)
 
 		<div class="hpContent" id="signInHP">
 
-    		<p class="details">Already Registered? Log In.</p>
+    		<p class="details">Already registered? Log in, or sign in with Facebook or Google.</p>
     		<?
                 if ($_GET["login"] === "false")
                     echo "<span id= 'badLogin' >Incorrect login information.<BR>Please try again.</span>";
             ?>
     		<form id="signInForm" method="POST" action="verify.php">
-    		    <!--Also will need option for fbook/twitter login once we get that far -->
     		    <input type="email" name="email" title="Enter the email address associated with your account" placeholder="Email Address" required><input type="password" name="pw" placeholder = "Password" required>
     		    <input type="submit" value="Log In" class="submit">
     		</form>
+            <br>
+            <center>
+                <span id="signinButton">
+                    <span
+                        class="g-signin"
+                        data-callback="signinCallback"
+                        data-clientid="273917884931.apps.googleusercontent.com"
+                        data-cookiepolicy="single_host_origin"
+                        data-requestvisibleactions="http://schemas.google.com/AddActivity"
+                        data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
+                    </span>
+                </span>
+                [FB sign in]
+            </center>
 
 		</div>
 
