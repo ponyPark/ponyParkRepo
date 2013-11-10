@@ -87,6 +87,6 @@ function disconnectUser()
     }
 }
 
-jQuery(document).ready(function() {
-    $("#signOut").click(disconnectUser);
-});
+//jQuery(document).ready(function() {
+//    $("#signOut").click(disconnectUser);
+//});
