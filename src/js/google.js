@@ -4,6 +4,14 @@
      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
     })();
 
+function getEmail(access_token)
+{
+    return $.ajax({
+        type: "GET",
+        url: "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+access_token
+    });
+}
+
 function signinCallback(authResult)
 {
     if (authResult['access_token'])
@@ -11,43 +19,74 @@ function signinCallback(authResult)
         // Hide the sign-in button now that the user is authorized, for example:
         document.getElementById('signinButton').setAttribute('style', 'display: none');
 
-        var email = "asdf";
-        externalID_Google = "";
-        fname_Google = "";
-        lname_Google = "";
-        // Get the email
-        gapi.client.load('oauth2', 'v2', function()
-        {
-            gapi.client.oauth2.userinfo.get().execute(function(resp) {
-                email = resp.email;
-                alert("1: " + email);
-            });
-        });
+        var email, externalID, fname, lname;
 
-        alert("2: " + email);
-        
-        // Get the id, first name, and last name
-        gapi.client.load('plus', 'v1', function(externalID, fname, lname)
+        // Get the email, id, first name, and last name
+        gapi.client.load('plus', 'v1', function()
         {
             gapi.client.plus.people.get( {'userId' : 'me'} ).execute(function(resp) {
                 externalID = resp.id;
                 fname = resp.name.givenName;
                 lname = resp.name.familyName;
-                // console.log(resp.id);
-                // console.log(resp.name.givenName);
-                // console.log(resp.name.familyName);
+                getEmail(authResult['access_token']).done(function(result) {
+                    email = result.email;
+                    $.ajax({
+                        type: "POST",
+                        url: "checkGoogleUser.php",
+                        data: { "email":email, "externalID":externalID, 
+                            "fname":fname, "lname":lname },
+                        success: function(result) {
+                            if (result === "1")
+                                window.location.replace("index.php");
+                        }
+                    });
+                });
             })
         });
-        //alert(email.valueOf + " " + externalID.valueOf + " " + fname.valueOf + " " + lname.valueOf);
-        // $.ajax({
-        //     type: "POST",
-        //     url: "checkGoogleUser.php",
-        //     data: { "email":email, "externalID":externalID, "fname":fname, "lname":lname },
-        // });
     }
-    else if (authResult['error'])
+    // else if (authResult['error'])
+    // {
+    //     // Update the app to reflect a signed out user
+    //     $.ajax({ url: "signOut.php" });
+    // }
+}
+
+function disconnectUser()
+{
+    var token = gapi.auth.getToken();
+    if (token)
     {
-        // Update the app to reflect a signed out user
-        $.ajax({ url: "signOut.php" });
+        var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
+            token.access_token;
+        $.ajax({
+            type: 'GET',
+            url: revokeUrl,
+            async: false,
+            contentType: "application/json",
+            dataType: 'jsonp',
+            success: function() {
+                $.ajax({
+                    url: "signOut.php",
+                    success: function(result) {
+                        if (result === "1")
+                            window.location.replace("index.php");
+                    }
+                });
+            }
+        });
+    }
+    else
+    {
+        $.ajax({
+            url: "signOut.php",
+            success: function(result) {
+                if (result === "1")
+                    window.location.replace("index.php");
+            }
+        });
     }
 }
+
+jQuery(document).ready(function() {
+    $("#signOut").click(disconnectUser);
+});

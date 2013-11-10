@@ -16,6 +16,7 @@ September 14, 2013
 		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/google.js"></script>
 	</head>
 	<body>
 		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
@@ -23,13 +24,23 @@ September 14, 2013
 
 		<section id="signIn">
 		Welcome to PonyPark, Guest! Please <a href="signup.php">Join</a> or <a href="signup.php">Sign in</a>
+		<span id="signinButton">
+		    <span
+			    class="g-signin"
+			    data-callback="signinCallback"
+			    data-clientid="273917884931.apps.googleusercontent.com"
+			    data-cookiepolicy="single_host_origin"
+			    data-requestvisibleactions="http://schemas.google.com/AddActivity"
+			    data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
+		    </span>
+		</span>
 		</section>
 		<div id="userOptions">
 			Welcome back to PonyPark, <? session_start(); echo($_SESSION['userName']);?>!
 			<ol id="userList">
 				<li><a href="maccount.php">Manage Account</a></li>
 				<li><a href="favlist.php">Favorite List</a></li>
-				<li><a href="signOut.php">Sign Out</a></li>
+				<li><a href="#" id="signOut">Sign Out</a></li>
 			</ol>
 		</div>
 

@@ -78,6 +78,13 @@ class phpapi
         }
     }
 
+    /**
+     * This function processes a Google+ sign in. If an entry doesn't already
+     * exist in the Users table for the user, then an entry is created.
+     * It will set session variables to indicate a logged in user.
+     * @return boolean True if user was successfully logged in through Gogogle.
+     * False if there was an error or if session variables were already set.
+     */
     public function checkGoogleUser()
     {
         
@@ -124,8 +131,9 @@ class phpapi
             $_SESSION['userID'] = $info['UserID'];
             $_SESSION['userName'] = $info['FirstName'];
 
-            header ('Location: index.php');
+            return true;
         }
+        return false;
     }
 
     /**
@@ -251,8 +259,9 @@ class phpapi
         {
             $_SESSION = array();
             session_destroy();
-            header ('Location: index.php');
-        }     
+            return true;
+        }
+        else return false;
     }
 
      public function signOutAndroid()
