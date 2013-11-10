@@ -16,8 +16,7 @@
 		<script type="text/javascript" src="js/google.js"></script>
 	</head>
 	<body>
-		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
-		<p id = "slogan">Trot Right In</p>
+        <div id="logo"><!-- logo.html --></div>
 
 		<section id="signIn"><!-- dashboardSignIn.html --></section>
 		<div id="userOptions"><!-- dashboardUserOptions.php --></div>

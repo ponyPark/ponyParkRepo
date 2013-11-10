@@ -21,12 +21,12 @@ if($_SESSION['logged'] === true)
 		<script type="text/javascript" src="js/script.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/includes.js"></script>
         <script type="text/javascript" src="js/verifySignup.js"></script>
 		<script type="text/javascript" src="js/google.js"></script>
 	</head>
 	<body>
-		<h1><a href="index.php"><img src="PonyPark.png" alt="PonyPark Logo"></a></h1>
-		<p id = "slogan">Trot Right In</p>
+        <div id="logo"><!-- logo.html --></div>
 
 		<div class="hpContent" id="signInHP">
 
