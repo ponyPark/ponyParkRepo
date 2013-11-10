@@ -53,7 +53,7 @@ function init() {
         var list = document.getElementById("favListDisp");
         request = new XMLHttpRequest();
             if(favorites.length === 0){
-                $('#favGLDisp').text("Oops, you don't have any favorites.  Please add some by clicking ")
+                $('#favGLDisp').text("Oops, you don't have any favorites.  Please add some by clicking ");
                 var anchor = $('<a />', {
                                 href: "editfav.php",
                                 text: "here."}).appendTo($('#favGLDisp'));
