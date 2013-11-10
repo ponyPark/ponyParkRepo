@@ -71,7 +71,14 @@ function init() {
                         if (request.readyState === 4) {
                             var data = JSON.parse(request.responseText);
                             var g = data.ParkingInfo;
-                            var rating = parseInt(g.Rating);
+                            var average_rating = parseInt(g.Average_Rating);
+                            var latest_rating = parseInt(g.Latest_Rating);
+                            var rating = !average_rating ? latest_rating : average_rating;
+                            var rating_message;
+                            if (average_rating)
+                                rating_message = "Average rating from past 2 hours";
+                            else
+                                rating_message = "Most recent rating (" + g.Last_Rated + ")";
 
                             var parent;
                             var child = $('<ul />');
@@ -81,27 +88,27 @@ function init() {
                             if (rating === 1) {
                                 parent = $('<li />');
                                 c2 = $('<li />', {
-                                    text: 'Availability: Full'}).appendTo(child);
+                                    text: rating_message + ': Full'}).appendTo(child);
                             }
                             else if (rating === 2) {
                                 parent = $('<li />');
                                 c2 = $('<li />', {
-                                    text: 'Availability: Scarce'}).appendTo(child);
+                                    text: rating_message + ': Scarce'}).appendTo(child);
                             }
                             else if (rating === 3) {
                                 parent = $('<li />');
                                 c2 = $('<li />', {
-                                    text: 'Availability: Some'}).appendTo(child);
+                                    text: rating_message + ': Some'}).appendTo(child);
                             }
                             else if (rating === 4) {
                                 parent = $('<li />');
                                 c2 = $('<li />', {
-                                    text: 'Availability: Plenty'}).appendTo(child);
+                                    text: rating_message + ': Plenty'}).appendTo(child);
                             }
                             else {
                                 parent = $('<li />');
                                 c2 = $('<li />', {
-                                    text: 'Availability: Empty'}).appendTo(child);
+                                    text: rating_message + ': Empty'}).appendTo(child);
                             }
 
                             var anchor = $('<a />', {

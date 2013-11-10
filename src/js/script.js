@@ -80,7 +80,7 @@ function init() {
       var rating = !average_rating ? latest_rating : average_rating;
       var rating_message;
       if (average_rating)
-          rating_message = "Average from past 2 hours";
+          rating_message = "Average rating from past 2 hours";
       else
           rating_message = "Most recent rating (" + item.Last_Rated + ")";
       var ava;
@@ -148,13 +148,11 @@ function init() {
                 for (var i = 0, j = garages.length; i < j; i++) {
                     var g = garages[i];
                     var average_rating = parseInt(g.Average_Rating);
-                    console.log(average_rating);
                     var latest_rating = parseInt(g.Latest_Rating);
-                    console.log(latest_rating);
                     var rating = !average_rating ? latest_rating : average_rating;
                     var rating_message;
                     if (average_rating)
-                        rating_message = "Average from past 2 hours";
+                        rating_message = "Average rating from past 2 hours";
                     else
                         rating_message = "Most recent rating (" + g.Last_Rated + ")";
 
