@@ -5,7 +5,14 @@
 <script>
   jQuery(document).ready(function(){
     $("#logout").click(function(){
-    FB.logout(response.autResponse);
+    FB.getLoginStatus(function(ret) {
+      if(ret.authResponse) {
+        FB.logout(function(response)
+        {
+
+        });
+      }
+    });
   });
   });
 
