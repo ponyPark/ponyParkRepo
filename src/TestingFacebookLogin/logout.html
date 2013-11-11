@@ -7,6 +7,14 @@ window.fbAsyncInit = function() {
     cookie     : true, // enable cookies to allow the server to access the session
     xfbml      : true  // parse XFBML
   });
+
+    FB.getLoginStatus(function(ret) {
+        if(ret.authResponse) {
+            FB.logout(function() {
+                window.location.replace("loginFacebook.html");
+            });
+        }
+    });
 };
 
   // Load the SDK asynchronously
@@ -17,12 +25,4 @@ window.fbAsyncInit = function() {
    js.src = "//connect.facebook.net/en_US/all.js";
    ref.parentNode.insertBefore(js, ref);
   }(document));
-
-FB.getLoginStatus(function(ret) {
-    if(ret.authResponse) {
-        FB.logout(function() {
-            window.location.replace("loginFacebook.html");
-        });
-    }
-});
 </script>
