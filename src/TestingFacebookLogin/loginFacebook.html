@@ -8,6 +8,7 @@
     FB.getLoginStatus(function(ret) {
       if(ret.authResponse) {
         FB.logout();
+        window.location.replace("loginFacebook.html");
       }
     });
   });
