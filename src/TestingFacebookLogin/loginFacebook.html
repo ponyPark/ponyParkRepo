@@ -9,6 +9,7 @@
       if(ret.authResponse) {
         FB.logout(function() {
           window.location.replace("loginFacebook.html");
+          return;
         });       
       }
     });
