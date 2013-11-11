@@ -77,7 +77,10 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-      console.log('TESTAPIGood to see you, ' + response.name + '.');
+      console.log('ID:' + response.id);
+      console.log('First Name: ' + response.first_name);
+      console.log('Last Name: ' + response.last_name);
+      console.log('Email: ' + response.email );
     });
   }
 </script>
