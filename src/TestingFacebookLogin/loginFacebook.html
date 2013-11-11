@@ -1,8 +1,14 @@
 <html>
-<head></head>
+<head> <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script></head>
 <body>
 <div id="fb-root"></div>
 <script>
+  jquery(document).ready(function(){
+    $("#logout").click(function(){
+    FB.logout();
+  });
+  });
+
   window.fbAsyncInit = function() {
   FB.init({
     appId      : '553041308102464', // App ID
@@ -73,5 +79,6 @@
   /docs/reference/plugins/login/ -->
 
 <fb:login-button perms="email" show-faces="true" width="200" max-rows="1"></fb:login-button>
+
 </body>
 </html>
