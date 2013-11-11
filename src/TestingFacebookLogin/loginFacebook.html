@@ -7,10 +7,7 @@
     $("#logout").click(function(){
     FB.getLoginStatus(function(ret) {
       if(ret.authResponse) {
-        FB.logout(function(response)
-        {
-
-        });
+        FB.logout();
       }
     });
   });
