@@ -43,7 +43,7 @@
    } else {
      console.log('User cancelled login or did not fully authorize.');
    }
- });    } else {
+ }, {scope: 'email'});    } else {
       // In this case, the person is not logged into Facebook, so we call the login() 
       // function to prompt them to do so. Note that at this stage there is no indication
       // of whether they are logged into the app. If they aren't then they'll see the Login
@@ -61,7 +61,7 @@
    } else {
      console.log('User cancelled login or did not fully authorize.');
    }
- });
+ }, {scope: 'email'});
     }
   });
   };
