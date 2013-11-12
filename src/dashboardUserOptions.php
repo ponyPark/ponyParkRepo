@@ -6,5 +6,8 @@
 </ol>
 
 <script>
-    $("#signOut").click(disconnectUser);
+    $("#signOut").click(function() {
+        disconnectUser();
+        disconnectFBUser();
+    });
 </script>

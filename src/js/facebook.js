@@ -53,3 +53,33 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
  js.src = "//connect.facebook.net/en_US/all.js";
  ref.parentNode.insertBefore(js, ref);
 }(document));
+
+function disconnectFBUser()
+{
+    FB.getLoginStatus(function(ret) {
+      if (response.status === 'connected')
+      {
+        if(ret.authResponse) {
+            FB.logout(function() {
+              $.ajax({
+                    url: "signOut.php",
+                    success: function(result) {
+                        if (result === "1")
+                            window.location.replace("index.php");
+                    }
+                });
+            });
+        }
+      }
+      else
+      {
+        $.ajax({
+            url: "signOut.php",
+            success: function(result) {
+                if (result === "1")
+                    window.location.replace("index.php");
+            }
+        });
+      }
+    });
+}
