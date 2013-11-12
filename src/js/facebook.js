@@ -62,25 +62,25 @@ function disconnectFBUser()
         if(ret.authResponse) {
             FB.logout();
             console.log("Logged out of FB");
-            // $.ajax({
-            //       url: "signOut.php",
-            //       success: function(result) {
-            //           if (result === "1")
-            //               window.location.replace("index.php");
-            //       }
-            //   });
+            $.ajax({
+                  url: "signOut.php",
+                  success: function(result) {
+                      if (result === "1")
+                          window.location.replace("index.php");
+                  }
+              });
         }
       }
       else
       {
         console.log("Not connected to FB");
-        // $.ajax({
-        //     url: "signOut.php",
-        //     success: function(result) {
-        //         if (result === "1")
-        //             window.location.replace("index.php");
-        //     }
-        // });
+        $.ajax({
+            url: "signOut.php",
+            success: function(result) {
+                if (result === "1")
+                    window.location.replace("index.php");
+            }
+        });
       }
     });
 }
