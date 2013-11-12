@@ -60,15 +60,14 @@ function disconnectFBUser()
       if (response.status === 'connected')
       {
         if(ret.authResponse) {
-            FB.logout(function() {
-              $.ajax({
-                    url: "signOut.php",
-                    success: function(result) {
-                        if (result === "1")
-                            window.location.replace("index.php");
-                    }
-                });
-            });
+            FB.logout();
+            $.ajax({
+                  url: "signOut.php",
+                  success: function(result) {
+                      if (result === "1")
+                          window.location.replace("index.php");
+                  }
+              });
         }
       }
       else
