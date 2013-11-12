@@ -61,24 +61,26 @@ function disconnectFBUser()
       {
         if(ret.authResponse) {
             FB.logout();
-            $.ajax({
-                  url: "signOut.php",
-                  success: function(result) {
-                      if (result === "1")
-                          window.location.replace("index.php");
-                  }
-              });
+            console.log("Logged out of FB");
+            // $.ajax({
+            //       url: "signOut.php",
+            //       success: function(result) {
+            //           if (result === "1")
+            //               window.location.replace("index.php");
+            //       }
+            //   });
         }
       }
       else
       {
-        $.ajax({
-            url: "signOut.php",
-            success: function(result) {
-                if (result === "1")
-                    window.location.replace("index.php");
-            }
-        });
+        console.log("Not connected to FB");
+        // $.ajax({
+        //     url: "signOut.php",
+        //     success: function(result) {
+        //         if (result === "1")
+        //             window.location.replace("index.php");
+        //     }
+        // });
       }
     });
 }
