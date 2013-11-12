@@ -12,6 +12,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/includes.js"></script>
 		<script type="text/javascript" src="js/google.js"></script>
+		<script type="text/javascript" src="js/facebook.js"></script>
 	</head>
 	<body>
         <div id="logo"><!-- logo.html --></div>
