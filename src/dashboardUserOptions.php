@@ -7,7 +7,7 @@
 
 <script>
     $("#signOut").click(function() {
-        //disconnectUser();
+        disconnectUser();
         disconnectFBUser();
     });
 </script>

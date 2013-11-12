@@ -22,7 +22,11 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
         type: "POST",
         url: "checkFacebookUser.php",
         data: { "email":response.email, "externalID":response.id, 
-                  "fname":response.first_name, "lname":response.last_name }
+                  "fname":response.first_name, "lname":response.last_name },
+        success: function(result) {
+            if (result === "1")
+                window.location.replace("index.php");
+        }
       });
     });
   } else if (response.status === 'not_authorized') {
