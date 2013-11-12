@@ -181,6 +181,9 @@ class phpapi
      */
     public function addFacebookUser()
     {
+        $query = "INSERT INTO Ratings (ParkingID, UserID, Timestamp, Rating, Level) values (1, 14, NOW(), 1, 1)";
+        mysql_query($query);
+
         // Obtain user info
         $fname = mysql_real_escape_string($_POST['fname']);
         $lname = mysql_real_escape_string($_POST['lname']);
