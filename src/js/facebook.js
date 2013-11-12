@@ -57,7 +57,7 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
 function disconnectFBUser()
 {
     FB.getLoginStatus(function(ret) {
-      if (response.status === 'connected')
+      if (ret.status === 'connected')
       {
         if(ret.authResponse) {
             FB.logout();
