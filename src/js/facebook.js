@@ -19,9 +19,9 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
     // have logged in to the app.
     FB.api('/me', function(response) {
       $.ajax({
-      type: "POST",
-      url: "checkFacebookUser.php",
-      data: { "externalID":response.id }
+        type: "POST",
+        url: "checkFacebookUser.php",
+        data: { "externalID":response.id }
       });
     });
   } else if (response.status === 'not_authorized') {
@@ -36,14 +36,14 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
      if (response.authResponse) {
        FB.api('/me', function(response) {
           $.ajax({
-            type: "POST",
-            url: "addFacebookUser.php",
-            data: { "email":response.email, "externalID":response.id, 
-                "fname":response.first_name, "lname":response.last_name }
-          });
-       });
-     }
-   });
+              type: "POST",
+              url: "addFacebookUser.php",
+              data: { "email":response.email, "externalID":response.id, 
+                  "fname":response.first_name, "lname":response.last_name }
+            });
+        });
+      }
+    });
   } else {
     // In this case, the person is not logged into Facebook, so we call the login() 
     // function to prompt them to do so. Note that at this stage there is no indication
@@ -58,12 +58,12 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
             url: "addFacebookUser.php",
             data: { "email":response.email, "externalID":response.id, 
                 "fname":response.first_name, "lname":response.last_name }
+            });
           });
-       });
-     }
-   });
-  }
-});
+        }
+      });
+    }
+  });
 };
 
 // Load the SDK asynchronously
