@@ -24,6 +24,7 @@ if($_SESSION['logged'] === true)
 		<script type="text/javascript" src="js/includes.js"></script>
         <script type="text/javascript" src="js/verifySignup.js"></script>
 		<script type="text/javascript" src="js/google.js"></script>
+        <script type="text/javascript" src="js/facebook.js"></script>
 	</head>
 	<body>
         <div id="logo"><!-- logo.html --></div>
@@ -51,7 +52,7 @@ if($_SESSION['logged'] === true)
                         data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
                     </span>
                 </span>
-                [FB sign in]
+                <fb:login-button perms="email" width="200" max-rows="1" size="large"></fb:login-button>
             </center>
 
 		</div>

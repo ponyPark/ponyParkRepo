@@ -17,7 +17,7 @@ function signinCallback(authResult)
     if (authResult['access_token'])
     {
         // Hide the sign-in button now that the user is authorized, for example:
-        document.getElementById('signinButton').setAttribute('style', 'display: none');
+        //document.getElementById('signinButton').setAttribute('style', 'display: none');
 
         var email, externalID, fname, lname;
 
