@@ -371,7 +371,7 @@ class phpapi
             ParkingLocations.ParkingID = Ratings.ParkingID AND Ratings.Level = 
             '$level' ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating,
             (SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
-            CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hours ago'), 
+            CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hour(s) ago'), 
             '>24 hours ago') FROM Ratings WHERE Ratings.ParkingID = 
             ParkingLocations.ParkingID AND Ratings.Level = '$level' 
             ORDER BY timestamp DESC LIMIT 1) AS Last_Rated FROM 
