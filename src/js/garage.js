@@ -9,12 +9,11 @@ function init() {
 	       //change this URL depending on what Jessica sets it from PHPApi, just pass parkID as one of the git parameters.
 	       var url = 'getParkingInfo.php';
 	       var data;
+           var gLevels;
        
 
-	       request.open("GET", url+'?parkingID='+parkID, true);
+	       request.open("GET", url+'?parkingID='+parkID, false);
 	       request.send();
-	       request.onreadystatechange = function(e) {
-
 	      	if(request.readyState === 4){
 	                //here you'll add the necessary form elements to the form ID reportAvaForm
 	                //also change the innerHTML of elemnt with ID reportAva to "Rate the Availability of " + garage_name_from_xml_http_request
@@ -22,8 +21,6 @@ function init() {
 	                //You'll need to make sure you have a hidden field that passes the garageID to the DB side.
 	                data = request.responseText;
 	                data = JSON.parse(data);
-	                //data = ({"ParkingInfo":{"ParkingID":"1","Name":"Moody Garage","Address":"6004 Bishop Blvd","Cost":"2","NumberOfLevels":"4"}});
-	                console.log(data);
 	                document.getElementById('reportAva').innerHTML = "Rate the Availability of " + data.ParkingInfo.Name;
                     document.getElementById('address').innerHTML = data.ParkingInfo.Address + "<BR>Dallas, Texas 75205";
                     $('#moreGInfo').text(data.ParkingInfo.Name + " is located at " + data.ParkingInfo.Address + " in Dallas, Texas on the Southern Methodist University Campus");
@@ -35,10 +32,10 @@ function init() {
                     if(rating === '4') text = "PLENTY";
                     if(rating === '5') text = "EMPTY";
                     if(text === "NONE") $('#ratingofG').text("There is no rating available for this garage. You can help by logging in and rating above.");
-                    console.log(text);
                     $('#ratingGinInfo').text(text);
                     var levels = document.getElementById('level');
 	                var numLevels = parseInt(data.ParkingInfo.NumberOfLevels, 10);
+                    gLevels = numLevels;
 	                for (var i = 1; i <= numLevels; i++) {
 	                	$('<option />', {
 	                		value: i,
@@ -46,7 +43,63 @@ function init() {
 	                }
 	                
 	      	}
-	   	}
+            url = 'getLevelRating.php';
+            var olElm = document.getElementById("levelRating");
+
+              for (var i = 1 ; i <= gLevels; i++ ){
+                
+                    
+
+                var child = $('<ul />');
+                request = new XMLHttpRequest();
+                url = url +'?parkingID='+parkID+'&level='+i;
+                request.open("GET", url, false);
+                request.send();
+                if(request.readyState === 4){
+                    data = request.responseText;
+                    data = JSON.parse(data);
+                    console.log(data);
+                    var text = "NONE";
+                    var rating = data.LevelInfo[0].Average_Rating;
+                    if(rating === '1') text = "FULL";
+                    if(rating === '2') text = "SCARCE";
+                    if(rating === '3') text = "SOME";
+                    if(rating === '4') text = "PLENTY";
+                    if(rating === '5') text = "EMPTY";
+                    if(text === "NONE") text = "There is no rating available for this level. You can help by logging in and rating above.";
+                    var latestRating = "NONE";
+                    rating = data.LevelInfo[0].Latest_Rating;
+                    if(rating === '1') latestRating = "FULL";
+                    if(rating === '2') latestRating = "SCARCE";
+                    if(rating === '3') latestRating = "SOME";
+                    if(rating === '4') latestRating = "PLENTY";
+                    if(rating === '5') latestRating = "EMPTY";
+                    if(latestRating === "NONE") latestRating = "There is no rating available for this level. You can help by logging in and rating above.";
+
+                    var time = "";
+                    if ( data.LevelInfo[0].Last_Rated != null){
+                        time = data.LevelInfo[0].Last_Rated;
+                    }
+
+                   var parent;
+                    var child = $('<ul />');
+                    var c1 = $('<li />', {
+                        text: "The Average Rating: " + text}).appendTo(child);
+                    var c2 = $('<li />', {
+                        text: "The Most Recent Rating: " +latestRating + " "+ time}).appendTo(child);
+                        parent = $('<li />', {
+                            text: "Rating Data for Level " + i});
+
+                    child.appendTo(parent);
+                    parent.appendTo(olElm);
+
+
+                }
+                
+
+            }
+
+            
 	        
 
     }
