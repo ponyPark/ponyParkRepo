@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `CommuteTimes` (
   `WarningTime` time DEFAULT NULL,
   `TimeOfNotification` datetime DEFAULT NULL,
   PRIMARY KEY (`CommuteID`),
+  UNIQUE KEY (`UserID`, `Time`, `Day`),
   CONSTRAINT FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`)
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
