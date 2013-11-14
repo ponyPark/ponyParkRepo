@@ -610,7 +610,7 @@ class phpapi
      * Add a commute time for a user. The user will be able to select multiple
      * days at a time for a single commute time. This function will handle that
      * as an array. Assumes that 1 is Sunday, 7 is Saturday.
-     * @return boolean True on success, false on error.
+     * @return String of any duplicates.
      */
     public function addCommuteTimes()
     {
@@ -631,18 +631,24 @@ class phpapi
         $time = $commutes['time'];
         $warningTime = $commutes['warningTime'];
 
+        //Make an array for any duplicates.
+        $existing = array();
+
         // Changes all values in the days array to (userID, time, warningTime,
         // value) where value is a specific day
-        foreach ($days as &$value)
-            $value = "('$userID', '$time', '$warningTime', '$value')";
+        foreach ($days as $value)
+        {
+            // Add the commute time.
+            $query = "INSERT INTO CommuteTimes (UserID, Time, WarningTime, Day)
+            VALUES ('$userID', '$time', '$warningTime', '$value')";
+            if (!mysql_query($query))
+            {
+                array_push($existing , $value);
+            }
+        }
 
-        // Add the commute time.
-        $query = "INSERT INTO CommuteTimes (UserID, Time, WarningTime, Day)
-            VALUES " . implode(",", $days);
-        if (mysql_query($query))
-            return true;
-        else
-            return false;
+        //Return a string of duplicate values.
+        return implode(',', $existing);
     }
 
     /**
