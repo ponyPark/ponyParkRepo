@@ -689,8 +689,12 @@ class phpapi
      */
     public function notifyUsers()
     {
-        mail("jessicayeh@gmail.com", "Subject", "Words", "From: ponypark@floccul.us");
-        sleep(2);
+        $email_list = array("jessicayeh@gmail.com", "jkayse@smu.edu", "storyzanetti@gmail.com");
+        foreach ($email_list as $email)
+        {
+            mail($email, "Subject", "Words", "From: ponypark@floccul.us");
+            sleep(2);
+        }
     }
 }
 ?>
