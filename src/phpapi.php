@@ -689,7 +689,8 @@ class phpapi
      */
     public function notifyUsers()
     {
-        mail("jkayse@smu.edu", "Subject", "Words");
+        mail("jessicayeh@gmail.com", "Subject", "Words", "From: ponypark@floccul.us");
+        sleep(2);
     }
 }
 ?>
