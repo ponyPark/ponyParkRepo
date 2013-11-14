@@ -72,7 +72,7 @@ function init() {
                 if(data === ""){
                     window.location.href = 'ctimes.php?stat=1';
                 }
-                else(window.location.href = 'ctimes.php?stat=1');
+                else(window.location.href = 'ctimes.php?stat=2');
                 
 
             }
