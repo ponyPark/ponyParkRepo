@@ -29,7 +29,7 @@
 					<li>Commute Times
 						<UL>
 							<LI><a href="ctimes.php">Add Commute Times</a></LI>
-							<LI><a href="Ectimes.php">Edit Commute Times</a></LI>
+							<LI><a href="Ectimes.php">Edit/Delete Commute Times</a></LI>
 
 						</UL></li>
 				</ol></p>
