@@ -7,7 +7,7 @@
 		<title>PonyPark | Trot Right In</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css">
-		<script type="text/javascript" src="js/favorite.js"></script>
+		<script type="text/javascript" src="js/commute.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/includes.js"></script>
@@ -22,15 +22,24 @@
 		<nav id="navigation"><!-- navigation.html --></nav>
 
 		<div class="hpContent">
-			<h2>Edit Favorite Garages</h2>
+			<h2>Edit Commute Times</h2>
 
 			<p class = "details"><? 
-			if($_GET['stat'] == 1) echo("**Your Favorite Modification Was Successful**<BR>"); ?>
-				Please select the garages you wish to keep in your favorites.
-				
-				<ul id="favList">
-				</ul>
-				<a class="submit" href="favlist.php">Done</a>
+			if($_GET['stat'] == 1) echo("**Your Commute Time Addition Was Successful**<BR>"); ?>
+				Please select the time your commute begins:
+				<p><input type="time" value="12:00" id="cTime"></p>
+				Please select the time you'd like to be notified of parking availability:
+				<p><input type="time" value="11:30" id="wTime"></p>
+				<p> Please select what days of the week your commute begins at this time:</p>
+						<input type="checkbox" value="Sunday" id="Sunday">Sunday</input>
+ 					 	<input type="checkbox" value="Monday" id="Monday">Monday</input>
+				  	  	<input type="checkbox" value="Tuesday" id="Tuesday">Tuesday</input>
+					  	<input type="checkbox" value="Wednesday" id="Wednesday">Wednesday</input>
+					  	<input type="checkbox" value="Thursday" id="Thursday">Thursday</input>
+					  	<input type="checkbox" value="Friday" id="Friday">Friday</input>
+					  	<input type="checkbox" value="Saturday" id="Saturday">Saturday</input>
+					  </p>
+				<span class="submit" id="submitCommute">Submit</span>
 				</p>
 
 
