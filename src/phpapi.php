@@ -677,6 +677,13 @@ class phpapi
         mysql_query($query);    
     }
 
-
+    /**
+     * Email all users the availability of their favorite garages before their
+     * commute times, if they have commute time(s).
+     */
+    public function notifyUsers()
+    {
+        mail("jkayse@smu.edu", "Subject", "Words");
+    }
 }
 ?>
