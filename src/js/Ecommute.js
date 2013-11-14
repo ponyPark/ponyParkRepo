@@ -154,7 +154,15 @@ function init() {
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send(passing);
     //console.log(JSON);
-    window.location.href = 'Ectimes.php?stat=1';
+    if (request.readyState === 4) {
+                var data = request.responseText;
+                if(data === ""){
+                    window.location.href = 'Ectimes.php?stat=1';
+                }
+                else(window.location.href = 'Ectimes.php?stat=2');
+                
+
+            }
     }
 
     function deleteCommute(idPassed){

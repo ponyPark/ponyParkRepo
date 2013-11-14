@@ -25,7 +25,9 @@
 			<h2>Add Commute Times</h2>
 
 			<p class = "details"><? 
-			if($_GET['stat'] == 1) echo("**Your Commute Time Addition Was Successful**<BR>"); ?>
+			if($_GET['stat'] == 1) echo("**Your Commute Time Addition Was Successful**<BR>"); 
+			if($_GET['stat'] == 2) echo("**Your Commute Time Addition Contained a Duplicate.  The duplicate was not added.**<BR>");
+			?>
 				Please select the time your commute begins:
 				<p><input type="time" value="12:00" id="cTime"></p>
 				Please select the time you'd like to be notified of parking availability:
