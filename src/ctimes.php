@@ -7,7 +7,7 @@
 		<title>PonyPark | Trot Right In</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="css/style.css" type="text/css">
-		<script type="text/javascript" src="js/commute.js"></script>
+		<script type="text/javascript" src="js/Acommute.js"></script>
 		<link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/includes.js"></script>
@@ -22,7 +22,7 @@
 		<nav id="navigation"><!-- navigation.html --></nav>
 
 		<div class="hpContent">
-			<h2>Edit Commute Times</h2>
+			<h2>Add Commute Times</h2>
 
 			<p class = "details"><? 
 			if($_GET['stat'] == 1) echo("**Your Commute Time Addition Was Successful**<BR>"); ?>
