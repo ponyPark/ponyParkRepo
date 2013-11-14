@@ -3,5 +3,5 @@
     $parkingID = $_GET['parkingID'];
     $phpInit = new phpapi();
     $phpInit->addRating($parkingID);
-    header('Location: index.php');
+    header('Location: ratingSuccess.php');
 ?>
