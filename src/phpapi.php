@@ -731,6 +731,9 @@ class phpapi
                 FavoriteGarages.Priority";
             $result2 = mysql_query($query);
 
+            if(mysql_num_rows($result2) == 0)
+                continue;
+
             $message = "Hello, " . $row['FirstName'] . " " . $row['LastName'] . 
                 ",\n\nHere's a list of the capacity of your favorite garages!\n\n";
             while ($row2 = mysql_fetch_assoc($result2))
@@ -739,13 +742,35 @@ class phpapi
 
                 if(!empty($row2['Average_Rating']))
                 {
+                    if($row2['Average_Rating'] == 1)
+                        $rating = "Full Garage";
+                    else if($row2['Average_Rating'] == 2)
+                        $rating = "Scarce Parking Spots";
+                    else if($row2['Average_Rating'] == 3)
+                        $rating = "Some Parking Spots";
+                    else if($row2['Average_Rating'] == 4)
+                        $rating = "Plenty of Parking Spots";
+                    else if($row2['Average_Rating'] == 5)
+                        $rating = "Empty Garage";
+
                     $message .= "Average Rating for the past 2 hours: " . 
-                        $row2['Average_Rating'] . "\n\n";
+                        $rating . "\n\n";
                 }
                 else
                 {
+                    if($row2['Latest_Rating'] == 1)
+                        $rating = "Full Garage";
+                    else if($row2['Latest_Rating'] == 2)
+                        $rating = "Scarce Parking Spots";
+                    else if($row2['Latest_Rating'] == 3)
+                        $rating = "Some Parking Spots";
+                    else if($row2['Latest_Rating'] == 4)
+                        $rating = "Plenty of Parking Spots";
+                    else if($row2['Latest_Rating'] == 5)
+                        $rating = "Empty Garage";
+
                     $message .= "Latest Rating (" . $row2['Last_Rated'] . "): " . 
-                        $row2['Lastest_Rating'] . "\n\n";
+                        $rating . "\n\n";
                 }
             }
 
