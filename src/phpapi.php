@@ -704,9 +704,10 @@ class phpapi
             Users.UserID=CommuteTimes.UserID) AS Email, (SELECT FirstName FROM 
             Users WHERE Users.UserID=CommuteTimes.UserID) AS FirstName, 
             (SELECT LastName FROM Users WHERE Users.UserID=CommuteTimes.UserID) 
-            AS LastName FROM CommuteTimes WHERE Day=DAYOFWEEK(NOW()) AND 
-            ABS(TIME_TO_SEC(TIMEDIFF(TIME(NOW()), WarningTime)))<5*60 AND 
-            ABS(TIME_TO_SEC(TIMEDIFF(NOW(), TimeOfNotification)))>5*60";
+            AS LastName, CommuteTimes.CommuteID FROM CommuteTimes WHERE 
+            Day=DAYOFWEEK(NOW()) AND ABS(TIME_TO_SEC(TIMEDIFF(TIME(NOW()), 
+            WarningTime)))<5*60 AND ABS(TIME_TO_SEC(TIMEDIFF(NOW(), 
+            TimeOfNotification)))>5*60";
         $result = mysql_query($query);
 
         while ($row = mysql_fetch_assoc($result))
@@ -731,51 +732,66 @@ class phpapi
                 FavoriteGarages.Priority";
             $result2 = mysql_query($query);
 
-            if(mysql_num_rows($result2) == 0)
-                continue;
+            $query = "UPDATE CommuteTimes SET TimeOfNotification = NOW() WHERE 
+                CommuteID = '" . $row['CommuteID'] . "'";
+            mysql_query($query);
 
             $message = "Hello, " . $row['FirstName'] . " " . $row['LastName'] . 
-                ",\n\nHere's a list of the capacity of your favorite garages!\n\n";
-            while ($row2 = mysql_fetch_assoc($result2))
+                    ",\n\n";
+            if(mysql_num_rows($result2) == 0)
             {
-                $message .= $row2['Name'] . " (" . $row2['Address'] . "):\n";
-
-                if(!empty($row2['Average_Rating']))
-                {
-                    if($row2['Average_Rating'] == 1)
-                        $rating = "Full Garage";
-                    else if($row2['Average_Rating'] == 2)
-                        $rating = "Scarce Parking Spots";
-                    else if($row2['Average_Rating'] == 3)
-                        $rating = "Some Parking Spots";
-                    else if($row2['Average_Rating'] == 4)
-                        $rating = "Plenty of Parking Spots";
-                    else if($row2['Average_Rating'] == 5)
-                        $rating = "Empty Garage";
-
-                    $message .= "Average Rating for the past 2 hours: " . 
-                        $rating . "\n\n";
-                }
-                else
-                {
-                    if($row2['Latest_Rating'] == 1)
-                        $rating = "Full Garage";
-                    else if($row2['Latest_Rating'] == 2)
-                        $rating = "Scarce Parking Spots";
-                    else if($row2['Latest_Rating'] == 3)
-                        $rating = "Some Parking Spots";
-                    else if($row2['Latest_Rating'] == 4)
-                        $rating = "Plenty of Parking Spots";
-                    else if($row2['Latest_Rating'] == 5)
-                        $rating = "Empty Garage";
-
-                    $message .= "Latest Rating (" . $row2['Last_Rated'] . "): " . 
-                        $rating . "\n\n";
-                }
+                $message .= "You currently do not have any favorite garages.
+                    Therefore, we cannot send you any garage ratings at this time.
+                    If you would like to receive a rating for any garages in the 
+                    future, please add the garages to your favorite garages.";
             }
+            else
+            {
+                $message .= "Here's a list of the capacity of your favorite 
+                    garages!\n\n";
+                while ($row2 = mysql_fetch_assoc($result2))
+                {
+                    $message .= $row2['Name'] . " (" . $row2['Address'] . "):\n";
 
-            $message .= "Yours truly,\nPonyPark from BAM! Software";
+                    if(!empty($row2['Average_Rating']))
+                    {
+                        if($row2['Average_Rating'] == 1)
+                            $rating = "Full Garage";
+                        else if($row2['Average_Rating'] == 2)
+                            $rating = "Scarce Parking Spots";
+                        else if($row2['Average_Rating'] == 3)
+                            $rating = "Some Parking Spots";
+                        else if($row2['Average_Rating'] == 4)
+                            $rating = "Plenty of Parking Spots";
+                        else if($row2['Average_Rating'] == 5)
+                            $rating = "Empty Garage";
 
+                        $message .= "Average Rating for the past 2 hours: " . 
+                            $rating . "\n\n";
+                    }
+                    else
+                    {
+                        if($row2['Latest_Rating'] == 1)
+                            $rating = "Full Garage";
+                        else if($row2['Latest_Rating'] == 2)
+                            $rating = "Scarce Parking Spots";
+                        else if($row2['Latest_Rating'] == 3)
+                            $rating = "Some Parking Spots";
+                        else if($row2['Latest_Rating'] == 4)
+                            $rating = "Plenty of Parking Spots";
+                        else if($row2['Latest_Rating'] == 5)
+                            $rating = "Empty Garage";
+
+                        $message .= "Latest Rating (" . $row2['Last_Rated'] . "): " . 
+                            $rating . "\n\n";
+                    }
+                }
+
+                $message .= "If you no longer wish to receive these emails, delete 
+                    your commute times at http://ponypark.floccul.us\n\nYours truly,
+                    \nPonyPark from BAM! Software";
+            }
+            
             echo $message;
         }
     }
