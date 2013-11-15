@@ -50,6 +50,11 @@ function init() {
                     if(data[i].Status === '0'){
                         var parentList = $('#requestList');
                         var child1 = $('<li />', {text: data[i].Name});
+                        var child1child1 = $('<ul />');
+                        var child1child1child = $('<li />', {text: data[i].Address});
+                        child1child1.append(child1child1child);
+                        child1.append(child1child1);
+
                         parentList.append(child1);
                     }
                 }
