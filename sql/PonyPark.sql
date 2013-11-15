@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `CommuteTimes` (
   `Time` time NOT NULL,
   `Day` int NOT NULL,
   `WarningTime` time DEFAULT NULL,
-  `TimeOfNotification` datetime DEFAULT NULL,
+  `TimeOfNotification` datetime DEFAULT '2000-12-31 00:00:00',
   PRIMARY KEY (`CommuteID`),
   UNIQUE KEY (`UserID`, `WarningTime`, `Day`),
   CONSTRAINT FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`)
