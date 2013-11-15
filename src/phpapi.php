@@ -701,10 +701,12 @@ class phpapi
     public function notifyUsers()
     {
         $query = "SELECT DISTINCT UserID, (SELECT Email FROM Users WHERE 
-            Users.UserID=CommuteTimes.UserID) AS Email FROM CommuteTimes WHERE 
-            Day=DAYOFWEEK(NOW()) AND ABS(TIME_TO_SEC(TIMEDIFF(TIME(NOW()), 
-            WarningTime)))<5*60 AND ABS(TIME_TO_SEC(TIMEDIFF(NOW(), 
-            TimeOfNotification)))>5*60";
+            Users.UserID=CommuteTimes.UserID) AS Email, (SELECT FirstName FROM 
+            Users WHERE Users.UserID=CommuteTimes.UserID) AS FirstName, 
+            (SELECT LastName FROM Users WHERE Users.UserID=CommuteTimes.UserID) 
+            AS LastName FROM CommuteTimes WHERE Day=DAYOFWEEK(NOW()) AND 
+            ABS(TIME_TO_SEC(TIMEDIFF(TIME(NOW()), WarningTime)))<5*60 AND 
+            ABS(TIME_TO_SEC(TIMEDIFF(NOW(), TimeOfNotification)))>5*60";
         $result = mysql_query($query);
 
         while ($row = mysql_fetch_assoc($result))
@@ -713,7 +715,7 @@ class phpapi
             //sleep(2);
 
             //Query to get the ratings of a users favorite garage.
-            $query = "SELECT FavoriteGarages.UserID, ParkingLocations.Name, ParkingLocations.Address,
+            $query = "SELECT ParkingLocations.Name, ParkingLocations.Address,
                 FavoriteGarages.Priority, (SELECT floor(avg(Rating)) AS Rating FROM
                 Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
                 Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
@@ -727,14 +729,29 @@ class phpapi
                 ParkingLocations.parkingID = FavoriteGarages.parkingID AND
                 FavoriteGarages.UserID = '". $row['UserID'] . "' ORDER BY 
                 FavoriteGarages.Priority";
-            //echo $query . "<br>";
             $result2 = mysql_query($query);
 
+            $message = "Hello, " . $row['FirstName'] . " " . $row['LastName'] . 
+                ",\n\nHere's a list of the capacity of your favorite garages!\n\n";
             while ($row2 = mysql_fetch_assoc($result2))
             {
-                var_dump($row2);
-                echo "<br/>";
+                $message .= $row2['Name'] . " (" . $row2['Address'] . "):\n";
+
+                if(!empty($row2['Average_Rating']))
+                {
+                    $message .= "Average Rating for the past 2 hours: " . 
+                        $row2['Average_Rating'] . "\n\n";
+                }
+                else
+                {
+                    $message .= "Latest Rating (" . $row2['Last_Rated'] . "): " . 
+                        $row2['Lastest_Rating'] . "\n\n";
+                }
             }
+
+            $message .= "Yours truly,\nPonyPark from BAM! Software";
+
+            echo $message;
         }
     }
 }
