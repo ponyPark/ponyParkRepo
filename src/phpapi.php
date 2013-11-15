@@ -790,7 +790,7 @@ class phpapi
 
                 mail($row['Email'], "Notifcation from PonyPark", $message, 
                     "From: ponypark@floccul.us");
-                sleep(2);
+                sleep(.5);
             }
         }
     }
