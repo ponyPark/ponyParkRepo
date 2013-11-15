@@ -794,5 +794,43 @@ class phpapi
             }
         }
     }
+
+    /**
+     * Get the Top Ten Users ranked by the number of contributions.
+     * @return JSON The list top ten users.
+     */
+    public function getTop10Users()
+    {
+        $query = "SELECT FirstName, LastName, Points FROM Users JOIN TopTen
+        WHERE Users.UserID = TopTen.UserID ORDER BY Points desc";
+        $result = mysql_query($query);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('TopTen' => $rows)); 
+    }
+
+    /**
+     * Calculate the Top Ten Users.
+     */
+    public function calculateTop10Users()
+    {
+        //Delete everything from the top ten users table.
+        $query = "Delete FROM TopTen";
+        mysql_query($query);
+
+        $query = "SELECT UserID, count(Ratings.Rating) AS Points FROM Ratings 
+        GROUP BY UserID ORDER BY Points DESC LIMIT 10";
+        $result = mysql_query($query);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            array_push($rows, "(". $temp['UserID'] . ", " . $temp['Points'] . ")");
+        $query = "INSERT INTO TopTen (UserID, Points) VALUES " . implode(',', $rows);
+        mysql_query($query);
+    }
 }
 ?>
