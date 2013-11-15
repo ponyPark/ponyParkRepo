@@ -725,11 +725,14 @@ class phpapi
                 ParkingLocations.ParkingID ORDER BY timestamp DESC LIMIT 1) AS 
                 Last_Rated FROM ParkingLocations JOIN FavoriteGarages WHERE
                 ParkingLocations.parkingID = FavoriteGarages.parkingID AND
-                FavoriteGarages.UserID =" . $row['UserID'] . "ORDER BY 
+                FavoriteGarages.UserID = " . '$row['UserID']' . " ORDER BY 
                 FavoriteGarages.Priority";
-            $result = mysql_query($query);
+            $result2 = mysql_query($query);
 
-            echo $result;
+            while ($row2 = mysql_fecth_assoc($result2))
+            {
+                var_dump($row2);
+            }
         }
     }
 }
