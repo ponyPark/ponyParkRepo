@@ -713,7 +713,7 @@ class phpapi
             //sleep(2);
 
             //Query to get the ratings of a users favorite garage.
-            $query = "SELECT ParkingLocations.Name, ParkingLocations.Address,
+            $query = "SELECT FavoriteGarages.UserID, ParkingLocations.Name, ParkingLocations.Address,
                 FavoriteGarages.Priority, (SELECT floor(avg(Rating)) AS Rating FROM
                 Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
                 Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
