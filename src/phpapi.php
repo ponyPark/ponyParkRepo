@@ -702,9 +702,9 @@ class phpapi
     {
         $query = "SELECT DISTINCT UserID, (SELECT Email FROM Users WHERE 
             Users.UserID=CommuteTimes.UserID) AS Email FROM CommuteTimes WHERE 
-            Day=DAYOFWEEK(NOW()) AND ABS(TIME_TO_SEC(TIMEDIFF(TIME(DATE_SUB(NOW(), 
-            INTERVAL 6 HOUR)), WarningTime)))<5*60 AND 
-            ABS(TIME_TO_SEC(TIMEDIFF(NOW(), TimeOfNotification)))>5*60";
+            Day=DAYOFWEEK(NOW()) AND ABS(TIME_TO_SEC(TIMEDIFF(TIME(NOW()), 
+            WarningTime)))<5*60 AND ABS(TIME_TO_SEC(TIMEDIFF(NOW(), 
+            TimeOfNotification)))>5*60";
         $result = mysql_query($query);
 
         while ($row = mysql_fetch_assoc($result))
@@ -733,6 +733,7 @@ class phpapi
             while ($row2 = mysql_fetch_assoc($result2))
             {
                 var_dump($row2);
+                echo "<br/>";
             }
         }
     }
