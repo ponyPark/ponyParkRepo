@@ -24,8 +24,10 @@ FB.Event.subscribe('auth.authResponseChange', function(response) {
         data: { "email":response.email, "externalID":response.id, 
                   "fname":response.first_name, "lname":response.last_name },
         success: function(result) {
-            if (result === "1")
-                window.location.replace("index.php");
+          if (result === "admin")
+              window.location.replace("admin.php");
+          else if (result === "user")
+              window.location.replace("index.php");
         }
       });
     });

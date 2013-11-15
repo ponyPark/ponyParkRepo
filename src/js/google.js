@@ -36,7 +36,9 @@ function signinCallback(authResult)
                         data: { "email":email, "externalID":externalID, 
                             "fname":fname, "lname":lname },
                         success: function(result) {
-                            if (result === "1")
+                            if (result === "admin")
+                                window.location.replace("admin.php");
+                            else if (result === "user")
                                 window.location.replace("index.php");
                         }
                     });

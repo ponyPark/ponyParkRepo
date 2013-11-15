@@ -128,10 +128,14 @@ class phpapi
             
             //Added the user to the session since we use
             //that for adding favorites, etc.
+            $_SESSION['userType'] = $info['UserType'];
             $_SESSION['userID'] = $info['UserID'];
             $_SESSION['userName'] = $info['FirstName'];
 
-            return true;
+            if ($info['UserType'] == "1")
+                return "admin";
+            else
+                return "user";
         }
         return false;
     }
@@ -186,10 +190,14 @@ class phpapi
             
             //Added the user to the session since we use
             //that for adding favorites, etc.
+            $_SESSION['userType'] = $info['UserType'];
             $_SESSION['userID'] = $info['UserID'];
             $_SESSION['userName'] = $info['FirstName'];
 
-            return true;
+            if ($info['UserType'] == "1")
+                return "admin";
+            else
+                return "user";
         }
         return false;
     }
@@ -224,7 +232,7 @@ class phpapi
 
         // Validate the user. Using the native system.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND    
-            ExternalType = 'native' AND Password = '$pw'"; 
+            ExternalType = 'native' AND Password = '$pw'";
         $result = mysql_query($query);
 
         // Redirect the user to an error if validation was unsucessful.
@@ -242,10 +250,13 @@ class phpapi
             $_SESSION['userEmail'] = $info['Email'];
             //Added the user to the session since we use
             //that for adding favorites, etc.
+            $_SESSION['userType'] = $info['UserType'];
             $_SESSION['userID'] = $info['UserID'];
             $_SESSION['userName'] = $info['FirstName'];
-
-            header ('Location: index.php');
+            if ($info['UserType'] == "1")
+                header ('Location: admin.php');
+            else
+                header ('Location: index.php');
             return true;
         }
     }
