@@ -733,19 +733,19 @@ class phpapi
                 CommuteID = '" . $row['CommuteID'] . "'";
             mysql_query($query);
 
-            $message = "Hello, " . $row['FirstName'] . " " . $row['LastName'] . 
-                    ",\n\n";
+            $message = "Hello " . $row['FirstName'] . " " . $row['LastName'] . 
+                    "!\n\n";
             if(mysql_num_rows($result2) == 0)
             {
-                $message .= "You currently do not have any favorite garages.
-                    Therefore, we cannot send you any garage ratings at this time.
-                    If you would like to receive a rating for any garages in the 
-                    future, please add the garages to your favorite garages.";
+                $message .= "You currently do not have any favorite garages. " .
+                    "Therefore, we cannot send you any garage ratings at this time. " .
+                    "If you would like to receive a rating for any garages in the " .
+                    "future, please add the garages to your favorite garages.";
             }
             else
             {
-                $message .= "Here's a list of the capacity of your favorite 
-                    garages!\n\n";
+                $message .= "Here's a list of the capacity of your favorite " . 
+                    "garages!\n\n";
                 while ($row2 = mysql_fetch_assoc($result2))
                 {
                     $message .= $row2['Name'] . " (" . $row2['Address'] . "):\n";
@@ -784,9 +784,9 @@ class phpapi
                     }
                 }
 
-                $message .= "If you no longer wish to receive these emails, delete 
-                    your commute times at http://ponypark.floccul.us\n\nYours truly,
-                    \nPonyPark from BAM! Software";
+                $message .= "If you no longer wish to receive these emails, delete ". 
+                    "your commute times at http://ponypark.floccul.us\n\nYours truly," .
+                    "\nPonyPark from BAM! Software";
 
                 mail($row['Email'], "Notifcation from PonyPark", $message, 
                     "From: ponypark@floccul.us");
