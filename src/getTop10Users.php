@@ -1,5 +1,5 @@
 <?
     include "phpapi.php";
     $phpInit = new phpapi();
-    echo($phpInit->getTop10Users.php());
+    echo($phpInit->getTop10Users());
 ?>

@@ -802,8 +802,7 @@ class phpapi
     public function getTop10Users()
     {
         $query = "SELECT FirstName, LastName, Points FROM Users JOIN TopTen
-        WHERE Users.UserID = TopTen.UserID ORDER BY Points desc";
-        echo($query);       
+        WHERE Users.UserID = TopTen.UserID ORDER BY Points desc";     
         $result = mysql_query($query);
 
         // Change mysql result to array so that it can be exported in JSON.
@@ -823,8 +822,7 @@ class phpapi
         mysql_query($query);
 
         $query = "SELECT UserID, count(Ratings.Rating) AS Points FROM Ratings 
-        GROUP BY UserID ORDER BY Points DESC LIMIT 10";
-        echo($query);  
+        GROUP BY UserID ORDER BY Points DESC LIMIT 10";  
         $result = mysql_query($query);
 
         // Change mysql result to array so that it can be exported in JSON.
@@ -833,7 +831,6 @@ class phpapi
             array_push($rows, "(". $temp['UserID'] . ", " . $temp['Points'] . ")");
         $query = "INSERT INTO TopTen (UserID, Points) VALUES " . implode(',', $rows);
         mysql_query($query);
-        echo($query);  
     }
 }
 ?>
