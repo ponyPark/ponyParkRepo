@@ -712,9 +712,6 @@ class phpapi
 
         while ($row = mysql_fetch_assoc($result))
         {
-            //mail($row['Email'], "Subject", "Words", "From: ponypark@floccul.us");
-            //sleep(2);
-
             //Query to get the ratings of a users favorite garage.
             $query = "SELECT ParkingLocations.Name, ParkingLocations.Address,
                 FavoriteGarages.Priority, (SELECT floor(avg(Rating)) AS Rating FROM
@@ -790,9 +787,11 @@ class phpapi
                 $message .= "If you no longer wish to receive these emails, delete 
                     your commute times at http://ponypark.floccul.us\n\nYours truly,
                     \nPonyPark from BAM! Software";
+
+                mail($row['Email'], "Notifcation from PonyPark", $message, 
+                    "From: ponypark@floccul.us");
+                sleep(2);
             }
-            
-            echo $message;
         }
     }
 }
