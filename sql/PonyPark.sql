@@ -120,3 +120,17 @@ CREATE TABLE IF NOT EXISTS `Requests` (
   CONSTRAINT FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`)
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `TopTen`
+--
+
+CREATE TABLE IF NOT EXISTS `TopTen` (
+  `UserID` int NOT NULL,
+  `Points` int DEFAULT NULL,
+  PRIMARY KEY (`UserID`),
+  CONSTRAINT FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
