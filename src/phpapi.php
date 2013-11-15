@@ -730,7 +730,7 @@ class phpapi
             echo $query . "<br>";
             $result2 = mysql_query($query);
 
-            while ($row2 = mysql_fecth_assoc($result2))
+            while ($row2 = mysql_fetch_assoc($result2))
             {
                 var_dump($row2);
             }
