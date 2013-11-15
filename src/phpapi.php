@@ -700,10 +700,16 @@ class phpapi
      */
     public function notifyUsers()
     {
-        $email_list = array("jessicayeh@gmail.com", "jkayse@smu.edu", "storyzanetti@gmail.com");
-        foreach ($email_list as $email)
+        $query = "SELECT DISTINCT UserID, (SELECT Email FROM Users WHERE 
+            Users.UserID=CommuteTimes.UserID) AS Email FROM CommuteTimes WHERE 
+            Day=DAYOFWEEK(NOW()) AND ABS(TIME_TO_SEC(TIMEDIFF(TIME(DATE_SUB(NOW(), 
+            INTERVAL 6 HOUR)), WarningTime)))<5*60 AND 
+            ABS(TIME_TO_SEC(TIMEDIFF(NOW(), TimeOfNotification)))>5*60";
+        $result = mysql_query($query);
+
+        while ($row = mysql_fetch_assoc($result))
         {
-            mail($email, "Subject", "Words", "From: ponypark@floccul.us");
+            mail($row['Email'], "Subject", "Words", "From: ponypark@floccul.us");
             sleep(2);
         }
 
