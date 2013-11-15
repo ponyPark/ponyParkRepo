@@ -727,6 +727,7 @@ class phpapi
                 ParkingLocations.parkingID = FavoriteGarages.parkingID AND
                 FavoriteGarages.UserID = '". $row['UserID'] . "' ORDER BY 
                 FavoriteGarages.Priority";
+            echo $query . "<br>";
             $result2 = mysql_query($query);
 
             while ($row2 = mysql_fecth_assoc($result2))
