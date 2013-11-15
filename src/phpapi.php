@@ -709,26 +709,27 @@ class phpapi
 
         while ($row = mysql_fetch_assoc($result))
         {
-            mail($row['Email'], "Subject", "Words", "From: ponypark@floccul.us");
-            sleep(2);
-        }
+            //mail($row['Email'], "Subject", "Words", "From: ponypark@floccul.us");
+            //sleep(2);
 
-        //Query to get the ratings of a users favorite garage.
-        /*$query = "SELECT ParkingLocations.Name, ParkingLocations.Address,
-            FavoriteGarages.Priority, (SELECT floor(avg(Rating)) AS Rating FROM
-            Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
-            Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
-            (SELECT Rating FROM Ratings WHERE ParkingLocations.ParkingID
-            = Ratings.ParkingID ORDER BY Timestamp DESC LIMIT 1) AS 
-            Latest_Rating, (SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
-            CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hours ago'), 
-            '>24 hours ago') FROM Ratings WHERE Ratings.ParkingID = 
-            ParkingLocations.ParkingID ORDER BY timestamp DESC LIMIT 1) AS 
-            Last_Rated FROM ParkingLocations JOIN FavoriteGarages WHERE
-            ParkingLocations.parkingID = FavoriteGarages.parkingID AND
-            FavoriteGarages.UserID = '$userID' ORDER BY FavoriteGarages.Priority"
-        $result = mysql_query($query);
-        */
+            //Query to get the ratings of a users favorite garage.
+            $query = "SELECT ParkingLocations.Name, ParkingLocations.Address,
+                FavoriteGarages.Priority, (SELECT floor(avg(Rating)) AS Rating FROM
+                Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
+                Ratings.ParkingID = ParkingLocations.ParkingID) AS Average_Rating,
+                (SELECT Rating FROM Ratings WHERE ParkingLocations.ParkingID
+                = Ratings.ParkingID ORDER BY Timestamp DESC LIMIT 1) AS 
+                Latest_Rating, (SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
+                CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hours ago'), 
+                '>24 hours ago') FROM Ratings WHERE Ratings.ParkingID = 
+                ParkingLocations.ParkingID ORDER BY timestamp DESC LIMIT 1) AS 
+                Last_Rated FROM ParkingLocations JOIN FavoriteGarages WHERE
+                ParkingLocations.parkingID = FavoriteGarages.parkingID AND
+                FavoriteGarages.UserID = $row['UserID'] ORDER BY FavoriteGarages.Priority"
+            $result = mysql_query($query);
+
+            echo $result;
+        }
     }
 }
 ?>
