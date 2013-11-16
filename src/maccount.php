@@ -23,16 +23,20 @@
 
 		<div class="hpContent">
 			<h2>Manage Account</h2>
-			<p class = "details">Please choose what you would like to modify:
+			<p class = "details">Please choose an action you would like to perform:
 				<ul>
-					<li><a href="editfav.php">Favorites</a></li>
-					<li>Commute Times
+					<? session_start();
+			if($_SESSION['userType'] == 1 && $_SESSION['logged'] == true) echo("<li><a href='admin.php'>Admin Dashboard</a></li>"); ?>
+					<li><a href="editfav.php">Add/Remove Favorites</a></li>
+					<li>Notification Settings
 						<UL>
-							<LI><a href="ctimes.php">Add Commute Times</a></LI>
-							<LI><a href="Ectimes.php">Edit/Delete Commute Times</a></LI>
+							<LI><a href="ctimes.php">Add Notification Time</a></LI>
+							<LI><a href="Ectimes.php">Edit/Delete Notification Times</a></LI>
 
 						</UL></li>
-				</ol></p>
+					<li><a href="request.php">Request Addition of a Garage to PonyPark</a></li>
+					
+				</ul></p>
 		</div>
 	</body>
 

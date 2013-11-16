@@ -19,8 +19,6 @@ function init() {
                 if (data === "true") {
                     $('#signIn').css('display', 'none');
                     $('#userOptions').css('display', 'block');
-                    $('nav ol li:first-child a').attr("href", "index.php");
-                    $('nav ol li:first-child a').text("Availability");
                 }
                 if (data === "false") {
                     $('#signIn').css('display', 'block');
