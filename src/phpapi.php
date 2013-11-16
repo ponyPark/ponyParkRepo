@@ -706,7 +706,7 @@ class phpapi
             (SELECT LastName FROM Users WHERE Users.UserID=CommuteTimes.UserID) 
             AS LastName, CommuteTimes.CommuteID FROM CommuteTimes WHERE 
             Day=DAYOFWEEK(NOW()) AND ABS(TIME_TO_SEC(TIMEDIFF(TIME(NOW()), 
-            WarningTime)))<5*60 AND ABS(TIME_TO_SEC(TIMEDIFF(NOW(), 
+            WarningTime)))<3*60 AND ABS(TIME_TO_SEC(TIMEDIFF(NOW(), 
             TimeOfNotification)))>5*60";
         $result = mysql_query($query);
 
