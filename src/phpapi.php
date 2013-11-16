@@ -799,14 +799,20 @@ class phpapi
      */
     public function getTop10Users()
     {
-        $query = "SELECT FirstName, LastName, Points FROM Users JOIN TopTen
+        $query = "SELECT FirstName, LastName, Email, Points FROM Users JOIN TopTen
         WHERE Users.UserID = TopTen.UserID ORDER BY Points desc";     
         $result = mysql_query($query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
         while($temp = mysql_fetch_assoc($result))
+        {
+            // Censor the email
+            $temp['Email'] = preg_replace_callback('/([^@]+)@([^\s]+)/', 
+                function ($match) { return substr($match[1], 0, 
+                strlen($match[1])/2).'***@'.$match[2]; }, $temp['Email']);
             $rows[] = $temp;
+        }
         return json_encode(array('TopTen' => $rows)); 
     }
 

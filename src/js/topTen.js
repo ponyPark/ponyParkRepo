@@ -48,7 +48,9 @@ function init() {
                         var parentList = $('#topTenList');
                         var lastName = data[i].LastName;
                         lastName = lastName.charAt(0);
-                        var child1 = $('<li />', {text: data[i].FirstName + " " + lastName + "." + " - " + data[i].Points + " Points"});
+                        var child1 = $('<li />', {text: data[i].FirstName + 
+                            " " + lastName + ". (" + data[i].Email + ") - " + 
+                            data[i].Points + " Points"});
                         parentList.append(child1);
                 }
             }
