@@ -799,7 +799,7 @@ class phpapi
      */
     public function getTop10Users()
     {
-        $query = "SELECT FirstName, LastName, Points FROM Users JOIN TopTen
+        $query = "SELECT Email, Points FROM Users JOIN TopTen
         WHERE Users.UserID = TopTen.UserID ORDER BY Points desc";     
         $result = mysql_query($query);
 
@@ -819,8 +819,9 @@ class phpapi
         $query = "Delete FROM TopTen";
         mysql_query($query);
 
-        $query = "SELECT UserID, count(Ratings.Rating) AS Points FROM Ratings 
-        GROUP BY UserID ORDER BY Points DESC LIMIT 10";  
+        $query = "SELECT Ratings.UserID, count(Ratings.Rating) AS Points FROM 
+        Ratings JOIN Users WHERE Users.UserID = Ratings.UserID GROUP BY Email
+        ORDER BY Points DESC LIMIT 10";  
         $result = mysql_query($query);
 
         // Implode results to insert values in one query.
