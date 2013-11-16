@@ -443,17 +443,15 @@ class phpapi
         $name = mysql_real_escape_string($parkingInfo['name']);
         $address = mysql_real_escape_string($parkingInfo['address']);
         $cost = $parkingInfo['cost'];
-        $comments = mysql_real_escape_string($parkingInfo['comments']);
         $numberOfLevels = $parkingInfo['numberOfLevels'];
 
-        //Change comments and cost if NULL
+        //Change cost if NULL
         $cost = empty($cost) ? "NULL" : "'" . $cost . "'";
-        $comments = empty($comments) ? "NULL" : "'" . $comments . "'";
 
         // Edit the parking location info.
         $query = "UPDATE ParkingLocations SET Name = '$name', 
-            Address = '$address', Cost = '$cost', Comments = '$comments', 
-            NumberOfLevels = '$numberOfLevels' WHERE ParkingID = '$parkingID'";
+            Address = '$address', Cost = '$cost', NumberOfLevels = 
+            '$numberOfLevels' WHERE ParkingID = '$parkingID'";
         if (mysql_query($query))
             return true;
         else
@@ -557,9 +555,8 @@ class phpapi
         if($status == 2)
         {
             $query = "INSERT INTO ParkingLocations (Name, Address, Cost, 
-                Comments, NumberOfLevels) SELECT Name, Address, Cost, 
-                Comments, NumberOfLevels FROM Requests WHERE RequestID = 
-                $requestID";
+                NumberOfLevels) SELECT Name, Address, Cost, NumberOfLevels FROM 
+                Requests WHERE RequestID = $requestID";
             mysql_query($query);
         }
     }
