@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS `ParkingLocations` (
   `Name` varchar(50) NOT NULL,
   `Address` varchar(200) NOT NULL,
   `Cost` double DEFAULT NULL,
-  `Comments` varchar(250) DEFAULT NULL,
   `NumberOfLevels` int NOT NULL,
   PRIMARY KEY (`ParkingID`)
 ) ENGINE=InnoDB;
