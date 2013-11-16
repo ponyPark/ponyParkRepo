@@ -484,26 +484,24 @@ class phpapi
      */
     public function addRequest()
     {
-        $requestInfoJSON = $_POST['requestInfo'];
-        if (empty($requestInfoJSON)) return false;
+
 
         // Retrieve the UserID.
         $userID = $_SESSION['userID'];
 
-        // Read the JSON.
-        $requestInfo = (array) json_decode($requestInfoJSON);
+
 
         //Change comments and cost if NULL
-        $cost = empty($requestInfo['cost']) ? "NULL" : "'" . $requestInfo['cost'] . "'";
-        $comments = empty($requestInfo['commments']) ? "NULL" : "'" .
-            mysql_real_escape_string($requestInfo['comments']) . "'";
+        $cost = empty($_POST['cost']) ? "NULL" : "'" . $_POST['cost'] . "'";
+        $comments = empty($_POST['comments']) ? "NULL" : "'" .
+            mysql_real_escape_string($_POST['comments']) . "'";
         
         //Query to insert request into the table
         $query = "INSERT INTO Requests (UserID, Name, Address, Cost, 
             NumberOfLevels, Comments, Status) VALUES ('$userID', '" . 
-            mysql_real_escape_string($requestInfo['name']) . "','" .
-            mysql_real_escape_string($requestInfo['address']) . "', $cost,'" . 
-            $requestInfo['numLevels'] . "', $comments, 0)"; 
+            mysql_real_escape_string($_POST['name']) . "','" .
+            mysql_real_escape_string($_POST['address']) . "', $cost,'" . 
+            $_POST['numLevels'] . "', $comments, 0)"; 
         mysql_query($query);
     }
 
