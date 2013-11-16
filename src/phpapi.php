@@ -799,7 +799,7 @@ class phpapi
      */
     public function getTop10Users()
     {
-        $query = "SELECT Email, Points FROM Users JOIN TopTen
+        $query = "SELECT FirstName, LastName, Points FROM Users JOIN TopTen
         WHERE Users.UserID = TopTen.UserID ORDER BY Points desc";     
         $result = mysql_query($query);
 
