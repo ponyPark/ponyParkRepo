@@ -825,12 +825,31 @@ class phpapi
         GROUP BY UserID ORDER BY Points DESC LIMIT 10";  
         $result = mysql_query($query);
 
-        // Change mysql result to array so that it can be exported in JSON.
+        // Implode results to insert values in one query.
         $rows = array();
         while($temp = mysql_fetch_assoc($result))
             array_push($rows, "(". $temp['UserID'] . ", " . $temp['Points'] . ")");
         $query = "INSERT INTO TopTen (UserID, Points) VALUES " . implode(',', $rows);
         mysql_query($query);
+    }
+
+    /**
+     * Get the average ratings over time for a certain garage.
+     * @param INT $parkingID The ID of the parking location.
+     * @return JSON The average ratings for each hour that has a rating.
+     */
+    public function getAverage($parkingID)
+    {
+        //Query to get the average ratings for each hour there is a rating.
+        $query = "SELECT HOUR(TIME(Timestamp)) AS Hour, avg(Rating) AS Rating
+        FROM Ratings WHERE Ratings.ParkingID = '$parkingID' GROUP BY Hour ORDER BY Hour";
+        $result = mysql_query($query);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('Ratings' => $rows)); 
     }
 }
 ?>
