@@ -125,10 +125,17 @@ function init() {
                 if (data === "true") {
                     $('#signIn').css('display', 'none');
                     $('#userOptions').css('display', 'block');
+                    // Show rating form if user is logged in.
+                    $('#notloggedGarageReport').css('display', 'none');
+                    $('#reportAvaDivElem').css('display', 'block');
+
                 }
                 if (data === "false") {
                     $('#signIn').css('display', 'block');
                     $('#userOptions').css('display', 'none');
+                    // Hide rating form if user is not logged in.
+                    $('#notloggedGarageReport').css('display', 'block');
+                    $('#reportAvaDivElem').css('display', 'none');
                 }
 
             }
