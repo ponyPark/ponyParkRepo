@@ -37,7 +37,12 @@
 
 		<div class="hpContent" id = "whatsPonyPark">
 			<h2>PonyPark Admin Page</h2>
-			<p class = "details">Please approve or deny the following requests.</p>
+			<p class = "details">
+				<? 
+			if($_GET['stat'] == 1) echo("**Your Request Modification Was Successful**<BR>"); ?>
+
+
+				Please approve or deny the following requests.</p>
 			<UL id="requestList"></UL>
 		</div>
 
