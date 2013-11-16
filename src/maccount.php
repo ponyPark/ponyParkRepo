@@ -35,7 +35,7 @@
 
 						</UL></li>
 					<li><a href="request.php">Request Addition of a Garage to PonyPark</a></li>
-					<li><a href="requestStat.php">Request Status</a></li>
+					<li><a href="requestStat.php">Status of Garage Addition Requests</a></li>
 					
 				</ul></p>
 		</div>

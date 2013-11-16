@@ -21,9 +21,13 @@ function init() {
 	                //You'll need to make sure you have a hidden field that passes the garageID to the DB side.
 	                data = request.responseText;
 	                data = JSON.parse(data);
+                    var parkingCostVar = "The cost to visitors for this garage is $"+ data.ParkingInfo.Cost + ".";
 	                document.getElementById('reportAva').innerHTML = "Rate the Availability of " + data.ParkingInfo.Name;
                     document.getElementById('address').innerHTML = data.ParkingInfo.Address + "<BR>Dallas, Texas 75205";
-                    $('#moreGInfo').text(data.ParkingInfo.Name + " is located at " + data.ParkingInfo.Address + " in Dallas, Texas on the Southern Methodist University Campus");
+                    if(data.ParkingInfo.Cost === null){
+                        parkingCostVar = "";
+                    }
+                    $('#moreGInfo').text(data.ParkingInfo.Name + " is located at " + data.ParkingInfo.Address + " in Dallas, Texas on the Southern Methodist University Campus. "+ parkingCostVar);
 	                var text = "NONE";
                     var rating = data.ParkingInfo.Average_Rating ? data.ParkingInfo.Average_Rating : data.ParkingInfo.Latest_Rating;
                     if(rating === '1') text = "FULL";
