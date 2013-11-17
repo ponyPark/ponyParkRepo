@@ -51,9 +51,8 @@ CREATE TABLE IF NOT EXISTS `ParkingLocations` (
 CREATE TABLE IF NOT EXISTS `CommuteTimes` (
   `CommuteID` int NOT NULL AUTO_INCREMENT,
   `UserID` int NOT NULL,
-  `Time` time NOT NULL,
   `Day` int NOT NULL,
-  `WarningTime` time DEFAULT NULL,
+  `WarningTime` time NOT NULL,
   `TimeOfNotification` datetime DEFAULT '2000-12-31 00:00:00',
   PRIMARY KEY (`CommuteID`),
   UNIQUE KEY (`UserID`, `WarningTime`, `Day`),
