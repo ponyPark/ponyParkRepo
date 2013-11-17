@@ -47,20 +47,20 @@ function init() {
             }
 
             if(data.length === 0 ){
-                $('#mainPar').text("Whoops, you don't have any commute times.  ");
+                $('#mainPar').text("Whoops, you don't have any notification times.  ");
                 $('#mainPar').append($('<a />', {text: "Click here to add some.", href: "ctimes.php"}));
                 return;
             }
 
         for(var i = 0; i < data.length; i++){
             var dayOfWeek = data[i].Day;
-            var parent = $('<div />', { class: "hpContent"}).append($("<h2 />", {text: "Commute Time " + (i+1) }));
-            var p1 = $('<p />', { text: "Modify your current times and hit update to save the changes.  To delete a specific commute time, hit delete", class: "details"});
-            var p1p = $('<p />', {text: "Your commute time is set to:"});
+            var parent = $('<div />', { class: "hpContent"}).append($("<h2 />", {text: "Notification Time " + (i+1) }));
+            var p1 = $('<p />', { text: "Modify your current times and hit update to save the changes.  To delete a specific notification time, hit delete", class: "details"});
+            var p1p = $('<p />', {text: "Your notification time is set to:"});
             p1p.append($('<input />', {type: "time", value: data[i].Time, id: "cTime" + data[i].CommuteID}));
             var p2p = $('<p />', {text: "Your current notification time is set to:"});
             p2p.append($('<input />', {type: "time", value: data[i].WarningTime, id: "wTime" + data[i].CommuteID}));
-            var p3p = $('<p />', {text: "Your current commute days are:"});
+            var p3p = $('<p />', {text: "Your current notification days are:"});
             var divElm = $('<p />');
             var input = $('<input />', { type: 'checkbox', id: '1'+data[i].CommuteID, value: "Sunday" })
             var label = $('<label />', { 'for': '1'+data[i].CommuteID, text: "Sunday" });

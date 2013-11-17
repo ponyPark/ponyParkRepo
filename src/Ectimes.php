@@ -23,12 +23,12 @@
 
 <section id="cTimeContainer">
 		<div class="hpContent">
-			<h2>Modify/Delete Commute Times</h2>
+			<h2>Modify/Delete Notification Times</h2>
 
 			<p class = "details" id="mainPar"><? 
-			if($_GET['stat'] == 1) echo("**Your Commute Time Modification Was Successful**<BR>"); 
-			if($_GET['stat'] == 2) echo("**Your Commute Time Modification Contained a Duplicate.  The duplicate was not added.**<BR>");?>
-				Please use the form below to modify your commute times.
+			if($_GET['stat'] == 1) echo("**Your Notification Time Modification Was Successful**<BR>"); 
+			if($_GET['stat'] == 2) echo("**Your Notification Time Modification Contained a Duplicate.  The duplicate was not added.**<BR>");?>
+				Please use the form below to modify your notification times.
 				</p>
 
 
