@@ -2,6 +2,8 @@
 October, 2013*/
 
 jQuery(document).ready(function() {
+    $( "#changePassword" ).hide();
+
     // Populate the edit form with the user's profile
     $.ajax({
         dataType: "json",
@@ -11,6 +13,9 @@ jQuery(document).ready(function() {
             $( "input[name='lname']" ).val(user.UserInfo.LastName);
             $( "input[name='email']" ).val(user.UserInfo.Email);
             $( "input[name='phone']" ).val(user.UserInfo.PhoneNumber);
+
+            if (user.UserInfo.ExternalType === "native")
+                $( "#changePassword" ).show();
         }
     });
 
@@ -24,13 +29,21 @@ jQuery(document).ready(function() {
             data: $(this).serialize(),
             beforeSend: function() { $("#signupResult").html("Processing, please wait..."); },
             success: function(output) {
-                if (output === "1")
+                if (output === "missing_info")
                 {
-                    $("#signupResult").html("Your profile was successfully edited.");
+                    $("#signupResult").html("First name and last name are required.");
+                }
+                else if (output === "wrong_password")
+                {
+                    $("#signupResult").html("The password confirmation failed.");
+                    $( "input[name='old_pw']" ).val("");
+                    $( "input[name='new_pw']" ).val("");
                 }
                 else
                 {
-                    $("#signupResult").html("Oops, something went wrong. Try again.");
+                    $("#signupResult").html("Your profile was successfully edited.");
+                    $( "input[name='old_pw']" ).val("");
+                    $( "input[name='new_pw']" ).val("");
                 }
             }
         });

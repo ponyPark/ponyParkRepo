@@ -33,6 +33,7 @@
             <h2>Edit Your Profile Info</h2>
                 <span id="signupResult"></span>
                 <form id="submitEditUser" method="POST">
+                <input type="hidden" name="externalType">
                 <label for="fname">First Name:</label>
                 <input type="text" name="fname" pattern="[a-zA-Z]+" title="Letters only" placeholder="First Name" class="editProfileInput" required><br>
                 <label for="lname">Last Name:</label>
@@ -40,8 +41,15 @@
                 <label for="email">Email:</label>
                 <input type="email" name="email" placeholder="Email Address" class="editProfileInput" disabled><br>
                 <label for="phone">Phone Number:</label>
-                <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" class="editProfileInput"><br><br>
-                <input type="submit" d="subRequestBut" class="submit" value="Submit Changes">
+                <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" class="editProfileInput"><br>
+                <div id="changePassword">
+                    <p>If you want to change your password, please enter your current password, then enter your new password.</p>
+                    <label for="old_pw">Current password:</label>
+                    <input type="password" name="old_pw" placeholder="Current Password" class="editProfileInput"><br>
+                    <label for="new_pw">New password:</label>
+                    <input type="password" name="new_pw" placeholder="New Password" pattern=".{8,}" title="Need at least 8 characters" class="editProfileInput"><br>
+                </div>
+                <br><input type="submit" d="subRequestBut" class="submit" value="Submit Changes">
                 </form>
             </p>
         </div>

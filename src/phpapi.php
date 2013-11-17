@@ -79,7 +79,8 @@ class phpapi
     }
 
     /**
-     * Get the first name, last name, email, and phone number of the logged in user.
+     * Get the first name, last name, email phone number, and external type of 
+     * the logged in user.
      * @return JSON The profile of the logged in user.
      */
     public function getUser()
@@ -87,13 +88,17 @@ class phpapi
     }
 
     /**
-     * Edit the user's profile info. The user can edit their first name, last name,
-     * and phone number. The first name and last name can't be blank.
-     * @return boolean True if editing was successful. False otherwise.
+     * Edit the user's profile info. Any user can edit their first name, last name,
+     * and phone number. The first name and last name can't be blank. Only 
+     * non-Google and non-Facebook users can change their password.
+     * @return string Empty string: Editing the user was successful.
+     *                missing_info: First name or last name was missing.
+     *                wrong_password: User wanted to change their password and 
+     *                  the password confirmation failed.
      */
     public function editUser()
     {
-        return false;
+        return "missing_info";
     }
 
     /**
