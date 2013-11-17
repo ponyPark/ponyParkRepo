@@ -670,11 +670,7 @@ class phpapi
         {
             // Add the commute time.
             $query = "INSERT INTO CommuteTimes (UserID, WarningTime, Day)
-<<<<<<< HEAD
-            VALUES ('$userID', $warningTime', '$value')";
-=======
-            VALUES ('$userID' '$warningTime', '$value')";
->>>>>>> ffcf0f95fbcfe59cddceefec0c67754c448d837f
+            VALUES ('$userID', '$warningTime', '$value')";
             if (!mysql_query($query))
             {
                 array_push($existing , $value);
