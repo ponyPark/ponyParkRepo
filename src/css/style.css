@@ -339,7 +339,9 @@ footer a:hover {
 
 }
 
-
-
-
-
+.editProfileInput {
+    width: 300px;
+    position: fixed;
+    left: 180px;
+    padding: 2px;
+}

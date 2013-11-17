@@ -98,10 +98,7 @@ if($_SESSION['logged'] === true)
 
 	</body>
 
-	<footer>
-		PonyPark | Southern Methodist University | Dallas, Texas 2013
-		<p id ="footerLinks"> <a href="http://nhl.com">Contact Us</a> <a href="http://nhl.com">Policies</a></p>
-    </footer>
+	<footer id="footer"><!-- footer.html --></footer>
 
 </html>
 

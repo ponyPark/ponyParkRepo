@@ -27,6 +27,7 @@
 				<ul>
 					<? session_start();
 			if($_SESSION['userType'] == 1 && $_SESSION['logged'] == true) echo("<li><a href='admin.php'>Admin Dashboard</a></li>"); ?>
+					<li><a href="editProfileInfo.php">View/Edit Your Profile Info</a></li>
 					<li><a href="editfav.php">Add/Remove Favorites</a></li>
 					<li>Notification Settings
 						<UL>

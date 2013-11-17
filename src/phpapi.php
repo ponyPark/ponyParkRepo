@@ -79,19 +79,21 @@ class phpapi
     }
 
     /**
+     * Get the first name, last name, email, and phone number of the logged in user.
+     * @return JSON The profile of the logged in user.
+     */
+    public function getUser()
+    {
+    }
+
+    /**
      * Edit the user's profile info. The user can edit their first name, last name,
-     * phone number, and password. The first name and last name can't be blank,
-     * and if they are changing their password, it must be at least 8 characters.
-     * In order to change any profile info, they must provide their old password
-     * to confirm their identity.
-     * @return string Empty string: Editing the user was successful.
-     *                missing_info: One or more required fields were empty.
-     *                short_password: New password was too short (less than 8).
-     *                wrong_password: The old password confirmation failed.
+     * and phone number. The first name and last name can't be blank.
+     * @return boolean True if editing was successful. False otherwise.
      */
     public function editUser()
     {
-        return "missing_info";
+        return false;
     }
 
     /**
