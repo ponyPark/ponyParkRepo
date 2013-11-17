@@ -44,15 +44,14 @@ function init() {
     }
     if(days.length === 0 ){
         alert("You Must Select a Day of the Week.");
-        return;
+        return
     }
-    var time = document.getElementById('cTime').value;
+
     var warningTime = document.getElementById('wTime').value;
 
     var passArray;
     passArray = {
         "days": days,
-        "time": time,
         "warningTime": warningTime
 
     };

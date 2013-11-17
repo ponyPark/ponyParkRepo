@@ -28,8 +28,6 @@
 			if($_GET['stat'] == 1) echo("**Your Notification Time Addition Was Successful**<BR>"); 
 			if($_GET['stat'] == 2) echo("**Your Notification Time Addition Contained a Duplicate.  The duplicate was not added.**<BR>");
 			?>
-				Please select the time your commute begins:
-				<p><input type="time" value="12:00" id="cTime"></p>
 				Please select the time you'd like to be notified of parking availability:
 				<p><input type="time" value="11:30" id="wTime"></p>
 				<p> Please select what days of the week your commute begins at this time:</p>

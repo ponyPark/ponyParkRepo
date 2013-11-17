@@ -57,9 +57,7 @@ function init() {
             var parent = $('<div />', { class: "hpContent"}).append($("<h2 />", {text: "Notification Time " + (i+1) }));
             var p1 = $('<p />', { text: "Modify your current times and hit update to save the changes.  To delete a specific notification time, hit delete", class: "details"});
             var p1p = $('<p />', {text: "Your notification time is set to:"});
-            p1p.append($('<input />', {type: "time", value: data[i].Time, id: "cTime" + data[i].CommuteID}));
-            var p2p = $('<p />', {text: "Your current notification time is set to:"});
-            p2p.append($('<input />', {type: "time", value: data[i].WarningTime, id: "wTime" + data[i].CommuteID}));
+            p1p.append($('<input />', {type: "time", value: data[i].WarningTime, id: "wTime" + data[i].CommuteID}));
             var p3p = $('<p />', {text: "Your current notification days are:"});
             var divElm = $('<p />');
             var input = $('<input />', { type: 'checkbox', id: '1'+data[i].CommuteID, value: "Sunday" })
@@ -98,7 +96,6 @@ function init() {
             p3p.append(divElm);
 
             p1.append(p1p);
-            p1.append(p2p);
             p1.append(p3p);
             parent.append(p1);
 
@@ -133,13 +130,11 @@ function init() {
         alert("You Must Select a Day of the Week.");
         return;
     }
-    var time = document.getElementById('cTime' + idSub).value;
     var warningTime = document.getElementById('wTime' + idSub).value;
 
     var passArray;
     passArray = {
         "days": days,
-        "time": time,
         "warningTime": warningTime
 
     };
