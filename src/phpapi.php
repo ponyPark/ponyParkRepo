@@ -79,6 +79,22 @@ class phpapi
     }
 
     /**
+     * Edit the user's profile info. The user can edit their first name, last name,
+     * phone number, and password. The first name and last name can't be blank,
+     * and if they are changing their password, it must be at least 8 characters.
+     * In order to change any profile info, they must provide their old password
+     * to confirm their identity.
+     * @return string Empty string: Editing the user was successful.
+     *                missing_info: One or more required fields were empty.
+     *                short_password: New password was too short (less than 8).
+     *                wrong_password: The old password confirmation failed.
+     */
+    public function editUser()
+    {
+        return "missing_info";
+    }
+
+    /**
      * This function processes a Google+ sign in. If an entry doesn't already
      * exist in the Users table for the user, then an entry is created.
      * It will set session variables to indicate a logged in user.
