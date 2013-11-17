@@ -670,8 +670,8 @@ class phpapi
         foreach ($days as $value)
         {
             // Add the commute time.
-            $query = "INSERT INTO CommuteTimes (UserID, Time, WarningTime, Day)
-            VALUES ('$userID', '$time', '$warningTime', '$value')";
+            $query = "INSERT INTO CommuteTimes (UserID, WarningTime, Day)
+            VALUES ('$userID', $warningTime', '$value')";
             if (!mysql_query($query))
             {
                 array_push($existing , $value);
