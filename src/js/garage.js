@@ -164,6 +164,7 @@ function init() {
                     // Show rating form if user is logged in.
                     $('#notloggedGarageReport').css('display', 'none');
                     $('#reportAvaDivElem').css('display', 'block');
+                    addButton();
 
                 }
                 if (data === "false") {
@@ -182,7 +183,6 @@ function init() {
 
 
 populateGarage();
-addButton();
 userLogged();
 }
 window.onload = init;
