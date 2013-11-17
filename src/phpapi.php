@@ -378,7 +378,7 @@ class phpapi
         $query = "SELECT (SELECT floor(avg(Rating)) AS Rating FROM
             Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
             Ratings.ParkingID = ParkingLocations.ParkingID AND Ratings.Level = 
-            '$level') AS Average_Rating, IFNULL(SELECT Rating FROM Ratings WHERE 
+            '$level') AS Average_Rating, IFNULL((SELECT Rating FROM Ratings WHERE 
             ParkingLocations.ParkingID = Ratings.ParkingID AND Ratings.Level = 
             '$level' ORDER BY Timestamp DESC LIMIT 1), 5) AS Latest_Rating,
             IFNULL((SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
