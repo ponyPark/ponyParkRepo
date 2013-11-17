@@ -613,6 +613,28 @@ class phpapi
     }
 
     /**
+     * Returns whether or not a user has a garage in their favorites.
+     * @param INT $parkingID The ID of the parking location.
+     * @return BOOL Returns true if the user has that garage in their favorites,
+     * false if the user does not.
+     */
+    public function hasFavorite($parkingID)
+    {
+        // Retrieve the UserID.
+        $userID = $_SESSION['userID'];
+
+        //Get the highest priority plus 1
+        $query = "SELECT * FROM FavoriteGarages WHERE parkingID = '$parkingID' 
+            AND UserID = '$userID'";
+        $result = mysql_query($query);
+
+        if(mysql_num_rows($result) == 0)
+            return false;
+        
+        return true;
+    }
+
+    /**
      * Add a commute time for a user. The user will be able to select multiple
      * days at a time for a single commute time. This function will handle that
      * as an array. Assumes that 1 is Sunday, 7 is Saturday.
