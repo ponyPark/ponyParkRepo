@@ -378,14 +378,14 @@ class phpapi
         $query = "SELECT (SELECT floor(avg(Rating)) AS Rating FROM
             Ratings WHERE Timestamp>DATE_SUB(NOW(), INTERVAL 2 HOUR) AND
             Ratings.ParkingID = ParkingLocations.ParkingID AND Ratings.Level = 
-            '$level') AS Average_Rating, IFNULL((SELECT Rating FROM Ratings WHERE 
+            '$level') AS Average_Rating, (SELECT Rating FROM Ratings WHERE 
             ParkingLocations.ParkingID = Ratings.ParkingID AND Ratings.Level = 
-            '$level' ORDER BY Timestamp DESC LIMIT 1), 5) AS Latest_Rating,
-            IFNULL((SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
+            '$level' ORDER BY Timestamp DESC LIMIT 1) AS Latest_Rating,
+            (SELECT IF(HOUR(TIMEDIFF(NOW(), timestamp))<24, 
             CONCAT(HOUR(TIMEDIFF(NOW(), timestamp)), ' hour(s) ago'), 
             '>24 hours ago') FROM Ratings WHERE Ratings.ParkingID = 
             ParkingLocations.ParkingID AND Ratings.Level = '$level' 
-            ORDER BY timestamp DESC LIMIT 1), '>24 hours ago') AS Last_Rated FROM 
+            ORDER BY timestamp DESC LIMIT 1) AS Last_Rated FROM 
             ParkingLocations WHERE ParkingLocations.parkingID = '$parkingID'";
         $result = mysql_query($query);
 
