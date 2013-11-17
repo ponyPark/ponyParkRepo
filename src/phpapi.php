@@ -623,14 +623,16 @@ class phpapi
         // Retrieve the UserID.
         $userID = $_SESSION['userID'];
 
-        //Get the highest priority plus 1
+        //Get the user's favorite, if it exsists, that corresponds with the parkingID
         $query = "SELECT * FROM FavoriteGarages WHERE parkingID = '$parkingID' 
             AND UserID = '$userID'";
         $result = mysql_query($query);
 
+        //If the garage is not one of the user's favorites, return false
         if(mysql_num_rows($result) == 0)
             return false;
         
+        //Return true if the garage is one of the user's favorites
         return true;
     }
 
