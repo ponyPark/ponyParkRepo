@@ -658,20 +658,23 @@ class phpapi
         // Get the list of days that the commute time applies to.
         $days = (array) $commutes['days'];
 
-        // Get the time and warning time.
-        $time = $commutes['time'];
+        // Get the warning time.
         $warningTime = $commutes['warningTime'];
 
         //Make an array for any duplicates.
         $existing = array();
 
-        // Changes all values in the days array to (userID, time, warningTime,
+        // Changes all values in the days array to (userID warningTime,
         // value) where value is a specific day
         foreach ($days as $value)
         {
             // Add the commute time.
             $query = "INSERT INTO CommuteTimes (UserID, WarningTime, Day)
+<<<<<<< HEAD
             VALUES ('$userID', $warningTime', '$value')";
+=======
+            VALUES ('$userID' '$warningTime', '$value')";
+>>>>>>> ffcf0f95fbcfe59cddceefec0c67754c448d837f
             if (!mysql_query($query))
             {
                 array_push($existing , $value);
@@ -692,7 +695,7 @@ class phpapi
         $userID = $_SESSION['userID'];
 
         //Get the list of commute times.
-        $query = "SELECT CommuteID, Time, Day, WarningTime FROM CommuteTimes 
+        $query = "SELECT CommuteID, Day, WarningTime FROM CommuteTimes 
         WHERE UserID = '$userID'";          
         $result = mysql_query($query);
     
