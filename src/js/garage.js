@@ -62,7 +62,6 @@ function init() {
                 if(request.readyState === 4){
                     data = request.responseText;
                     data = JSON.parse(data);
-                    console.log(data);
                     var text = "NONE";
                     var rating = data.LevelInfo[0].Average_Rating;
                     if(rating === '1') text = "FULL";
@@ -103,8 +102,45 @@ function init() {
 
             }
 
+
             
 	        
+
+    }
+
+
+    function addButton(){
+        var request = new XMLHttpRequest();
+        var parkID = document.getElementById('garageID').innerHTML;
+        var url = 'hasFavorite.php?parkingID=' + parkID;
+        var data;
+
+        request.open("GET", url, true);
+        request.send();
+        request.onreadystatechange = function (e) {
+
+            if (request.readyState === 4) {
+                data = request.responseText;
+                if(data === "False"){
+                    //not a favorite
+                    var child = $('#levelRating');
+                    var c2 = $('<span />', {class: "submit"}).appendTo(child);
+                    var link = $('<a />',{
+                        href: "addFavorites.php?parkingID=" + parkID,
+                        text: "Add To Favorites"}).appendTo(c2);
+                }
+                else{
+                    //favorite
+                    var child = $('#levelRating');
+                    var c2 = $('<span />', {class: "submit"}).appendTo(child);
+                    var link = $('<a />',{
+                        href: "deleteFavorites.php?favoriteID=" + data,
+                        text: "Delete from Favorites"}).appendTo(c2);
+                }
+            }
+        }
+
+
 
     }
 
@@ -146,6 +182,7 @@ function init() {
 
 
 populateGarage();
+addButton();
 userLogged();
 }
 window.onload = init;

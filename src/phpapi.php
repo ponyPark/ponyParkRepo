@@ -627,13 +627,14 @@ class phpapi
         $query = "SELECT * FROM FavoriteGarages WHERE parkingID = '$parkingID' 
             AND UserID = '$userID'";
         $result = mysql_query($query);
+        $info = mysql_fetch_assoc($result);
 
         //If the garage is not one of the user's favorites, return false
         if(mysql_num_rows($result) == 0)
-            return false;
+            echo("False");
         
         //Return true if the garage is one of the user's favorites
-        return true;
+        else echo($info['FavoriteID']);
     }
 
     /**
