@@ -806,11 +806,11 @@ class phpapi
                 $message .= "If you no longer wish to receive these emails, delete ". 
                     "your commute times at http://ponypark.floccul.us\n\nYours truly," .
                     "\nPonyPark from BAM! Software";
-
-                mail($row['Email'], "Notifcation from PonyPark", $message, 
-                    "From: ponypark@floccul.us");
-                sleep(.5);
             }
+            
+            mail($row['Email'], "Notifcation from PonyPark", $message, 
+                "From: ponypark@floccul.us");
+            sleep(.5);
         }
     }
 
