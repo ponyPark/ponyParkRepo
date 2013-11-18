@@ -23,7 +23,7 @@
 
 		<div class="hpContent">
 			<h2>Top Ten Users</h2>
-			<p class = "details">At PonyPark, we value those who help make our service a success.  Here are our top ten contributers.  Please, aspire to be like these individuals and contribute!</p>
+			<p class = "details">At PonyPark, we value those who help make our service a success.  Here are our top ten contributers, updated once a day.  Please, aspire to be like these individuals and contribute!</p>
 			<OL id="topTenList"></OL>
 		</div>
 
