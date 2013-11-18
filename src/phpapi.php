@@ -109,7 +109,61 @@ class phpapi
      */
     public function editUser()
     {
-        return "missing_info";
+        //Get userID from SESSION
+        $userID = $_SESSION['userID'];
+
+        //Get information from POST
+        $firstName = mysql_real_escape_string($_POST['fname']);
+        $lastName = mysql_real_escape_string($_POST['lname']);
+        $phoneNumber = $_POST['phone'];
+        $oldPassword = $_POST['old_pw'];
+        $newPassword = $_POST['new_pw'];
+
+        if(empty($firstName) || empty($lastName))
+            return "missing_info";
+
+        //Check if phoneNumber is null
+        $phoneNumber = empty($phoneNumber) ? "NULL" : "'" . $phoneNumber . "'";
+
+        if(empty($newPassword))
+        {
+            $query = "UPDATE Users SET FirstName = '$firstName', LastName = 
+                '$lastName', PhoneNumber = $phoneNumber WHERE UserID = '$userID'";
+            mysql_query($query);
+        }
+        else
+        {
+            // Obtain the salt for the user.
+            $query = "SELECT * FROM Users WHERE UserId = '$userID'";
+            $info = mysql_fetch_array(mysql_query($query));
+            $salt = $info['PasswordSalt'];
+
+            // Add the salt to the password, and hash the whole thing.
+            $pwps = $oldPassword . $salt;
+            $pw = hash(md5, $pwps);
+
+            // Validate the user. Using the native system.
+            $query = "SELECT * FROM Users WHERE UserID = '$userID' AND 
+                Password = '$pw'";
+            $result = mysql_query($query);
+
+            if(mysql_num_rows($result) != 0)
+            {
+                // Create the salt. Then salt and hash the password.
+                $salt = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB), MCRYPT_DEV_RANDOM);
+                $pwps = $newPassword . $salt;
+                $pw = hash(md5, $pwps);
+
+                $query = "UPDATE Users SET FirstName = '$firstName', LastName = 
+                    '$lastName', PhoneNumber = $phoneNumber, Password = '$pw', 
+                    PasswordSalt = '$salt' WHERE UserID = '$userID'";
+                mysql_query($query);
+            }
+            else
+                return "wrong_password";
+        }
+
+        return "";
     }
 
     /**
