@@ -79,12 +79,23 @@ class phpapi
     }
 
     /**
-     * Get the first name, last name, email phone number, and external type of 
+     * Get the first name, last name, email, phone number, and external type of 
      * the logged in user.
      * @return JSON The profile of the logged in user.
      */
     public function getUser()
     {
+        //Get userID from SESSION
+        $userID = $_SESSION['userID'];
+
+        //Query to get user's information
+        $query = "SELECT FirstName, LastName, Email, PhoneNumber, ExternalType 
+            FROM Users WHERE Users.UserID = '$userID'";
+        $result = mysql_query($query);
+
+        //Change mysql result to array so that it can be exported in JSON.
+        $rows = mysql_fetch_assoc($result);
+        return json_encode(array('UserInfo' => $rows));
     }
 
     /**
