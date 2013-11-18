@@ -89,7 +89,7 @@ class phpapi
         $userID = $_SESSION['userID'];
 
         //Query to get user's information
-        $query = "SELECT FirstName, LastName, Email, PhoneNumber, ExternalType 
+        $query = "SELECT FirstName, LastName, Email, PhoneNumber, UserType, ExternalType 
             FROM Users WHERE Users.UserID = '$userID'";
         $result = mysql_query($query);
 

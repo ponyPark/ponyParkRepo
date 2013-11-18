@@ -11,7 +11,6 @@ jQuery(document).ready(function() {
         success: function(user) {
             $( "input[name='fname']" ).val(user.UserInfo.FirstName);
             $( "input[name='lname']" ).val(user.UserInfo.LastName);
-            $( "input[name='email']" ).val(user.UserInfo.Email);
             $( "input[name='phone']" ).val(user.UserInfo.PhoneNumber);
 
             if (user.UserInfo.ExternalType === "native")

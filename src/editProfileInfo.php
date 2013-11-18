@@ -33,13 +33,10 @@
             <h2>Edit Your Profile Info</h2>
                 <span id="signupResult"></span>
                 <form id="submitEditUser" method="POST">
-                <input type="hidden" name="externalType">
                 <label for="fname">First Name:</label>
                 <input type="text" name="fname" pattern="[a-zA-Z]+" title="Letters only" placeholder="First Name" class="editProfileInput" required><br>
                 <label for="lname">Last Name:</label>
                 <input type="text" name="lname" placeholder="Last Name" title="Letters only" pattern="[a-zA-Z]+" class="editProfileInput" required><br>
-                <label for="email">Email:</label>
-                <input type="email" name="email" placeholder="Email Address" class="editProfileInput" disabled><br>
                 <label for="phone">Phone Number:</label>
                 <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" class="editProfileInput"><br>
                 <div id="changePassword">
@@ -51,7 +48,6 @@
                 </div>
                 <br><input type="submit" d="subRequestBut" class="submit" value="Submit Changes">
                 </form>
-            </p>
         </div>
 
     </body>
