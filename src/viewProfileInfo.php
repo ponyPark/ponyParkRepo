@@ -31,12 +31,12 @@
 
         <div class="hpContent" id="whatsPonyPark">
             <h2>View Your Profile Info</h2>
-                <b>User Type:</b> <span id="userType"></span><br><br>
-                <b>Account Type:</b> <span id="accountType"></span><br><br>
                 <b>First Name:</b> <span id="firstName"></span><br><br>
                 <b>Last Name:</b> <span id="lastName"></span><br><br>
                 <b>Email:</b> <span id="email"></span><br><br>
                 <b>Phone Number:</b> <span id="phoneNumber"></span><br><br>
+                <b>User Type:</b> <span id="userType"></span><br><br>
+                <b>Account Type:</b> <span id="accountType"></span><br><br>
             <a href="editProfileInfo.php" class="submit">Edit Profile Info</a>
         </div>
 
