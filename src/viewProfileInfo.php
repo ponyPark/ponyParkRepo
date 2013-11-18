@@ -36,7 +36,8 @@
                 <b>First Name:</b> <span id="firstName"></span><br><br>
                 <b>Last Name:</b> <span id="lastName"></span><br><br>
                 <b>Email:</b> <span id="email"></span><br><br>
-                <b>Phone Number:</b> <span id="phoneNumber"></span>
+                <b>Phone Number:</b> <span id="phoneNumber"></span><br><br>
+            <a href="editProfileInfo.php" class="submit">Edit Profile Info</a>
         </div>
 
     </body>
