@@ -565,6 +565,21 @@ class phpapi
         header ('Location: ratingsub.html'); //this will need to change 
     }
 
+    /**
+     * A function to add a rating to the database for Android.
+     * @param INT $userID The ID of the user.
+     * @param INT $parkingID The ID of the parking location.
+     */
+    public function addRatingAndroid($userID, $parkingID)
+    {
+        $ratingInfoJSON = $_POST;
+
+        $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
+            Rating) VALUES ('$parkingID', '" . $_POST['level'] . 
+            "', NOW(), '$userID', '" . $_POST['availability'] . "')";
+        mysql_query($query); 
+    }
+
      /**
      * A function to add a request for a parking garage.
      */
