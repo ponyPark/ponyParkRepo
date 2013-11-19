@@ -716,6 +716,42 @@ class phpapi
     }
 
     /**
+     * Add a favorite garage for a user.
+     * @param INT $userID The ID for a user.
+     * @param INT $parkingID The ID of the parking location.
+     */
+    public function addFavoritesAndroid($userID, $parkingID)
+    {
+        //Get the highest priority plus 1
+        $query = "SELECT IFNULL(max(Priority)+1,1) priority FROM FavoriteGarages
+            WHERE UserID = '$userID'";
+        $priority = mysql_fetch_assoc(mysql_query($query));
+
+        //Add a favorite garage.
+        $query = "INSERT INTO FavoriteGarages(UserID, ParkingID, Priority)
+            VALUES('$userID', '$parkingID', '" . $priority["priority"] . "')";
+        mysql_query($query);    
+    }
+
+    /**
+     * Get the favorite garages for a user.
+     * @param INT $userID The ID for a user.
+     * @return JSON The list of favorite garages.
+     */
+    public function getFavoritesAndroid($userID)
+    {
+        //Get the list of favorite garages.
+        $query = "SELECT * FROM FavoriteGarages WHERE UserID = '$userID' ORDER BY Priority";          
+        $result = mysql_query($query);    
+    
+        // Change mysql result to array so that it can be exported in JSON.
+        $rows = array();
+        while($temp = mysql_fetch_assoc($result))
+            $rows[] = $temp;
+        return json_encode(array('Favorites' => $rows));
+    }
+
+    /**
      * Returns whether or not a user has a garage in their favorites.
      * @param INT $parkingID The ID of the parking location.
      * @return BOOL Returns true if the user has that garage in their favorites,
