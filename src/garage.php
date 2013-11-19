@@ -39,6 +39,7 @@
 		<div class="hpContent" id="reportAvaDivElem">
 			<h2 id="reportAva">Rate the Availability of a Garage</h2>
 			<h3 id="address"></h3>
+			<p id="insertButtonHere"> </p>
 			<p class = "details">Please answer the two simple questions below to report the availability of this garage.</p>
 			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
 				<div>
@@ -68,6 +69,7 @@
 				<input type="submit" value="Rate" class="submit"/>
 
             </form>
+
 
 		</div>
 

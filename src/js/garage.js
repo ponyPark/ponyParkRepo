@@ -123,7 +123,7 @@ function init() {
                 data = request.responseText;
                 if(data === "False"){
                     //not a favorite
-                    var child = $('#levelRating');
+                    var child = $('#insertButtonHere');
                     var c2 = $('<span />', {class: "submit"}).appendTo(child);
                     var link = $('<a />',{
                         href: "addFavorites.php?parkingID=" + parkID + "&redirect=false",
@@ -131,7 +131,7 @@ function init() {
                 }
                 else{
                     //favorite
-                    var child = $('#levelRating');
+                    var child = $('#insertButtonHere');
                     var c2 = $('<span />', {class: "submit"}).appendTo(child);
                     var link = $('<a />',{
                         href: "deleteFavorites.php?favoriteID=" + data + "&redirect=false&parkingID=" + parkID,
