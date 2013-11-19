@@ -291,6 +291,95 @@ class phpapi
     }
 
     /**
+     * This function processes a Google+ sign in from Android. If an entry 
+     * doesn't already exist in the Users table for the user, then an entry is 
+     * created. It will set session variables to indicate a logged in user.
+     * @return JSON All the user data so the android app can use it
+     */
+    public function verifyGoogleUserAndroid()
+    {
+        // Obtain user info
+        $fname = mysql_real_escape_string($_POST['fname']);
+        $lname = mysql_real_escape_string($_POST['lname']);
+        $email = mysql_real_escape_string($_POST['email']);
+        $externalID = mysql_real_escape_string($_POST['externalID']);
+        $auth = 0;
+        $externalType = "Google";
+
+        //Query to see if the user already exists
+        $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
+            ExternalType = '$externalType'";
+        $result = mysql_query($query);
+
+        //If the user doesn't exist.
+        if(mysql_num_rows($result)==0)
+        {
+            //Add the info into the users table.
+            $query = "INSERT INTO Users(FirstName, LastName, Email, UserType,
+                ExternalType, ExternalID) VALUES ('$fname','$lname','$email','$auth',
+                '$externalType', '$externalID')";
+            mysql_query($query);
+
+            //Get everything from the row just inserted.
+            $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
+                ExternalType = '$externalType'";
+            $result = mysql_query($query);
+        }
+
+        $info = mysql_fetch_array($result);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        // Returns an empty array if no info is inside.
+        return json_encode(array('UserInfo' => $info));
+    }
+
+    /**
+     * This function processes a Facebook sign in from Android. If an entry 
+     * doesn't already exist in the Users table for the user, then an entry is 
+     * created.  It will set session variables to indicate a logged in user.
+     * @return JSON All the user data so the android app can use it
+     */
+    public function verifyFacebookUserAndroid()
+    {
+        // Obtain user info
+        $fname = mysql_real_escape_string($_POST['fname']);
+        $lname = mysql_real_escape_string($_POST['lname']);
+        $email = mysql_real_escape_string($_POST['email']);
+        $externalID = mysql_real_escape_string($_POST['externalID']);
+        $auth = 0;
+        $externalType = "Facebook";
+
+        if(empty($email) || empty($externalID))
+            return false;
+
+        //Query to see if the user already exists
+        $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
+            ExternalType = '$externalType'";
+        $result = mysql_query($query);
+
+        //If the user doesn't exist.
+        if(mysql_num_rows($result)==0)
+        {
+            //Add the info into the users table.
+            $query = "INSERT INTO Users(FirstName, LastName, Email, UserType,
+                ExternalType, ExternalID) VALUES ('$fname','$lname','$email','$auth',
+                '$externalType', '$externalID')";
+            mysql_query($query);
+            
+            //Get everything from the row just inserted.
+            $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
+                ExternalType = '$externalType'";
+            $result = mysql_query($query);
+        }
+
+        $info = mysql_fetch_array($result);
+
+        // Change mysql result to array so that it can be exported in JSON.
+        // Returns an empty array if no info is inside.
+        return json_encode(array('UserInfo' => $info));
+    }
+
+    /**
      * A function to verify that a user is entering the right information when
      * logging in. By retrieving information from a query to the database. It 
      * also saves the information into a session. 
