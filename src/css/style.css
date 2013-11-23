@@ -345,3 +345,8 @@ footer a:hover {
     left: 180px;
     padding: 2px;
 }
+
+#garageImg {
+	float: right;
+	border: 2px solid;
+}
