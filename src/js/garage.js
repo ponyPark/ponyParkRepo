@@ -35,7 +35,7 @@ function init() {
                     if(rating === '3') text = "SOME";
                     if(rating === '4') text = "PLENTY";
                     if(rating === '5') text = "EMPTY";
-                    if(text === "NONE") $('#ratingofG').text("There is no rating available for this garage. You can help by logging in and rating above.");
+                    if(text === "NONE") $('#ratingofG').text("There is no rating available for this garage. You can help by rating above.");
                     $('#ratingGinInfo').text(text);
                     var levels = document.getElementById('level');
 	                var numLevels = parseInt(data.ParkingInfo.NumberOfLevels, 10);
@@ -69,7 +69,7 @@ function init() {
                     if(rating === '3') text = "SOME";
                     if(rating === '4') text = "PLENTY";
                     if(rating === '5') text = "EMPTY";
-                    if(text === "NONE") text = "The average rating cannot be calculated due to lack of ratings. You can help by logging in and rating above.";
+                    if(text === "NONE") text = "The average rating cannot be calculated due to lack of ratings. You can help by rating above.";
                     var latestRating = "NONE";
                     rating = data.LevelInfo[0].Latest_Rating;
                     if(rating === '1') latestRating = "FULL";
@@ -77,7 +77,7 @@ function init() {
                     if(rating === '3') latestRating = "SOME";
                     if(rating === '4') latestRating = "PLENTY";
                     if(rating === '5') latestRating = "EMPTY";
-                    if(latestRating === "NONE") latestRating = "There is no rating available for this level. You can help by logging in and rating above.";
+                    if(latestRating === "NONE") latestRating = "There is no rating available for this level. You can help by rating above.";
 
                     var time = "";
                     if ( data.LevelInfo[0].Last_Rated != null){
