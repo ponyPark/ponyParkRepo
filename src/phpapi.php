@@ -842,6 +842,36 @@ class phpapi
 
     /**
      * Returns whether or not a user has a garage in their favorites.
+     * @param INT $userID The ID for a user.
+     * @param INT $parkingID The ID of the parking location.
+     * @return BOOL Returns true if the user has that garage in their favorites,
+     * false if the user does not.
+     */
+    public function hasFavoriteAndroid($userID, $parkingID)
+    {
+        //Get the user's favorite, if it exsists, that corresponds with the parkingID
+        $query = "SELECT * FROM FavoriteGarages WHERE parkingID = '$parkingID' 
+            AND UserID = '$userID'";
+        $result = mysql_query($query);
+        $info = mysql_fetch_assoc($result);
+
+        //If the garage is not one of the user's favorites, return false
+        if(mysql_num_rows($result) == 0)
+        {
+            echo("False");
+            return false;
+        }
+        
+        //Return true if the garage is one of the user's favorites
+        else
+        {
+            echo($info['FavoriteID']);
+            return true;
+        }
+    }
+
+    /**
+     * Returns whether or not a user has a garage in their favorites.
      * @param INT $parkingID The ID of the parking location.
      * @return BOOL Returns true if the user has that garage in their favorites,
      * false if the user does not.
