@@ -110,38 +110,39 @@ function init() {
                 data = JSON.parse(data);
 
                 var averages = data.Ratings;
-                var data = new Array();
-                for (var u = 0; u < 24; u++){
-                    data[u] = null;
-                }
+                var ratings = new Array();
+                var hours = new Array();
 
                 for (var i = 0, len = averages.length; i < len; i++) {
-                    var index = averages[i].Hour;
-                    data[index] = parseInt(averages[i].Rating, 10);
+                    hours[i] = averages[i].Hour;
+                    ratings[i] = averages[i].Rating;
                 }
 
                 console.log(data);
                 
                 var chart = new Highcharts.Chart({
                     chart: {
-                        renderTo: 'graph'
+                        renderTo: 'graph',
+                        type: 'column',
                     },
                     title: {
                         text: 'Average Rating'
                     },
                     xAxis: {
-                        categories: ['0', '1', '2', '3', '4', '5',
-                    '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+                        categories: hours
                     },
                     yAxis: {
                         title: {
                             text: 'Rating (1-5)'
                         }
                     },
+                    legend: {
+                        enabled: false
+                    },  
                     series: [{
-                    data: data
+                    data: ratings
                     }]
-                });   
+                });         
 
             }   
 
