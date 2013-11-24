@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_id">553041308102464</string>
     <string name="app_name">PonyPark</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    
     <string name="action_LoginNon">My Account</string>
     <string name="action_Login">Login/Sign Up</string>
     <string name="action_help">About</string>
@@ -21,6 +21,20 @@
     <string name="btnNon">Get an account. SignUp!</string>
     <string name="phone">Phone</string>
     <string name="login">Login</string>
-    <string name="myFavs">My Favorites</string>
-
+    <string name="myFavs">My Favorites</string>    
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_garage_page">GaragePage</string>
+    <string name="refresh">  Refresh</string>
+    <string name="title_activity_google_sign_in">GoogleSignIn</string>
+    <string name="title_activity_google_log_in">GoogleLogIn</string>
+	<string name="selectLevel">Please select the level</string>
+    <string name="full">Full</string>
+    <string name="reportAvail">Report availability</string>
+    <string name="scarce">Scarce 10+ spots</string>
+    <string name="addFavs">Add to Favorites</string>    
+    <string name="some">Some 5&#8211;10 spots</string>    
+    <string name="plenty">Plenty 1&#8211;5 spots</string>    
+    <string name="empty">Empty</string>
+    
 </resources>

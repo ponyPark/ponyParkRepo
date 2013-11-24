@@ -1,6 +1,6 @@
 /*
  * Justin Trantham
- * 11/1/13
+ * 11/23/13
  * PonyPark by BAM Software
  */
 package com.app.ponypark;
@@ -8,8 +8,9 @@ package com.app.ponypark;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.JSONException;
 import org.json.JSONObject;
-import com.example.ponypark.R;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -28,12 +29,7 @@ public class Register extends Activity {
 	Button btnLoginLink;
 	EditText txtFName, txtLName, txtEmail, txtPhone, txtPassword;
 	TextView signUpError;
-	public static String KEY_fName = "fname";
-	public static String KEY_lName = "lname";
-	public static String KEY_email = "email";
-	public static String KEY_password = "pw";
-	public static String KEY_phone = "phone";
-	private String fName, lName, email, phone, password;
+	private String fName, lName, email, phone, password, userId;
 	SessionControl session;
 	private Context context;
 	private ProgressDialog pd;
@@ -69,10 +65,12 @@ public class Register extends Activity {
 						&& email.length() != 0 && phone.length() != 0
 						&& password.length() != 0) {
 					if (emailValid(email) && passValid(password)
-							&& isPhoneValid(phone)) {
-						background task = new background();
+							&& isPhoneValid(phone) && validFName(fName)
+							&& validLName(lName)) {
+						registerUser task = new registerUser();
 
 						task.execute((Object[]) null);
+
 					} else {
 
 						signUpError.setText("Error occured in registration");
@@ -96,8 +94,8 @@ public class Register extends Activity {
 		});
 	}
 
-	private class background extends AsyncTask<Object, Object, Object> {
-		private boolean success;
+	private class registerUser extends AsyncTask<Object, Object, Object> {
+		private boolean success = false, duplicateEmail = false;
 
 		@Override
 		protected void onPreExecute() {
@@ -105,7 +103,7 @@ public class Register extends Activity {
 			pd.setTitle("Signing Up....");
 			pd.setMessage("Please wait.");
 			pd.setCancelable(false);
-			pd.setIndeterminate(true);
+			// pd.setIndeterminate(true);
 			pd.show();
 		}
 
@@ -113,13 +111,38 @@ public class Register extends Activity {
 		protected Object doInBackground(Object... params) {
 
 			UserActions user = new UserActions();
-			user.signUp(fName, lName, email, password, phone);
+			System.out.println(fName + " " + lName + " " + email + " "
+					+ password);
+			JSONObject json = user.signUp(fName, lName, email, password, phone);
 
-			// TODO we need to add ability to get success,failure,or already a
-			// user
-			session.createLoginSession(email, password, fName, lName, password);
-			// Close Registration Screen
-			success = true;
+			duplicateEmail = false;
+			try {
+				if (!json.isNull("emailAlready")) {
+					if (json.getBoolean("emailAlready")) {
+						duplicateEmail = true;
+						success = false;
+					}
+				} else {
+					if (json.getJSONObject("UserInfo").get("Email").toString()
+							.length() != 0) {
+						fName = json.getJSONObject("UserInfo").get("FirstName")
+								.toString();
+						lName = json.getJSONObject("UserInfo").get("LastName")
+								.toString();
+						email = json.getJSONObject("UserInfo").get("Email")
+								.toString();
+						userId = json.getJSONObject("UserInfo").get("UserID")
+								.toString();
+						duplicateEmail = false;
+						success = true;
+					} else {
+						success = false;
+						// Error in login
+					}
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 			return null;
 		}
 
@@ -130,11 +153,19 @@ public class Register extends Activity {
 			}
 			if (success) {
 				signUpError.setText("Thank You!");
-				Toast.makeText(getApplicationContext(), "Success!",
-						Toast.LENGTH_SHORT).show();
+				successMessageUI("Thank you for joining!");
+				// Create login session
+				MainActivity.session.createLoginSession(fName, lName, email,
+						userId);
 				finish();
 			} else {
-				signUpError.setText("Error occured in registration");
+
+				if (duplicateEmail) {
+					signUpError
+							.setText("Already an account with that email address.");
+				} else
+					signUpError.setText("Error occured in registration");
+
 			}
 		}
 	}
@@ -174,5 +205,33 @@ public class Register extends Activity {
 			txtPhone.setError("Incorrect phone number");
 			return false;
 		}
+	}
+
+	public final boolean validFName(String input) throws NumberFormatException {
+		if (input.matches("[a-zA-Z ]+")) {
+			return true;
+		} else {
+			txtFName.setError("Accept alphabetical letters only.");
+			return false;
+		}
+	}
+
+	public final boolean validLName(String input) throws NumberFormatException {
+		if (input.matches("[a-zA-Z ]+")) {
+			return true;
+		} else {
+			txtLName.setError("Accept alphabetical letters only.");
+			return false;
+		}
+	}
+
+	public void successMessageUI(final String message) {
+		runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 }

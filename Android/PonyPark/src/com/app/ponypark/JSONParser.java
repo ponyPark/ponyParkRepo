@@ -2,6 +2,8 @@
  * Justin Trantham
  * 11/1/13
  * PonyPark by BAM Software
+ * Used example at http://www.androidhive.info/ for
+ * help. 
  */
 package com.app.ponypark;
 
@@ -21,12 +23,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.util.Log;
 
 public class JSONParser {
 
 	static InputStream is = null;
 	static JSONObject jObj = null;
+	private boolean checkFavorite = false, hasFavorite = false;
 	static String json = "";
 
 	// constructor
@@ -34,12 +38,19 @@ public class JSONParser {
 	}
 
 	public JSONObject getJSONFromUrl(String url, List<NameValuePair> paramss) {
-
+		// Check to see if were checking to see if the user has a favorite
 		try {
-			// defaultHttpClient
+			if (url.contains("hasFavorite")) {
+				checkFavorite = true;
+			} else {
+				checkFavorite = false;
+			}
+
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
-			httpPost.setEntity(new UrlEncodedFormEntity(paramss));
+			if (paramss != null)
+				httpPost.setEntity(new UrlEncodedFormEntity(paramss));
+
 			HttpResponse httpResponse = httpClient.execute(httpPost);
 			HttpEntity httpEntity = httpResponse.getEntity();
 			is = httpEntity.getContent();
@@ -51,15 +62,25 @@ public class JSONParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		boolean emailExists = false;
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					is, "iso-8859-1"), 8);
 			StringBuilder sb = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {
+				sb.append(line + "\n");
+				if (line.equals("Email already exists")) {
+					emailExists = true;
+					break;
+				}
 
-				sb.append(line + "n");
+				if (checkFavorite) {
+					if (line.equals("False"))
+						hasFavorite = false;
+					else
+						hasFavorite = true;
+				}
 			}
 			is.close();
 			json = sb.toString();
@@ -71,12 +92,23 @@ public class JSONParser {
 
 		// Parse string to JSON object
 		try {
-			jObj = new JSONObject(json);
+			if (checkFavorite) {
+				jObj = new JSONObject();
+				jObj.put("hasFavorite", hasFavorite);
+				System.out.println("CHECKING ");
+			}
+			// See if the email already exists and if so create seperate JSON
+			// object to return
+			else if (emailExists) {
+				jObj = new JSONObject();
+				jObj.put("emailAlready", true);
+			} else
+				jObj = new JSONObject(json);
+
 		} catch (JSONException e) {
 			Log.e("JSON Parser", "Error parsing data " + e.toString());
 		}
-
-		// return JSON String
+		// return JSON object
 		return jObj;
 	}
 }

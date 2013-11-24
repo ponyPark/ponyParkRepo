@@ -10,7 +10,7 @@
         android:padding="10dip" >
 
         <!-- View Title Label -->
-
+    
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -44,18 +44,35 @@
             android:textColor="#e30000"
             android:textStyle="bold" />
 
+    
+
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="@string/login" />
-
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+            android:layout_gravity="center_horizontal"
+          android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
+    
+        <com.facebook.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp" />
         <Button
             android:id="@+id/btnRegScreen"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:background="@null"
             android:text="@string/btnNon"
             android:textColor="#848482"

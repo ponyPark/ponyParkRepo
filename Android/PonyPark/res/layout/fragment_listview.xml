@@ -3,15 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ff8400" >
-    
-    <TextView android:layout_width="fill_parent"
-        android:id="@+id/lView"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="List View"
-        android:textSize="20dp"
-        android:layout_centerInParent="true"/>
-    
+    android:id="@+id/fragList"
+    android:background="#FFFFFF"
+    android:padding="5dp" >
 
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/refreshList" >
+    </ListView>
+    <Button
+        android:id="@id/refreshList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="@string/refresh" />
 </RelativeLayout>
