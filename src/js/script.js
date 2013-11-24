@@ -107,9 +107,9 @@ function init() {
             break;
       }
 
-      var contentString = '<ol><li><a href="garage.php?garageID=' + 
-        item.ParkingID + '">' + item.Name + '</a></ul><li>' + item.Address + 
-        '</li><li>' + rating_message + ': ' + ava + '</li></ol>';
+      var contentString = '<font class="map_marker"><a href="garage.php?garageID=' + 
+        item.ParkingID + '" class="map_marker_link">' + item.Name + '</a><br>' + item.Address + '<br>' + 
+        rating_message + ': ' + ava + "</font>";
       new google.maps.event.addListener(marker, "click", function() {
         if (infowindow)
             infowindow.close();
@@ -117,9 +117,9 @@ function init() {
             content : contentString,
             size : new google.maps.Size(100, 300),
             backgroundColor: bgc,
-            maxWidth: 300,
-            minWidth: 50,
-            maxHeight: 80
+            maxWidth: 400,
+            minWidth: 200,
+            maxHeight: 60
             });
         infowindow.open(map, marker);
         });
