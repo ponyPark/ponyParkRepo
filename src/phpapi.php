@@ -64,7 +64,7 @@ class phpapi
         
         // Insert the user into the database.
         $auth = 0;
-        $externalType = "native";
+        $externalType = "Native";
         $query = "INSERT INTO Users(FirstName, LastName, Email,
             Password,PasswordSalt,PhoneNumber,UserType,ExternalType) VALUES 
             ('$fname','$lname','$email','$pw','$salt','$phone','$auth','$externalType')";
@@ -398,7 +398,7 @@ class phpapi
 
         // Obtain the salt for the user.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND 
-            ExternalType = 'native'";
+            ExternalType = 'Native'";
         $info = mysql_fetch_array(mysql_query($query));
         $salt = $info['PasswordSalt'];
         $info = NULL;
@@ -409,7 +409,7 @@ class phpapi
 
         // Validate the user. Using the native system.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND    
-            ExternalType = 'native' AND Password = '$pw'";
+            ExternalType = 'Native' AND Password = '$pw'";
         $result = mysql_query($query);
 
         // Redirect the user to an error if validation was unsucessful.
@@ -449,7 +449,7 @@ class phpapi
 
         // Obtain the salt for the user.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND 
-            ExternalType = 'native'";
+            ExternalType = 'Native'";
         $info = mysql_fetch_array(mysql_query($query));
         $salt = $info['PasswordSalt'];
         $info = NULL;
@@ -460,7 +460,7 @@ class phpapi
 
         // Validate the user. Using the native system.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND    
-            ExternalType = 'native' AND Password = '$pw'"; 
+            ExternalType = 'Native' AND Password = '$pw'"; 
         $result = mysql_query($query);
         
         if(mysql_num_rows($result) > 0)
