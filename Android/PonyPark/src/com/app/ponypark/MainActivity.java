@@ -156,18 +156,29 @@ public class MainActivity extends FragmentActivity implements
 			if (tab.getText().toString().equals("List View")) {
 				ListViewFrag.getInstance().clearData();
 				ListViewFrag.getInstance().startNewAsyncTask();
-				System.out.print("INside the frag for favorites!!!!!!");
 				viewPager.setCurrentItem(tab.getPosition());
 			} else if (tab.getText().toString().equals("Favs")) {
+				if(session.isLoggedIn()){
 
-				viewPager.setCurrentItem(tab.getPosition());
-
-				// FavoritesFrag.getInstance().startNewAsyncTask();
+					FavoritesFrag.getInstance().clearData();
+					FavoritesFrag.getInstance().startNewAsyncTask();
+					viewPager.setCurrentItem(tab.getPosition());	
+				}
+				else
+					displayLoginMessage();
 			} else if (tab.getText().toString().equals("Map View"))
 				viewPager.setCurrentItem(tab.getPosition());
 		}
 	}
-
+	private void displayLoginMessage() {
+		new AlertDialog.Builder(context).setTitle("Login to continue")
+				.setMessage("Please login to continue")
+				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						// Nothing
+					}
+				}).show();
+	}
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}

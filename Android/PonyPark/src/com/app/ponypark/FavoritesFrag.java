@@ -50,7 +50,7 @@ public class FavoritesFrag extends ListFragment {
 		adpt = new FavListAdapter(new ArrayList<GarageEntry>(), getActivity());
 
 		setListAdapter(adpt);
-		startNewAsyncTask();
+	//	startNewAsyncTask();
 		rootView.findViewById(R.id.refreshFavList).setOnClickListener(
 				new OnClickListener() {
 					@Override
@@ -74,15 +74,7 @@ public class FavoritesFrag extends ListFragment {
 		instance.result.clear();
 	}
 
-	private void displayLoginMessage() {
-		new AlertDialog.Builder(context).setTitle("Login to continue")
-				.setMessage("Please login to continue")
-				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						// Nothing
-					}
-				}).show();
-	}
+
 
 	/*
 	 * Used to start a refresh or initiate the favorites list with content.
@@ -94,8 +86,6 @@ public class FavoritesFrag extends ListFragment {
 					UserActions.KEY_userID);
 			// Getting latest favs
 			(new AsyncFavoritesLoader()).execute("");
-		} else {
-			displayLoginMessage();
 		}
 	}
 

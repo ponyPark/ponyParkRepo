@@ -61,23 +61,17 @@ public class Register extends Activity {
 				phone = txtPhone.getText().toString();
 				password = txtPassword.getText().toString();
 				// Form validation
-				if (fName.length() != 0 && lName.length() != 0
-						&& email.length() != 0 && phone.length() != 0
-						&& password.length() != 0) {
-					if (emailValid(email) && passValid(password)
-							&& isPhoneValid(phone) && validFName(fName)
-							&& validLName(lName)) {
+				if(phone.length()>0)
+					isPhoneValid(phone);
+					if (validFName(fName)
+							&& validLName(lName)&&emailValid(email) && passValid(password)
+							 ) {
 						registerUser task = new registerUser();
-
 						task.execute((Object[]) null);
 
-					} else {
-
-						signUpError.setText("Error occured in registration");
-					}
+					
 				} else {
-
-					signUpError.setText("Error occured in registration");
+					signUpError.setText("Error occurred in registration");
 				}
 			}
 		});

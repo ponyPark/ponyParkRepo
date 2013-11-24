@@ -77,7 +77,6 @@ public class ListViewFrag extends ListFragment {
 	}
 
 	public static void clearData() {
-		if (instance.isAdded())
 			instance.result.clear();
 	}
 
@@ -155,6 +154,10 @@ public class ListViewFrag extends ListFragment {
 					latestRating = c.getString(UserActions.KEY_LRating);
 					address = c.getString(UserActions.KEY_Adress);
 					id = c.getString("ParkingID");
+					
+					
+					//Distance
+					/*
 					List<Address> addresses;
 					try {
 
@@ -171,7 +174,7 @@ public class ListViewFrag extends ListFragment {
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}*/
 					result.add(convertTo(c));
 				}
 
@@ -190,10 +193,14 @@ public class ListViewFrag extends ListFragment {
 			address = c.getString(UserActions.KEY_Adress);
 			id = c.getString("ParkingID");
 			return new GarageEntry(name, address, lastRated, latestRating, id,
-					distanceTo);
+					"");
 		}
 	}
-
+	
+	/*
+	 * CODE TO SHOW DISTANCE FOR FUTURE
+	 */
+/*
 	private class getDistance extends
 			AsyncTask<String, Void, ArrayList<GarageEntry>> {
 		JSONObject distance;
@@ -295,4 +302,5 @@ public class ListViewFrag extends ListFragment {
 			return null;
 		}
 	}
+	*/
 }

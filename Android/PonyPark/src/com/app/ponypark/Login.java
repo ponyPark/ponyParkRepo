@@ -29,13 +29,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.Request;
+import com.facebook.*;
 import com.facebook.Request.GraphUserCallback;
-import com.facebook.Response;
-import com.facebook.Session;
 import com.facebook.Session.StatusCallback;
-import com.facebook.SessionState;
-import com.facebook.model.GraphUser;
+import com.facebook.model.*;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
@@ -256,16 +253,16 @@ public class Login extends Activity implements OnClickListener,
 		// Save the result and resolve the connection failure upon a user click.
 		mConnectionResult = result;
 	}
-
 	@Override
 	protected void onActivityResult(int requestCode, int responseCode,
 			Intent intent) {
+		  super.onActivityResult(requestCode, responseCode, intent);
 		// facebook.authorizeCallback(requestCode, responseCode, intent);
 		if (requestCode == REQUEST_CODE_RESOLVE_ERR
 				&& responseCode == RESULT_OK) {
 			mConnectionResult = null;
 			mPlusClient.connect();
-		} else
+		} else if(Session.getActiveSession()!=null)
 			Session.getActiveSession().onActivityResult(this, requestCode,
 					responseCode, intent);
 	}
@@ -393,6 +390,7 @@ public class Login extends Activity implements OnClickListener,
 	public void loginToFacebook() {
 		if (Session.getActiveSession() == null
 				|| Session.getActiveSession().isClosed()) {
+			
 			Session.openActiveSession(this, true, new StatusCallback() {
 
 				@SuppressWarnings("deprecation")

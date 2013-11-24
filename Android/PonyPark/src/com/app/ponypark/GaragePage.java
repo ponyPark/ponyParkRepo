@@ -34,6 +34,7 @@ public class GaragePage extends Activity implements OnClickListener {
 	private ProgressDialog pd;
 	private SharedPreferences mPref;
 
+private	Dialog dialog ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,9 +67,6 @@ public class GaragePage extends Activity implements OnClickListener {
 			checkFavs.execute((Object[]) null);
 
 		}
-		// TODO
-		// Check to see if they have the favorite or not!!!
-
 		gName.setText(name);
 		gAddress.setText(address);
 		setRating(latestRating, lastRated);
@@ -102,9 +100,8 @@ public class GaragePage extends Activity implements OnClickListener {
 		getMenuInflater().inflate(R.menu.garage_page, menu);
 		return true;
 	}
-
 	public void displayRate() {
-		final Dialog dialog = new Dialog(this, R.style.FullHeightDialog); // this
+	dialog	= new Dialog(this, R.style.FullHeightDialog); // this
 																			// is
 																			// a
 																			// reference
@@ -211,14 +208,11 @@ public class GaragePage extends Activity implements OnClickListener {
 		protected Void doInBackground(Boolean... params) {
 
 			UserActions user = new UserActions();
-
-			System.out.println("Inside add it" + userId + parkingId);
 			// If true then add rating
 			if (params[0]) {
 				user.addRating(userId, parkingId, levelSelected, rating);
 			} else {
 				user.addFavorite(userId, parkingId);
-				System.out.println("IN FAV ");
 			}
 			success = true;
 			return null;
@@ -235,6 +229,8 @@ public class GaragePage extends Activity implements OnClickListener {
 						Toast.LENGTH_SHORT).show();
 
 				addFav.setVisibility(View.INVISIBLE);
+				if(dialog.isShowing())
+				dialog.dismiss();
 				// finish();
 			} else {
 				// signUpError.setText("Error occured in registration");
@@ -253,7 +249,6 @@ public class GaragePage extends Activity implements OnClickListener {
 
 			JSONObject test = user.hasFavorite(userId, parkingId);
 			hasFavorite = false;
-			System.out.println("top " + hasFavorite);
 			try {
 				if (test.get("hasFavorite").equals(true)) {
 					hasFavorite = true;
@@ -261,7 +256,6 @@ public class GaragePage extends Activity implements OnClickListener {
 					System.out.println("AAAAAAAAAAAa " + hasFavorite);
 				} else
 					hasFavorite = false;
-				System.out.println("AAAAAAAAAAAa " + hasFavorite);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
