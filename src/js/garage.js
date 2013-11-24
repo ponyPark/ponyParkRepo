@@ -98,6 +98,17 @@ function init() {
 
 
                 }
+
+                url = 'getAverage.php';
+                request = new XMLHttpRequest();
+                url = url +'?parkingID='+parkID;
+                request.open("GET", url, false);
+                request.send();
+                if(request.readyState === 4){
+                    data = request.responseText;
+                    data = JSON.parse(data);
+                    
+                }
                 
 
             }
