@@ -115,7 +115,7 @@ function init() {
 
                 for (var i = 0, len = averages.length; i < len; i++) {
                     hours[i] = averages[i].Hour;
-                    ratings[i] = averages[i].Rating;
+                    ratings[i] = parseInt(averages[i].Rating);
                 }
 
                 console.log(data);
