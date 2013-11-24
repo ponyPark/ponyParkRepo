@@ -83,27 +83,33 @@ function init() {
           rating_message = "Most recent rating (" + item.Last_Rated + ")";
       var ava;
       var bgc;
+      var fgc;
       switch (rating)
       {
         case 1:
             ava = "Full";
-            bgc = "#FF8C8C";
+            bgc = "#d91818";
+            fgc = "#fdeaea";
             break;
         case 2:
             ava = "Scarce";
-            bgc = "#FF8C8C";
+            bgc = "#d91818";
+            fgc = "#fdeaea";
             break;
         case 3:
             ava = "Some";
-            bgc = "#FFF78C";
+            bgc = "#f5d10b";
+            fgc = "#f7f6df";
             break;
         case 4:
             ava = "Plenty";
-            bgc = "#A8FFAB";
+            bgc = "#128c16";
+            fgc = "#e5fae6";
             break;
         case 5:
             ava = "Empty";
-            bgc = "#A8FFAB";
+            bgc = "#128c16";
+            fgc = "#e5fae6";
             break;
       }
 
@@ -114,9 +120,11 @@ function init() {
         if (infowindow)
             infowindow.close();
         infowindow = new InfoBubble({
-            content : contentString,
-            size : new google.maps.Size(100, 300),
-            backgroundColor: bgc,
+            content: contentString,
+            size: new google.maps.Size(100, 300),
+            backgroundColor: fgc,
+            borderWidth: 3,
+            borderColor: bgc,
             maxWidth: 400,
             minWidth: 200,
             maxHeight: 60
