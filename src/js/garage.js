@@ -111,11 +111,13 @@ function init() {
 
                 var averages = data.Ratings;
                 var ratings = new Array();
-                var hours = new Array();
+                for (var u = 0; u < 24; u++){
+                    ratings[u] = null;
+                }
 
                 for (var i = 0, len = averages.length; i < len; i++) {
-                    hours[i] = averages[i].Hour;
-                    ratings[i] = parseInt(averages[i].Rating);
+                    var index = averages[i].Hour;
+                    ratings[index] = parseInt(averages[i].Rating, 10);
                 }
 
                 console.log(data);
@@ -129,7 +131,8 @@ function init() {
                         text: 'Average Rating'
                     },
                     xAxis: {
-                        categories: hours
+                        categories: ['12 AM', '1 AM', '2AM', '3AM', '4 AM', '5 AM',
+                    '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM']
                     },
                     yAxis: {
                         title: {
@@ -142,7 +145,7 @@ function init() {
                     series: [{
                     data: ratings
                     }]
-                });         
+                });           
 
             }   
 
