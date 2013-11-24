@@ -11,7 +11,7 @@ if (!$phpInit->addUser())
 }
 else
 {
-    $phpInit->verifyUserAndroid();
+    echo $phpInit->verifyUserAndroid();
 }
 
 ?>
