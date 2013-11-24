@@ -85,6 +85,7 @@
 			<p id="ratingofG">The current rating of the garage is <span id="ratingGinInfo"></span></p>
 			<ul id="levelRating" >
 			</ul>
+			<div id="graph" />
 		</div>
 	</body>
 
