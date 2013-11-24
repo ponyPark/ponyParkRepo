@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="js/includes.js"></script>
 		<script type="text/javascript" src="js/google.js"></script>
 		<script type="text/javascript" src="js/facebook.js"></script>
+		<script src="http://code.highcharts.com/2.2.4/highcharts.js"></script>
 	</head>
 	<body>
 		<div>

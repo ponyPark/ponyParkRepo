@@ -98,24 +98,53 @@ function init() {
 
 
                 }
-
-                url = 'getAverage.php';
-                request = new XMLHttpRequest();
-                url = url +'?parkingID='+parkID;
-                request.open("GET", url, false);
-                request.send();
-                if(request.readyState === 4){
-                    data = request.responseText;
-                    data = JSON.parse(data);
-                    
-                }
-                
-
             }
 
+            url = 'getAverage.php';
+            request = new XMLHttpRequest();
+            url = url +'?parkingID='+parkID;
+            request.open("GET", url, false);
+            request.send();
+            if(request.readyState === 4){
+                data = request.responseText;
+                data = JSON.parse(data);
 
-            
-	        
+                var averages = data.Ratings;
+                var data = new Array();
+                for (var u = 0; u < 24; u++){
+                    data[u] = null;
+                }
+
+                for (var i = 0, len = averages.length; i < len; i++) {
+                    var index = averages[i].Hour;
+                    data[index] = averages[i].Rating;
+                }
+
+                console.log(data);
+                
+                var chart = new Highcharts.Chart({
+                    chart: {
+                        renderTo: 'graph'
+                    },
+                    title: {
+                        text: 'Average Rating'
+                    },
+                    xAxis: {
+                        categories: ['0', '1', '2', '3', '4', '5',
+                    '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Rating (1-5)'
+                        }
+                    },
+                    series: [{
+                    data: data
+                    }]
+                });   
+
+            }   
+
 
     }
 
