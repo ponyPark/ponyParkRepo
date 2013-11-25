@@ -168,18 +168,18 @@ function init() {
                 if(data === "False"){
                     //not a favorite
                     var child = $('#insertButtonHere');
-                    var c2 = $('<span />', {class: "submit"}).appendTo(child);
                     var link = $('<a />',{
                         href: "addFavorites.php?parkingID=" + parkID + "&redirect=false",
-                        text: "Add To Favorites"}).appendTo(c2);
+                        text: "Add To Favorites",
+                        class: "submit"}).appendTo(child);
                 }
                 else{
                     //favorite
                     var child = $('#insertButtonHere');
-                    var c2 = $('<span />', {class: "submit"}).appendTo(child);
                     var link = $('<a />',{
                         href: "deleteFavorites.php?favoriteID=" + data + "&redirect=false&parkingID=" + parkID,
-                        text: "Delete from Favorites"}).appendTo(c2);
+                        text: "Delete from Favorites",
+                        class: "submit"}).appendTo(child);
                 }
             }
         }
