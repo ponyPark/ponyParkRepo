@@ -1,3 +1,14 @@
+a {
+    color: #1d3674;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #757575;
+    text-decoration: underline;
+}
+
 nav {
 	position: absolute;
 	top: 120px;
@@ -53,12 +64,14 @@ nav li a {
 	margin-right: 100px;
 	text-decoration: none;
 	font-size: 25px;
+    font-weight: normal;
 	/*Further separates the links from one another and the top of browser*/
 }
 
 nav li a:hover {
 	text-decoration: underline;
 	/*gives a "rollover" effect for when a user's mouse is over the link*/
+    color: #757575;
 }
 
 
@@ -131,6 +144,7 @@ width: 310px;
 width: 300px;
 }
 
+/*
 #userList li a{
 	color: black;
 	text-decoration: none;
@@ -142,6 +156,7 @@ width: 300px;
 	text-decoration: underline;
 	
 }
+*/
 
 #userList{
 	list-style: none;
@@ -181,6 +196,7 @@ html{
 	display:none;
 }
 
+/*
 #signIn a{
 	color: black;
 	text-decoration: none;
@@ -189,6 +205,7 @@ html{
 	color: black;
 	text-decoration: underline;
 }
+*/
 
 .hpContent{
 
@@ -201,12 +218,9 @@ html{
    	margin-top: 50px;
     margin-bottom: 50px;
     background-color: #b9b9b9;
-    
-    
-
-
 }
 
+/*
 .hpContent a{
 	color:black;
 	text-decoration: none;
@@ -215,6 +229,7 @@ html{
 	color:black;
 	text-decoration: underline;
 }
+*/
 
 h2{
 
@@ -251,6 +266,7 @@ iframe{
 	border: 1px solid black;
 }
 
+/*
 footer a {
 
 	color: black;
@@ -262,6 +278,7 @@ footer a:hover {
 	color: black;
 	text-decoration: underline;
 }
+*/
 
 /*Used button generator to help style the button http://www.bestcssbuttongenerator.com/ */
     .submit,#cSub {
