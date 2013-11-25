@@ -181,7 +181,7 @@ function init() {
                     }
                     else if (rating === 3) {
                         parent = $('<li />', {
-                            style: "border-color: #ffec1e; background-color: #f8f8e8"});
+                            style: "border-color: #f4cc11; background-color: #f8f8e8"});
                         c2 = $('<li />', {
                             text: rating_message + ': Some'}).appendTo(child);
                     }
