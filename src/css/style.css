@@ -83,16 +83,9 @@ nav li a:hover {
 	padding: 10px 10px 10px 10px;
 }
 
-#listView ol > li a{
-	color: black;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-#listView ol > li a:hover{
-	color: black;
-	text-decoration: underline;
-	font-weight: bold;
+#listView ul {
+    list-style-type:none;
+    padding-left:0;
 }
 
 #userList li{
@@ -373,6 +366,27 @@ a.map_marker_link:hover {
 }
 a.map_marker_link:active {
     font-size: 16px;
+    font-weight: bold;
+    color: #757575;
+}
+
+a.list_view_link:link {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+}
+a.list_view_link:visited {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+}
+a.list_view_link:hover {
+    font-size: 18px;
+    font-weight: bold;
+    color: #757575;
+}
+a.list_view_link:active {
+    font-size: 18px;
     font-weight: bold;
     color: #757575;
 }

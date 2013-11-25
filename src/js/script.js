@@ -201,7 +201,7 @@ function init() {
                     var anchor = $('<a />', {
                         href: "garage.php?garageID=" + g.ParkingID,
                         text: g.Name,
-                        class: "map_marker_link"}).appendTo(parent);
+                        class: "list_view_link"}).appendTo(parent);
 
                     child.appendTo(parent);
                     parent.appendTo(list);
