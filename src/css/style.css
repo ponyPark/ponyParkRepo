@@ -10,7 +10,7 @@ nav {
 }
 
 #map-canvas { 
-	height: 900px;
+	height: 700px;
 	width: 60%;
 	position: absolute;
 }
@@ -73,8 +73,8 @@ nav li a:hover {
 	display: block;
 	width: 30%;
     background-color: #dbdbdb;
-    height: 880px;
-    overflow-y: scroll;
+    height: 680px;
+    overflow-y: auto;
 }
 
 #listView ol > li{
@@ -160,7 +160,7 @@ width: 300px;
 }
 
 #frontpg{
-	height: 1050px;
+	height: 850px;
 }
 
 
