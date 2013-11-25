@@ -46,7 +46,9 @@
                     <label for="new_pw">New password:</label>
                     <input type="password" name="new_pw" placeholder="New Password" pattern=".{8,}" title="Need at least 8 characters" class="editProfileInput"><br>
                 </div>
-                <br><input type="submit" d="subRequestBut" class="submit" value="Submit Changes">
+                <br>
+                <input type="submit" d="subRequestBut" class="submit" value="Submit Changes">
+                <a href="viewProfileInfo.php" class="submit">View Profile</a>
                 </form>
         </div>
 
