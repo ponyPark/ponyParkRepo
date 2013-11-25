@@ -139,7 +139,7 @@ function init() {
                             text: 'Rating (1-5)'
                         },
                         max: 5,
-                        categories: ['No rating', 1, 2, 3, 4, 5],
+                        categories: ['No rating', 'Full', 'Scarce', 'Some', 'Plenty', 'Empty'],
                         tickmarkPlacement: 'on'
                     },
                     legend: {
