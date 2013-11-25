@@ -169,38 +169,39 @@ function init() {
                     var c2;
                     if (rating === 1) {
                         parent = $('<li />', {
-                            style: "border: 4px solid red;"});
+                            style: "border-color: #d91818; background-color: #fcf7f7"});
                         c2 = $('<li />', {
                             text: rating_message + ': Full'}).appendTo(child);
                     }
                     else if (rating === 2) {
                         parent = $('<li />', {
-                            style: "border: 4px solid red;"});
+                            style: "border-color: #d91818; background-color: #fcf7f7"});
                         c2 = $('<li />', {
                             text: rating_message + ': Scarce'}).appendTo(child);
                     }
                     else if (rating === 3) {
                         parent = $('<li />', {
-                            style: "border: 4px solid yellow;"});
+                            style: "border-color: #ffec1e; background-color: #f8f8e8"});
                         c2 = $('<li />', {
                             text: rating_message + ': Some'}).appendTo(child);
                     }
                     else if (rating === 4) {
                         parent = $('<li />', {
-                            style: "border: 4px solid green;"});
+                            style: "border-color: #128c16; background-color: #f1fbf1"});
                         c2 = $('<li />', {
                             text: rating_message + ': Plenty'}).appendTo(child);
                     }
                     else {
                         parent = $('<li />', {
-                            style: "border: 4px solid green;"});
+                            style: "border-color: #128c16; background-color: #f1fbf1"});
                         c2 = $('<li />', {
                             text: rating_message + ': Empty'}).appendTo(child);
                     }
 
                     var anchor = $('<a />', {
                         href: "garage.php?garageID=" + g.ParkingID,
-                        text: g.Name}).appendTo(parent);
+                        text: g.Name,
+                        class: "map_marker_link"}).appendTo(parent);
 
                     child.appendTo(parent);
                     parent.appendTo(list);
