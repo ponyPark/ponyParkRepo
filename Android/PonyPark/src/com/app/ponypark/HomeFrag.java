@@ -200,7 +200,7 @@ public class HomeFrag extends Fragment implements OnMarkerClickListener {
 
 		@Override
 		protected ArrayList<GarageEntry> doInBackground(String... params) {
-
+			Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 			JSONArray jArray;
 			try {
 				json = userFunction.getGarages();

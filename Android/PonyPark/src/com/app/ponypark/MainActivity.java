@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity implements
 	private static Criteria criteria;
 	private static LocationManager locationManager;
 	// Tab titles
-	private String[] tabs = { "Map View", "List View", "Favs" };
+	private String[] tabs = { "Map View", "List View", "Favorites" };
 
 	public static MainActivity getInstance() {
 		return instance;
@@ -80,7 +80,7 @@ public class MainActivity extends FragmentActivity implements
 		instance = this;
 		viewPager.setAdapter(mAdapter);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		
+
 		// Adding Tabs
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
@@ -157,19 +157,17 @@ public class MainActivity extends FragmentActivity implements
 				ListViewFrag.getInstance().clearData();
 				ListViewFrag.getInstance().startNewAsyncTask();
 				viewPager.setCurrentItem(tab.getPosition());
-			} else if (tab.getText().toString().equals("Favs")) {
-				if(session.isLoggedIn()){
-
-					FavoritesFrag.getInstance().clearData();
+			} else if (tab.getText().toString().equals("Favorites")) {
+				if (session.isLoggedIn()) {
 					FavoritesFrag.getInstance().startNewAsyncTask();
-					viewPager.setCurrentItem(tab.getPosition());	
-				}
-				else
+					viewPager.setCurrentItem(tab.getPosition());
+				} else
 					displayLoginMessage();
 			} else if (tab.getText().toString().equals("Map View"))
 				viewPager.setCurrentItem(tab.getPosition());
 		}
 	}
+
 	private void displayLoginMessage() {
 		new AlertDialog.Builder(context).setTitle("Login to continue")
 				.setMessage("Please login to continue")
@@ -179,6 +177,7 @@ public class MainActivity extends FragmentActivity implements
 					}
 				}).show();
 	}
+
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 	}
@@ -289,8 +288,10 @@ public class MainActivity extends FragmentActivity implements
 					}
 				}).show();
 	}
+
 	void noPlay() {
-		new AlertDialog.Builder(this).setTitle("Google Play Services not found.")
+		new AlertDialog.Builder(this)
+				.setTitle("Google Play Services not found.")
 				.setMessage("Please install Google Play Services")
 				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
@@ -301,19 +302,28 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Login.getInstance().callFacebookLogout(context);
+		Login.getInstance().googleSignOut();
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		// get user data from session
-		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
-		if(status != ConnectionResult.SUCCESS) {
+		int status = GooglePlayServicesUtil
+				.isGooglePlayServicesAvailable(getApplicationContext());
+		if (status != ConnectionResult.SUCCESS) {
 
 			noPlay();
 		}
-	
+
 		if (!isNetworkAvailable()) {
 			displayAlert();
 		} else {
 			user = session.getUserDetails();
+
 			invalidateOptionsMenu();
 		}
 	}

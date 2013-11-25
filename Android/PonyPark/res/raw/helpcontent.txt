@@ -5,13 +5,15 @@ PonyPark is a parking finder service. The service is based on realtime data subm
 
 <br>
 <h3>Developers: </h3>
--Justin Trantham - Android 
+Backend:
 <br>
--Jessica Yeh, Jordan Kayse, Story Zanetti - Database/Backend
+Jordan Kayse, James Lomeo, Jessica Yeh, Story Zanetti
 <br>
--Evan Kohn and James Lomeo (Both) - Frontend
+Frontend:
 <br>
-
+-Evan Kohn and James Lomeo (Both)
+<br>
+Android - Justin Trantham
 <h3>Learn More</h3>
 Please visit our website below
 <br>

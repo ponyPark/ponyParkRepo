@@ -30,7 +30,7 @@
     <string name="title_activity_google_log_in">GoogleLogIn</string>
 	<string name="selectLevel">Please select the level</string>
     <string name="full">Full</string>
-    <string name="reportAvail">Report availability</string>
+    <string name="reportAvail">Rate availability</string>
     <string name="scarce">Scarce 10+ spots</string>
     <string name="addFavs">Add to Favorites</string>    
     <string name="some">Some 5&#8211;10 spots</string>    

@@ -94,12 +94,6 @@ private	Dialog dialog ;
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.garage_page, menu);
-		return true;
-	}
 	public void displayRate() {
 	dialog	= new Dialog(this, R.style.FullHeightDialog); // this
 																			// is
@@ -158,7 +152,7 @@ private	Dialog dialog ;
 				addRate = true;
 				addIt task = new addIt();
 				task.execute(true);
-
+					dialog.dismiss();
 			}
 		});
 		dialog.show();
@@ -179,9 +173,7 @@ private	Dialog dialog ;
 			if (MainActivity.getInstance().session.isLoggedIn()) {
 				addFavorite = true;
 				addIt add = new addIt();
-				System.out.println("Clicked it!");
 				add.execute(false);
-
 				addFavorite = false;
 			} else
 				displayLoginMessage();
@@ -229,8 +221,7 @@ private	Dialog dialog ;
 						Toast.LENGTH_SHORT).show();
 
 				addFav.setVisibility(View.INVISIBLE);
-				if(dialog.isShowing())
-				dialog.dismiss();
+				
 				// finish();
 			} else {
 				// signUpError.setText("Error occured in registration");

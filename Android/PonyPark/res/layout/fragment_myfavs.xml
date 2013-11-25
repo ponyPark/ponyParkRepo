@@ -4,14 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:padding="5dp"
-    android:background="#FFdf0d">
-    
+    android:background="#FFFFFF">
+       <TextView
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="4dp"
+        android:text="Press and hold to delete" />
         <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_below="@id/help" >
     </ListView>
 
     <Button
@@ -21,4 +27,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:text="@string/refresh" />
+
+ 
+
 </RelativeLayout>

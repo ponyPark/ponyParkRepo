@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,7 +114,6 @@ public class Login extends Activity implements OnClickListener,
 	@Override
 	public void onStop() {
 		super.onStop();
-
 		mPlusClient.disconnect();
 	}
 
@@ -390,9 +390,9 @@ public class Login extends Activity implements OnClickListener,
 	public void loginToFacebook() {
 		if (Session.getActiveSession() == null
 				|| Session.getActiveSession().isClosed()) {
-			
-			Session.openActiveSession(this, true, new StatusCallback() {
-
+			Session session = new Session(this); // <-- where "this" is a reference to your Activity, or Context
+			Session.OpenRequest request = new Session.OpenRequest(this).setPermissions("basic_info", "email");
+			request.setCallback(new Session.StatusCallback() {
 				@SuppressWarnings("deprecation")
 				@Override
 				public void call(Session session, SessionState state,
@@ -407,16 +407,13 @@ public class Login extends Activity implements OnClickListener,
 									public void onCompleted(GraphUser user,
 											Response response) {
 										if (user != null) {
-
 											fbId = user.getId();
 											fName = user.getFirstName();
 											lName = user.getLastName();
 											email = user.asMap().get("email")
 													.toString();
-
 											getInfo task = new getInfo();
 											task.execute((Object[]) null);
-
 										}
 										if (response != null) {
 										}
@@ -429,6 +426,46 @@ public class Login extends Activity implements OnClickListener,
 					}
 				}
 			});
+			Session.setActiveSession(session);
+			session.openForRead(request);
+			
+//			Session.openActiveSession(this, true, new StatusCallback() {
+//
+//				@SuppressWarnings("deprecation")
+//				@Override
+//				public void call(Session session, SessionState state,
+//						Exception exception) {
+//					System.out.println("State= " + state);
+//
+//					if (session.isOpened()) {
+//						System.out.println("Token=" + session.getAccessToken());
+//						Request.executeMeRequestAsync(session,
+//								new GraphUserCallback() {
+//									@Override
+//									public void onCompleted(GraphUser user,
+//											Response response) {
+//										if (user != null) {
+//
+//											fbId = user.getId();
+//											fName = user.getFirstName();
+//											lName = user.getLastName();
+//											email = user.asMap().get("email")
+//													.toString();
+//											getInfo task = new getInfo();
+//											task.execute((Object[]) null);
+//
+//										}
+//										if (response != null) {
+//										}
+//									}
+//								});
+//					}
+//					if (exception != null) {
+//						System.out.println("Some thing bad happened!");
+//						exception.printStackTrace();
+//					}
+//				}
+//			});
 		}
 	}
 
@@ -498,9 +535,24 @@ public class Login extends Activity implements OnClickListener,
 			session.closeAndClearTokenInformation();
 		}
 	}
-
+	public static boolean isFacebookConnected(){
+		boolean val=false;
+		Session session = Session.getActiveSession();
+		if (session != null) {
+			if (session.isClosed()) {
+		val=false;
+			}
+			else
+				val=true;
+		}
+		return val;
+	}
 	public static boolean isGoogleConnected() {
+		if(mPlusClient!=null)
 		return mPlusClient.isConnected();
+		else
+		return false;
+		
 	}
 
 	/**

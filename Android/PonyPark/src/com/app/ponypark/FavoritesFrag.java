@@ -36,7 +36,7 @@ public class FavoritesFrag extends ListFragment {
 	private FavListAdapter adpt;
 	public static FavoritesFrag instance;
 	private String userId, favId;
-	private Context context;
+	private Context context =getActivity();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +46,7 @@ public class FavoritesFrag extends ListFragment {
 				false);
 
 		context = rootView.getContext();
-		dialog = new ProgressDialog(getActivity());
+		dialog = new ProgressDialog(context);
 		adpt = new FavListAdapter(new ArrayList<GarageEntry>(), getActivity());
 
 		setListAdapter(adpt);
@@ -64,6 +64,9 @@ public class FavoritesFrag extends ListFragment {
 	}
 
 	public static FavoritesFrag getInstance() {
+		if (instance == null) {
+			instance = new FavoritesFrag();
+		}
 		return instance;
 	}
 
@@ -71,6 +74,7 @@ public class FavoritesFrag extends ListFragment {
 	 * Clear the
 	 */
 	public static void clearData() {
+		if(instance.result.size()>0)
 		instance.result.clear();
 	}
 
@@ -81,11 +85,11 @@ public class FavoritesFrag extends ListFragment {
 	 */
 	public void startNewAsyncTask() {
 		if (MainActivity.session.isLoggedIn()) {
-
+			result.clear();
 			userId = MainActivity.session.getUserDetails().get(
-					UserActions.KEY_userID);
+					UserActions.KEY_userID);					
 			// Getting latest favs
-			(new AsyncFavoritesLoader()).execute("");
+			(new AsyncFavoritesLoader()).execute("");	
 		}
 	}
 
@@ -155,14 +159,13 @@ public class FavoritesFrag extends ListFragment {
 
 		// Phone number is agin JSON Object
 		@Override
-		protected void onPostExecute(ArrayList<GarageEntry> result) {
+		protected void onPostExecute(ArrayList<GarageEntry> results) {
 			super.onPostExecute(result);
-			dialog.dismiss();
+			
 			adpt.setItemList(result);
 			// Sort the list by name
 			adpt.sort(new Comparator<GarageEntry>() {
 				public int compare(GarageEntry arg0, GarageEntry arg1) {
-					System.out.println(arg0.getName());
 					return arg0.getName().compareTo(arg1.getName());
 				}
 			});
@@ -179,18 +182,18 @@ public class FavoritesFrag extends ListFragment {
 							return true;
 						}
 					});
+			dialog.dismiss();
 		}
 
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
 			dialog.setMessage("Getting latest favorites...");
-			dialog.show();
+		dialog.show();
 		}
 
 		@Override
-		protected ArrayList<GarageEntry> doInBackground(String... params) {
-
+		protected ArrayList<GarageEntry> doInBackground(String... params) {	
 			JSONArray jArray;
 			try {
 				json = userFunction.getFavorites(userId);

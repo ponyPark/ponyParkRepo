@@ -138,6 +138,7 @@ public class ListViewFrag extends ListFragment {
 
 		@Override
 		protected ArrayList<GarageEntry> doInBackground(String... params) {
+			Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 			JSONArray jArray;
 
 			try {
