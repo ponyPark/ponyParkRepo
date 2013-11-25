@@ -325,10 +325,14 @@ footer a:hover {
         filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#468ccf', endColorstr='#63b8ee',GradientType=0);
         
         background-color:#468ccf;
+        color:#14396a;
+        text-decoration: none;
     }
     .submit:active,#cSub:active {
         position:relative;
         top:1px;
+        color:#14396a;
+        text-decoration: none;
     }
 
 #full, #scarce, #some, #plenty, #empty{
