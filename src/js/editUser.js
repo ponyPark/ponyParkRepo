@@ -13,7 +13,7 @@ jQuery(document).ready(function() {
             $( "input[name='lname']" ).val(user.UserInfo.LastName);
             $( "input[name='phone']" ).val(user.UserInfo.PhoneNumber);
 
-            if (user.UserInfo.ExternalType === "native")
+            if (user.UserInfo.ExternalType === "Native")
                 $( "#changePassword" ).show();
         }
     });
