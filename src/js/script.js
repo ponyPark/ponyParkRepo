@@ -169,13 +169,13 @@ function init() {
                     var c2;
                     if (rating === 1) {
                         parent = $('<li />', {
-                            style: "border-color: #d91818; background-color: #fcf7f7"});
+                            style: "border-color: #d91818; background-color: #faefef"});
                         c2 = $('<li />', {
                             text: rating_message + ': Full'}).appendTo(child);
                     }
                     else if (rating === 2) {
                         parent = $('<li />', {
-                            style: "border-color: #d91818; background-color: #fcf7f7"});
+                            style: "border-color: #d91818; background-color: #faefef"});
                         c2 = $('<li />', {
                             text: rating_message + ': Scarce'}).appendTo(child);
                     }
@@ -187,13 +187,13 @@ function init() {
                     }
                     else if (rating === 4) {
                         parent = $('<li />', {
-                            style: "border-color: #128c16; background-color: #f1fbf1"});
+                            style: "border-color: #128c16; background-color: #e9f8e9"});
                         c2 = $('<li />', {
                             text: rating_message + ': Plenty'}).appendTo(child);
                     }
                     else {
                         parent = $('<li />', {
-                            style: "border-color: #128c16; background-color: #f1fbf1"});
+                            style: "border-color: #128c16; background-color: #e9f8e9"});
                         c2 = $('<li />', {
                             text: rating_message + ': Empty'}).appendTo(child);
                     }
