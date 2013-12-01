@@ -78,9 +78,9 @@ function init() {
       var rating = !average_rating ? latest_rating : average_rating;
       var rating_message;
       if (average_rating)
-          rating_message = "Average rating from past 2 hours";
+          rating_message = "On average (past 2 hours)";
       else
-          rating_message = "Most recent rating (" + item.Last_Rated + ")";
+          rating_message = "Most recently (" + item.Last_Rated + ")";
       var ava;
       var bgc;
       var fgc;
@@ -126,8 +126,8 @@ function init() {
             borderWidth: 3,
             borderColor: bgc,
             maxWidth: 400,
-            minWidth: 250,
-            maxHeight: 100
+            minWidth: 200,
+            maxHeight: 60
             });
         infowindow.open(map, marker);
         });
@@ -158,9 +158,9 @@ function init() {
                     var rating = !average_rating ? latest_rating : average_rating;
                     var rating_message;
                     if (average_rating)
-                        rating_message = "Average rating from past 2 hours";
+                        rating_message = "On average (past 2 hours)";
                     else
-                        rating_message = "Most recent rating (" + g.Last_Rated + ")";
+                        rating_message = "Most recently (" + g.Last_Rated + ")";
 
                     var parent;
                     var child = $('<ul />');
