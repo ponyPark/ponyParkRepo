@@ -354,11 +354,13 @@ footer a:hover {
 
 }
 
+#submitEditUser label {
+    display: inline-block;
+    width: 160px;
+}
+
 .editProfileInput {
     width: 300px;
-    position: fixed;
-    left: 180px;
-    padding: 2px;
 }
 
 #garageImg {
