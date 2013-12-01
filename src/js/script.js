@@ -126,7 +126,7 @@ function init() {
             borderWidth: 3,
             borderColor: bgc,
             maxWidth: 400,
-            minWidth: 200,
+            minWidth: 250,
             maxHeight: 60
             });
         infowindow.open(map, marker);
