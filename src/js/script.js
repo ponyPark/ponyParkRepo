@@ -127,7 +127,7 @@ function init() {
             borderColor: bgc,
             maxWidth: 400,
             minWidth: 250,
-            maxHeight: 80
+            maxHeight: 100
             });
         infowindow.open(map, marker);
         });
