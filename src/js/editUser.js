@@ -2,6 +2,10 @@
 October, 2013*/
 
 jQuery(document).ready(function() {
+    // Prevent Chrome from autocompleting fields such as the password.
+    $('input').attr('autocomplete', 'off');
+
+    // On load, hide the change password part of the form.
     $( "#changePassword" ).hide();
 
     // Populate the edit form with the user's profile
@@ -13,6 +17,7 @@ jQuery(document).ready(function() {
             $( "input[name='lname']" ).val(user.UserInfo.LastName);
             $( "input[name='phone']" ).val(user.UserInfo.PhoneNumber);
 
+            // If the user is a Native user, they can change their password.
             if (user.UserInfo.ExternalType === "Native")
                 $( "#changePassword" ).show();
         }
