@@ -23,8 +23,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `ExternalType` varchar(10) NOT NULL,
   `ExternalID` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`UserID`),
-  UNIQUE KEY `Email` (`Email`,`ExternalType`),
-  UNIQUE KEY `ExternalType` (`ExternalType`,`ExternalID`)
+  UNIQUE KEY `Email` (`Email`,`ExternalType`)
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
