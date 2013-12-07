@@ -418,6 +418,6 @@ a.list_view_link:active {
     padding: 0px 10px;
 }
 
-#signInButton {
+#signinButton {
 	display: inline-flex;
 }
