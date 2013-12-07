@@ -420,4 +420,5 @@ a.list_view_link:active {
 
 #signinButton {
 	display: inline-flex;
+	vertical-align: middle;
 }
