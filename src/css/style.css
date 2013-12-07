@@ -464,3 +464,16 @@ a.list_view_link:active {
 #address {
     font-size: 30px;
 }
+
+.biggerFontForStory{
+    font-size: 20px;
+}
+
+#rateRadioButton {
+    height: 15px;
+    width: 15px;
+}
+
+#level {
+    font-size: 18px;
+}
