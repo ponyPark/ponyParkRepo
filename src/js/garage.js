@@ -136,7 +136,7 @@ function init() {
                     },
                     yAxis: {
                         title: {
-                            text: 'Rating (1-5)'
+                            text: 'Rating (Full-Empty)'
                         },
                         max: 5,
                         categories: ['No rating', 'Full', 'Scarce', 'Some', 'Plenty', 'Empty'],
