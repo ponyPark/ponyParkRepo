@@ -52,7 +52,7 @@ if($_SESSION['logged'] === true)
                         data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
                     </span>
                 </span>
-                <fb:login-button perms="email" width="200" max-rows="1" size="large"></fb:login-button>
+                <fb:login-button perms="email" width="200" max-rows="1" size="large">Sign in</fb:login-button>
             </center>
 
 		</div>
