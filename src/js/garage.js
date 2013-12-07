@@ -204,9 +204,6 @@ function init() {
                 if (data === "true") {
                     $('#signIn').css('display', 'none');
                     $('#userOptions').css('display', 'block');
-                    // Show rating form if user is logged in.
-                    $('#notloggedGarageReport').css('display', 'none');
-                    $('#reportAvaDivElem').css('display', 'block');
                     addButton();
 
                 }
@@ -214,8 +211,7 @@ function init() {
                     $('#signIn').css('display', 'block');
                     $('#userOptions').css('display', 'none');
                     // Hide rating form if user is not logged in.
-                    $('#notloggedGarageReport').css('display', 'block');
-                    $('#reportAvaDivElem').css('display', 'none');
+                    $("#ratingSection").html("<h2>PonyPark Needs You!</h2>Please help contribute to PonyPark.  PonyPark relies on users just like you to report the current parking conditions on campus.  All you need to do is join or sign in to get started!");
                 }
 
             }
