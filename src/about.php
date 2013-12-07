@@ -25,7 +25,7 @@
 			<h2> What's PonyPark?</h2>
 			<p class = "details">We've all been in that dreadful position; you need to be somewhere, but you can't find a parking spot.  We hate it when that happens.  Fortunately for you, we chose to do something to help solve this problem....PonyPark. </p>
 			<p class = "details">
-				PonyPark is a parking finder service.  The service is based on realtime data submitted by real people.  The very people who use the service are the ones who post the information.  Our service was built specifically for the students, faculty, and community members of Southern Methodist University.  Our service allows users to see the availability as reported by other users.  When you are on your way to campus, simply check PonyPark for the availability, and trot right in to your parking spot.  Remember to report the availability once parked so that other users may benefit.
+				PonyPark is a parking finder service that is based on realtime data submitted by people like you. Built specifically for the students, faculty, and community members of Southern Methodist University, PonyPark allows you to see parking garage availability as reported by other users. When you are on your way to campus, simply check PonyPark for parking availability, and trot right into your spot. Don’t forget to report the availability of your garage once you’ve parked so that other users may benefit, too!
 			</p>
 		</div>
 
