@@ -375,22 +375,21 @@ footer a:hover {
 }
 
 #garageImg {
-    display: block;
-    margin: 0 auto;
+    float: right;
 	border: 2px solid;
 }
 
-#garageImgAndLevelInfo {
-    float: right;
-    width: 40%;
-}
-
-#addressAndImage {
-    height: 204px;
-}
-
 #ratingSection {
+    float: left;
     width: 55%;
+}
+
+#levelRating {
+    margin-left: 60%;
+}
+
+#graphAndTitle {
+    clear: both;
 }
 
 .map_marker {

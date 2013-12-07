@@ -212,7 +212,7 @@ function init() {
                     $('#signIn').css('display', 'block');
                     $('#userOptions').css('display', 'none');
                     // Hide rating form if user is not logged in.
-                    $("#ratingSection").html("<h2>PonyPark Needs You!</h2>Please help contribute to PonyPark.  PonyPark relies on users just like you to report the current parking conditions on campus.  All you need to do is join or sign in to get started!");
+                    $("#ratingSection").html("<h2>PonyPark Needs You!</h2><font class='biggerFontForStory'>Please help contribute to PonyPark.  PonyPark relies on users just like you to report the current parking conditions on campus.  All you need to do is join or sign in to get started!</font>");
                 }
 
             }

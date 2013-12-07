@@ -45,17 +45,14 @@
 		<div class="hpContent" id="reportAvaDivElem">
 			<h2 id="reportAva">Rate the Availability of a Garage</h2>
             <div id="addressAndImage">
-                <div id="garageImgAndLevelInfo">
-                    <img height="200" width="400" id="garageImg" src="garage_images/<?php if (file_exists("garage_images/" . $_GET["garageID"] . ".jpg")) 
+                <img height="200" width="400" id="garageImg" src="garage_images/<?php if (file_exists("garage_images/" . $_GET["garageID"] . ".jpg")) 
                                                                                             echo $_GET['garageID'] . ".jpg";
                                                                                           else
                                                                                             echo "noimage.jpg"; 
                                                                                         ?>">
-                
-                    <div id="levelRating"><h2>Level Information</h2></div>
-                </div>
                 <h3 id="address"></h3>
                 <p id="ratingofG">The current rating of the garage is <span id="ratingGinInfo"></span>.</p>
+                <div style="clear: both;"></div>
             </div>
             <div id="ratingSection">
                 <h2>Rate the Availability</h2>
@@ -90,11 +87,15 @@
                 <h2>Favorite This Garage</h2>
                 <font class="biggerFontForStory">If you like this garage, add it to your favorites!</font>
                 <p id="insertButtonHere"></p>
+                <br><br>
             </div>
+            <div id="levelRating"><h2>Level Information</h2></div>
             <br><br>
             
-            <h2>Average Rating For Each Hour of the Day</h2>
-            <div id="graph"></div>
+            <div id="graphAndTitle">
+                <h2>Average Rating For Each Hour of the Day</h2>
+                <div id="graph"></div>
+            </div>
 		</div>
 	</body>
 
