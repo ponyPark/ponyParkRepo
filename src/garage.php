@@ -42,7 +42,11 @@
 			<h3 id="address"></h3>
 			<p id="insertButtonHere"> </p>
 			<p class = "details">Please answer the two simple questions below to report the availability of this garage.</p>
-			<img height="200" width="400" id="garageImg" src="garage_images/<?php echo $_GET['garageID']; ?>.jpg" />
+			<img height="200" width="400" id="garageImg" src="garage_images/<?php if (file_exists("garage_images/" . $_GET["garageID"] . ".jpg")) 
+																					echo $_GET['garageID'] . ".jpg";
+																				  else
+																				    echo "no.jpg"; 
+																				?>">
 			<form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
 				<div>
 					<label>Which level did you park your car?</label>
