@@ -61,6 +61,9 @@ function init() {
                     if(data[i].Cost === null){
                         cost = "None Specified";
                     }
+                    else {
+                        cost = "$" + cost;
+                    }
                     if(data[i].Comments === null){
                         comments = "None Entered";
                     }

@@ -37,9 +37,9 @@
 
 		<div class="hpContent" id = "whatsPonyPark">
 			<h2>PonyPark Admin Page</h2>
-			<p class = "details">
+			<p class = "details biggerFontForStory">
 				<? 
-			if($_GET['stat'] == 1) echo("**Your Request Modification Was Successful**<BR>"); ?>
+			if($_GET['stat'] == 1) echo("<b>**Your Request Modification Was Successful**</b><BR>"); ?>
 
 
 				Please approve or deny the following requests.</p>

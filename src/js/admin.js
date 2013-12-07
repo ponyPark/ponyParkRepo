@@ -47,27 +47,30 @@ function init() {
                 var count = 0;
                 for(var i =0; i < data.length; i++){
                     if(data[i].Status === '0'){
+                        var cost = data[i].Cost;
+                        var comments = data[i].Comments;
+                        if(data[i].Cost === null){
+                            cost = "None Specified";
+                        }
+                        else {
+                            cost = "$" + cost;
+                        }
+                        if(data[i].Comments === null){
+                            comments = "None Entered";
+                        }
                         var parentList = $('#requestList');
-                        var child1 = $('<li />', {text: "Name of Garage: " + data[i].Name});
-                        var child1child1 = $('<ul />');
-                        var child1child1child = $('<li />', {text: "Address: " + data[i].Address});
-                        child1child1.append(child1child1child);
-                        var child1child1child2 = $('<li />', {text: "Cost: " + data[i].Cost});
-                        child1child1.append(child1child1child2);
-                        var child1child1child3 = $('<li />', {text: "Levels: " + data[i].NumberOfLevels});
-                        child1child1.append(child1child1child3);
-                        var child1child1child4 = $('<li />', {text: "Comments: " +data[i].Comments});
-                        child1child1.append(child1child1child4);
-                        child1.append(child1child1);
-                        var p = $('<span />', {text: "Approve Request", id:"U" + data[i].RequestID, class: "submit" });
-                        child1.append(p);
-                        p = $('<span />', {text: "Deny Request", id:"D" + data[i].RequestID, class: "submit", style: "margin-left:10px;margin-top:10px;margin-bottom:10px;" });
-                        child1.append(p);
+                        var info = "<li><font size='5'><font class='requestLabels'>Name of Garage:</font> " + data[i].Name + "</font></li>";
+                        info += "<ul>";
+                        info += "<li><font class='requestLabels'>Address:</font> " + data[i].Address + "</li>";
+                        info += "<li><font class='requestLabels'>Cost:</font> " + cost + "</li>";
+                        info += "<li><font class='requestLabels'>Levels:</font> " + data[i].NumberOfLevels + "</li>";
+                        info += "<li><font class='requestLabels'>Comments:</font> " + comments + "</li>";
+                        info += "</ul>";
+                        info += "<span class='submit' id='U" + data[i].RequestID + "'>Approve Request</span>";
+                        info += "<span class='submit' style='margin-left:10px;margin-top:10px;margin-bottom:10px;' id='D" + data[i].RequestID + "'>Deny Request</span>";
+                        info += "<br><br>";
 
-
-
-
-                        parentList.append(child1);
+                        parentList.append(info);
                         var editButton = document.getElementById("U" + data[i].RequestID);
                         editButton.addEventListener("click", modRequest, true);
                         var editButton = document.getElementById("D" + data[i].RequestID);

@@ -42,8 +42,8 @@
 				<form id="submitRequest" method="POST" action="addRequest.php">
 				<input type="text" name="name" id="garageName" pattern="[a-z A-Z]+" title="Letters only" placeholder="Name of Garage" required>
                 <input type="text" name="address" id="streetAddress" placeholder="Street Address" title="House Number and Street, no city/state/zip" pattern="[a-z A-Z0-9]+" required>
-                <input type="text" name="cost" id="costOfG" placeholder="Cost" pattern="[0-9.]+" title="Please enter in cost format D.CC">
-                <input type="tel" name="numLevels" id="levelsOfG" placeholder="Number of levels" pattern="[0-9]+" title="Please enter numbers only" required>
+                <input type="text" name="cost" id="costOfG" placeholder="Cost" pattern="^\d+\.\d{2}$" title="Please enter in cost format 0.00">
+                <input type="number" name="numLevels" id="levelsOfG" placeholder="Number of levels" pattern="[0-9]+" min="1" title="Please enter numbers only. Must be positive." required>
                 <input type="text" name="comments" id="comments" placeholder="Comments" title="Enter any comments, 250 characters or less" maxlength="250" style="width: 300px;">
                 <input type="submit" d="subRequestBut" class="submit" value="Submit Request">
                 </form>

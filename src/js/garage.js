@@ -142,7 +142,8 @@ function init() {
                         enabled: false
                     },  
                     series: [{
-                    data: ratings
+                    data: ratings,
+                    name: "Rating"
                     }]
                 });           
 

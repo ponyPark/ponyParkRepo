@@ -92,11 +92,9 @@
                 <p id="insertButtonHere"></p>
             </div>
             <br><br>
+            
             <h2>Average Rating For Each Hour of the Day</h2>
-            <div id="graph" />
-            </form>
-
-
+            <div id="graph"></div>
 		</div>
 	</body>
 
