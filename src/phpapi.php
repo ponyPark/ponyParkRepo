@@ -1065,7 +1065,7 @@ class phpapi
                 "your commute times at http://ponypark.floccul.us\n\nYours truly," .
                 "\nPonyPark from BAM! Software";
 
-            mail($row['Email'], "Notifcation from PonyPark", $message, 
+            mail($row['Email'], "Notification from PonyPark", $message, 
                 "From: ponypark@floccul.us");
             sleep(.5);
         }
