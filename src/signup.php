@@ -38,7 +38,8 @@ if($_SESSION['logged'] === true)
             ?>
     		<form id="signInForm" method="POST" action="verify.php">
     		    <input type="email" name="email" title="Enter the email address associated with your account" placeholder="Email Address" required><input type="password" name="pw" placeholder = "Password" required>
-    		    <input type="submit" value="Log In" class="submit">
+                <br><br>
+    		    <input type="submit" value="Sign In" class="submit">
     		</form>
             <br>
             <center>
@@ -76,7 +77,7 @@ if($_SESSION['logged'] === true)
                 <input type="email" name="email" placeholder="Email Address" required>
                 <input type="password" name="pw" placeholder="Password" pattern=".{8,}" title="Need at least 8 characters"required>
                 <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only">
-                <br>
+                <br><br>
                 <input class="submitButton" type="submit" value="Sign Up" class="submit" id="cSub">
             </form>
 		</div>
