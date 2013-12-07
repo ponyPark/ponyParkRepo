@@ -22,7 +22,7 @@ function init() {
 	                data = request.responseText;
 	                data = JSON.parse(data);
                     var parkingCostVar = "The cost to visitors for this garage is $"+ data.ParkingInfo.Cost + ".";
-	                document.getElementById('reportAva').innerHTML = "Rate the Availability of " + data.ParkingInfo.Name;
+	                document.getElementById('reportAva').innerHTML = data.ParkingInfo.Name;
                     document.getElementById('address').innerHTML = data.ParkingInfo.Address + "<BR>Dallas, Texas 75205";
                     if(data.ParkingInfo.Cost === null){
                         parkingCostVar = "";
@@ -62,41 +62,37 @@ function init() {
                 if(request.readyState === 4){
                     data = request.responseText;
                     data = JSON.parse(data);
-                    var text = "NONE";
-                    var rating = data.LevelInfo[0].Average_Rating;
-                    if(rating === '1') text = "FULL";
-                    if(rating === '2') text = "SCARCE";
-                    if(rating === '3') text = "SOME";
-                    if(rating === '4') text = "PLENTY";
-                    if(rating === '5') text = "EMPTY";
-                    if(text === "NONE") text = "The average rating cannot be calculated due to lack of ratings. You can help by rating above.";
-                    var latestRating = "NONE";
-                    rating = data.LevelInfo[0].Latest_Rating;
-                    if(rating === '1') latestRating = "FULL";
-                    if(rating === '2') latestRating = "SCARCE";
-                    if(rating === '3') latestRating = "SOME";
-                    if(rating === '4') latestRating = "PLENTY";
-                    if(rating === '5') latestRating = "EMPTY";
-                    if(latestRating === "NONE") latestRating = "There is no rating available for this level. You can help by rating above.";
+                    
+                    var average_rating = parseInt(data.LevelInfo[0].Average_Rating);
+                    var latest_rating = parseInt(data.LevelInfo[0].Latest_Rating);
+                    var rating = !average_rating ? latest_rating : average_rating;
+                    var rating_message;
+                    if (average_rating)
+                        rating_message = "Average";
+                    else
+                        rating_message = "Most Recent (" + data.LevelInfo[0].Last_Rated + ")";
+                    if(rating === 1) rating = "FULL";
+                    else if(rating === 2) rating = "SCARCE";
+                    else if(rating === 3) rating = "SOME";
+                    else if(rating === 4) rating = "PLENTY";
+                    else if(rating === 5) rating = "EMPTY";
 
-                    var time = "";
-                    if ( data.LevelInfo[0].Last_Rated != null){
-                        time = data.LevelInfo[0].Last_Rated;
+                    var info = $("<li />", {
+                                    text: "Level " + i + ": "});
+                    if (!rating)
+                    {
+                        info = "<font class='levelNum'>Level " + i + 
+                               "</font><br><font class='ratingValue'>Be the first to rate this level!</font><br><br>";
+                    }
+                    else
+                    {
+                        info = "<font class='levelNum'>Level " + i + 
+                               "</font><br><font class='ratingMessage'>" + 
+                               rating_message + ":</font> <font class='ratingValue'>" + 
+                               rating + "</font><br><br>";
                     }
 
-                   var parent;
-                    var child = $('<ul />');
-                    var c1 = $('<li />', {
-                        text: "The Average Rating: " + text}).appendTo(child);
-                    var c2 = $('<li />', {
-                        text: "The Most Recent Rating: " +latestRating + " "+ time}).appendTo(child);
-                        parent = $('<li />', {
-                            text: "Rating Data for Level " + i});
-
-                    child.appendTo(parent);
-                    parent.appendTo(olElm);
-
-
+                    olElm.innerHTML += info;
                 }
             }
 

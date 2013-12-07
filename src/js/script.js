@@ -78,9 +78,9 @@ function init() {
       var rating = !average_rating ? latest_rating : average_rating;
       var rating_message;
       if (average_rating)
-          rating_message = "On average (past 2 hours)";
+          rating_message = "Average";
       else
-          rating_message = "Most recently (" + item.Last_Rated + ")";
+          rating_message = "Most Recent (" + item.Last_Rated + ")";
       var ava;
       var bgc;
       var fgc;
@@ -158,9 +158,9 @@ function init() {
                     var rating = !average_rating ? latest_rating : average_rating;
                     var rating_message;
                     if (average_rating)
-                        rating_message = "On average (past 2 hours)";
+                        rating_message = "Average";
                     else
-                        rating_message = "Most recently (" + g.Last_Rated + ")";
+                        rating_message = "Most Recent (" + g.Last_Rated + ")";
 
                     var parent;
                     var child = $('<ul />');

@@ -375,8 +375,17 @@ footer a:hover {
 }
 
 #garageImg {
-	float: right;
+    margin-right: auto;
 	border: 2px solid;
+}
+
+#garageImgAndLevelInfo {
+    float: right;
+    width: 40%;
+}
+
+#ratingSection {
+    width: 55%;
 }
 
 .map_marker {
@@ -432,4 +441,21 @@ a.list_view_link:active {
 #signinButton {
 	display: inline-flex;
 	vertical-align: middle;
+}
+
+.levelNum {
+    font-size: 25px;
+}
+
+.ratingMessage {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ratingValue {
+    font-size: 20px;
+}
+
+#address {
+    font-size: 30px;
 }
