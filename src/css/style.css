@@ -123,7 +123,7 @@ nav li a:hover {
 }
 
 #createAccount input{
-	padding: 10px 10px 10px 10px;
+	padding: 10px 8px 10px 8px;
 	width: 300px;
 }
 
@@ -132,16 +132,24 @@ input{
 }
 
 #signInHP{
-width: 310px;
+width: 320px;
 }
 
 #signInHP input{
-	padding: 10px 10px 10px 10px;
+	padding: 10px 8px 10px 8px;
 	width: 300px;
 }
 
+#signInHP input.submit {
+	width: 320px;
+}
+
 #singUpHP, #notloggedGarageReport{
-width: 300px;
+	width: 320px;
+}
+
+#createAccount input.submitButton {
+	width: 320px;
 }
 
 /*
