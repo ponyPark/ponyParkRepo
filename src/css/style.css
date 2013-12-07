@@ -348,8 +348,13 @@ footer a:hover {
 	margin-right: 30px;
 }
 
+#ratingofG {
+    font-size: 30px;
+}
+
 #ratingGinInfo {
-	font-size: 25px;
+	font-size: 30px;
+    font-weight: bold;
 }
 
 #submitRequest > input{
