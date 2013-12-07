@@ -44,16 +44,19 @@
 
 		<div class="hpContent" id="reportAvaDivElem">
 			<h2 id="reportAva">Rate the Availability of a Garage</h2>
-            <div id="garageImgAndLevelInfo">
-                <img height="200" width="400" id="garageImg" src="garage_images/<?php if (file_exists("garage_images/" . $_GET["garageID"] . ".jpg")) 
-                                                                                        echo $_GET['garageID'] . ".jpg";
-                                                                                      else
-                                                                                        echo "no.jpg"; 
-                                                                                    ?>">
-                <div id="levelRating"><h2>Level Information</h2></div>
+            <div id="addressAndImage">
+                <div id="garageImgAndLevelInfo">
+                    <img height="200" width="400" id="garageImg" src="garage_images/<?php if (file_exists("garage_images/" . $_GET["garageID"] . ".jpg")) 
+                                                                                            echo $_GET['garageID'] . ".jpg";
+                                                                                          else
+                                                                                            echo "noimage.jpg"; 
+                                                                                        ?>">
+                
+                    <div id="levelRating"><h2>Level Information</h2></div>
+                </div>
+                <h3 id="address"></h3>
+                <p id="ratingofG">The current rating of the garage is <span id="ratingGinInfo"></span>.</p>
             </div>
-			<h3 id="address"></h3>
-            <p id="ratingofG">The current rating of the garage is <span id="ratingGinInfo"></span>.</p>
             <div id="ratingSection">
                 <h2>Rate the Availability</h2>
                 <form id="reportAvaForm" name="reportAvailbilityForm" method="POST" action="addRating.php?parkingID=<?php echo $_GET['garageID']; ?>">
@@ -88,8 +91,9 @@
                 If you like this garage, add it to your favorites!
                 <p id="insertButtonHere"></p>
             </div>
-
-                <div id="graph" />
+            <br><br>
+            <h2>Average Rating For Each Hour of the Day</h2>
+            <div id="graph" />
             </form>
 
 

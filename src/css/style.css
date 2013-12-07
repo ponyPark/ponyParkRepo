@@ -385,6 +385,10 @@ footer a:hover {
     width: 40%;
 }
 
+#addressAndImage {
+    height: 204px;
+}
+
 #ratingSection {
     width: 55%;
 }

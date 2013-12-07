@@ -124,7 +124,7 @@ function init() {
                         type: 'column',
                     },
                     title: {
-                        text: 'Average Rating'
+                        text: ''
                     },
                     xAxis: {
                         categories: ['12 AM', '1 AM', '2AM', '3AM', '4 AM', '5 AM',
