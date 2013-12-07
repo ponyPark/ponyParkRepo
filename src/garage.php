@@ -83,8 +83,11 @@
 
     				<input type="submit" value="Rate" class="submit"/>
                 </form>
-            </div>
+
+                <h2>Favorite This Garage</h2>
+                If you like this garage, add it to your favorites!
                 <p id="insertButtonHere"></p>
+            </div>
 
                 <div id="graph" />
             </form>
