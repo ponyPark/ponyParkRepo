@@ -50,20 +50,16 @@ function init() {
                 for (var i = 0, j = garages.length; i < j; i++) {
                     var g = garages[i];
 
-                    var parent;
-                    var child = $('<ul />');
-                    var c1 = $('<li />', {
-                        text: g.Address}).appendTo(child);
-                    var c2 = $('<li />').appendTo(child);
-                    var link = $('<a />',{
-                        href: "addFavorites.php?parkingID=" + g.ParkingID,
-                        text: "Add To Favorites"}).appendTo(c2);
-                        parent = $('<li />', {
-                            id: "FavoriteParkingGarageID" + g.ParkingID,
-                            text: g.Name});
+                    var info = "<li id='FavoriteParkingGarageID" + g.ParkingID + "'>";
+                    info += "<a href='garage.php?garageID=" + g.ParkingID + "' class='favoriteLink'>" + g.Name + "</a>";
+                    info += "<ul>";
+                    info += "<li>" + g.Address + "</li>";
+                    info += "<li><a href='addFavorites.php?parkingID=" + g.ParkingID + "'>Add To Favorites</a></li>";
+                    info += "</ul>";
+                    info += "</li>";
+                    info += "<br><br>";
 
-                    child.appendTo(parent);
-                    parent.appendTo(list);
+                    list.innerHTML += info;
                 }
             }
 

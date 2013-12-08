@@ -25,11 +25,12 @@
 		<div class="hpContent">
 			<h2>Modify/Delete Notification Times</h2>
 
-			<p class = "details" id="mainPar"><? 
-			if($_GET['stat'] == 1) echo("<b>**Your Notification Time Modification Was Successful**</b><BR>"); 
-			if($_GET['stat'] == 2) echo("<b>**Your Notification Time Modification Contained a Duplicate.  The duplicate was not added.**</b><BR>");?>
-				Please use the form below to modify your notification times.
-				</p>
+			<p class = "details" id="mainPar">
+				<a href='ctimes.php' class='submit'>Add Notifications</a><br><br>
+				<? 
+				if($_GET['stat'] == 1) echo("<b>**Your Notification Time Modification Was Successful**</b><BR>"); 
+				if($_GET['stat'] == 2) echo("<b>**Your Notification Time Modification Contained a Duplicate.  The duplicate was not added.**</b><BR>");?>
+			</p>
 
 
 

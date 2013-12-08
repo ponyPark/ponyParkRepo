@@ -23,35 +23,41 @@
 
         <div class="hpContent">
             <h2>Manage Account</h2>
-            <p class = "details">Please choose an action you would like to perform:
+            <p class="details">Please choose an action you would like to perform:
+            <div id="myAccount">
                 <ul>
                     <? session_start();
-            if($_SESSION['userType'] == 1 && $_SESSION['logged'] == true) echo("<li><a href='admin.php'>Admin Dashboard</a></li>"); ?>
-                    <li>Profile
+            if($_SESSION['userType'] == 1 && $_SESSION['logged'] == true) echo("<li><a href='admin.php' class='favoriteLink'>Admin Dashboard</a></li><br>"); ?>
+                    <li><font class='favoriteLink'>Profile</font>
                         <ul>
                             <li><a href="viewProfileInfo.php">View Your Profile Info</a></li>
                             <li><a href="editProfileInfo.php">Edit Your Profile Info</a></li>
                         </ul>
                     </li>
-                    <li>Favorite Garages
+                    <br>
+                    <li><font class='favoriteLink'>Favorite Garages</font>
                         <ul>
                             <li><a href="favlist.php">View Favorites</a></li>
                             <li><a href="editfav.php">Add/Remove Favorites</a></li>
                         </ul>
                     </li>
-                    <li>Notification Settings
+                    <br>
+                    <li><font class='favoriteLink'>Notification Settings</font>
                         <ul>
                             <li><a href="Ectimes.php">View/Edit/Delete Notification Times</a></li>
                             <li><a href="ctimes.php">Add Notification Time</a></li>
                         </ul>
                     </li>
-                    <li>Request Garage Additions
+                    <br>
+                    <li><font class='favoriteLink'>Request Garage Additions</font>
                         <ul>
                             <li><a href="requestStat.php">Status of Garage Addition Requests</a></li>
                             <li><a href="request.php">Request Addition of a Garage to PonyPark</a></li>
                         </ul>
                     </li>
-                </ul></p>
+                </ul>
+            </div>
+            </p>
         </div>
     </body>
 
