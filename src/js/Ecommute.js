@@ -57,7 +57,7 @@ function init() {
         for(var i = 0; i < data.length; i++){
             var dayOfWeek = data[i].Day;
             var parent = $('<div />', { class: "hpContent"}).append($("<h2 />", {text: "Notification Time " + (i+1) }));
-            var p1 = $('<p />', { text: "Modify your current times and hit update to save the changes.  To delete a specific notification time, hit delete", class: "details"});
+            var p1 = $('<p />', { text: "Modify your current times and hit update to save the changes.  To delete a specific notification time, hit delete.", class: "details"});
             var p1p = $('<p />', {text: "Your notification time is set to:"});
             p1p.append($('<input />', {type: "time", value: data[i].WarningTime, id: "wTime" + data[i].CommuteID}));
             var p3p = $('<p />', {text: "Your current notification days are:"});
@@ -66,34 +66,39 @@ function init() {
             var label = $('<label />', { 'for': '1'+data[i].CommuteID, text: "Sunday" });
             divElm.append(input);
             divElm.append(label);
+            divElm.append("<br>");
             input = $('<input />', { type: 'checkbox', id: '2'+data[i].CommuteID, value: "Monday" })
             label = $('<label />', { 'for': '2'+data[i].CommuteID, text: "Monday" });
             divElm.append(input);
             divElm.append(label);
+            divElm.append("<br>");
             input = $('<input />', { type: 'checkbox', id: '3'+data[i].CommuteID, value: "Tuesday" })
             label = $('<label />', { 'for': '3'+data[i].CommuteID, text: "Tuesday" });
             divElm.append(input);
             divElm.append(label);
+            divElm.append("<br>");
             input = $('<input />', { type: 'checkbox', id: '4'+data[i].CommuteID, value: "Wednesday" })
             label = $('<label />', { 'for': '4'+data[i].CommuteID, text: "Wednesday" });
             divElm.append(input);
             divElm.append(label);
+            divElm.append("<br>");
             input = $('<input />', { type: 'checkbox', id: '5'+data[i].CommuteID, value: "Thursday" })
             label = $('<label />', { 'for': '5'+data[i].CommuteID, text: "Thursday" });
             divElm.append(input);
             divElm.append(label);
+            divElm.append("<br>");
             input = $('<input />', { type: 'checkbox', id: '6'+data[i].CommuteID, value: "Friday" })
             label = $('<label />', { 'for': '6'+data[i].CommuteID, text: "Friday" });
             divElm.append(input);
             divElm.append(label);
+            divElm.append("<br>");
             input = $('<input />', { type: 'checkbox', id: '7'+data[i].CommuteID, value: "Saturday" })
             label = $('<label />', { 'for': '7'+data[i].CommuteID, text: "Saturday" });
             divElm.append(input);
             divElm.append(label);
-            var p = $('<p />').append($('<span />', {text: "Update", id:"U" + data[i].CommuteID, class: "submit" }));
-            divElm.append(p);
-            p = $('<p />').append($('<span />', {text: "Delete This Time", id:"D" + data[i].CommuteID, class: "submit" }));
-            divElm.append(p);
+            var buttons = "<br><br><span class='submit' id='U" + data[i].CommuteID + "'>Update</span> ";
+            buttons += "<span class='submit' id='D" + data[i].CommuteID + "'>Delete This Time</span>";
+            divElm.append(buttons);
 
             p3p.append(divElm);
 
