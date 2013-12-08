@@ -59,15 +59,7 @@ if($_SESSION['logged'] === true)
 
 		</div>
 
-		<nav>
-
-			<ol>
-				<li><a href="signup.php">Join</a></li>
-				<li><a href="about.php">About</a></li>
-				<li><a href="contact.php">Contact</a></li>
-				<li><a href="request.php">Request</a></li>
-			</ol>
-		</nav>
+        <nav id="navigation"><!-- navigation.html --></nav>
 
 		<div class="hpContent" id="singUpHP">
 			<p class = "details">Use the signup form below to create a PonyPark Account.</p>
