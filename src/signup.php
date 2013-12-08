@@ -28,7 +28,10 @@ if($_SESSION['logged'] === true)
 	</head>
 	<body>
         <div id="logo"><!-- logo.html --></div>
-
+        
+        <section id="signIn"><!-- dashboardSignIn.html --></section>
+        <nav id="navigation"><!-- navigation.html --></nav>
+        
 		<div class="hpContent" id="signInHP">
 
     		<p class="details">Already registered? Log in, or sign in with Facebook or Google.</p>
@@ -58,8 +61,6 @@ if($_SESSION['logged'] === true)
             </center>
 
 		</div>
-
-        <nav id="navigation"><!-- navigation.html --></nav>
 
 		<div class="hpContent" id="singUpHP">
 			<p class = "details">Use the signup form below to create a PonyPark Account.</p>
