@@ -1,8 +1,8 @@
-/* 
+/*
  * Justin Trantham
- * PonyPark Version 1.0
- * Displays about box with features and basic info about MileLogger
- * 11/24/13
+ * 11/23/13
+ * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 

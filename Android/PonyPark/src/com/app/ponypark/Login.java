@@ -1,7 +1,8 @@
 /*
  * Justin Trantham
- * 11/1/13
+ * 11/23/13
  * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 
@@ -211,7 +212,7 @@ public class Login extends Activity implements OnClickListener,
 				}
 				// If it was a success then create a login session
 				if (!MainActivity.isLoggedIn()) {
-					MainActivity.session.createGoogleSession(fName, lName,
+					MainActivity.session.createGoogleSession(googleFName, lName,
 							email, userId, googleId);
 					mConnectionProgressDialog.dismiss();
 					welcomeMessageUI("Welcome,  " + googleFName);
@@ -253,16 +254,17 @@ public class Login extends Activity implements OnClickListener,
 		// Save the result and resolve the connection failure upon a user click.
 		mConnectionResult = result;
 	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int responseCode,
 			Intent intent) {
-		  super.onActivityResult(requestCode, responseCode, intent);
+		super.onActivityResult(requestCode, responseCode, intent);
 		// facebook.authorizeCallback(requestCode, responseCode, intent);
 		if (requestCode == REQUEST_CODE_RESOLVE_ERR
 				&& responseCode == RESULT_OK) {
 			mConnectionResult = null;
 			mPlusClient.connect();
-		} else if(Session.getActiveSession()!=null)
+		} else if (Session.getActiveSession() != null)
 			Session.getActiveSession().onActivityResult(this, requestCode,
 					responseCode, intent);
 	}
@@ -390,8 +392,11 @@ public class Login extends Activity implements OnClickListener,
 	public void loginToFacebook() {
 		if (Session.getActiveSession() == null
 				|| Session.getActiveSession().isClosed()) {
-			Session session = new Session(this); // <-- where "this" is a reference to your Activity, or Context
-			Session.OpenRequest request = new Session.OpenRequest(this).setPermissions("basic_info", "email");
+			Session session = new Session(this); // <-- where "this" is a
+													// reference to your
+													// Activity, or Context
+			Session.OpenRequest request = new Session.OpenRequest(this)
+					.setPermissions("basic_info", "email");
 			request.setCallback(new Session.StatusCallback() {
 				@SuppressWarnings("deprecation")
 				@Override
@@ -428,44 +433,44 @@ public class Login extends Activity implements OnClickListener,
 			});
 			Session.setActiveSession(session);
 			session.openForRead(request);
-			
-//			Session.openActiveSession(this, true, new StatusCallback() {
-//
-//				@SuppressWarnings("deprecation")
-//				@Override
-//				public void call(Session session, SessionState state,
-//						Exception exception) {
-//					System.out.println("State= " + state);
-//
-//					if (session.isOpened()) {
-//						System.out.println("Token=" + session.getAccessToken());
-//						Request.executeMeRequestAsync(session,
-//								new GraphUserCallback() {
-//									@Override
-//									public void onCompleted(GraphUser user,
-//											Response response) {
-//										if (user != null) {
-//
-//											fbId = user.getId();
-//											fName = user.getFirstName();
-//											lName = user.getLastName();
-//											email = user.asMap().get("email")
-//													.toString();
-//											getInfo task = new getInfo();
-//											task.execute((Object[]) null);
-//
-//										}
-//										if (response != null) {
-//										}
-//									}
-//								});
-//					}
-//					if (exception != null) {
-//						System.out.println("Some thing bad happened!");
-//						exception.printStackTrace();
-//					}
-//				}
-//			});
+
+			// Session.openActiveSession(this, true, new StatusCallback() {
+			//
+			// @SuppressWarnings("deprecation")
+			// @Override
+			// public void call(Session session, SessionState state,
+			// Exception exception) {
+			// System.out.println("State= " + state);
+			//
+			// if (session.isOpened()) {
+			// System.out.println("Token=" + session.getAccessToken());
+			// Request.executeMeRequestAsync(session,
+			// new GraphUserCallback() {
+			// @Override
+			// public void onCompleted(GraphUser user,
+			// Response response) {
+			// if (user != null) {
+			//
+			// fbId = user.getId();
+			// fName = user.getFirstName();
+			// lName = user.getLastName();
+			// email = user.asMap().get("email")
+			// .toString();
+			// getInfo task = new getInfo();
+			// task.execute((Object[]) null);
+			//
+			// }
+			// if (response != null) {
+			// }
+			// }
+			// });
+			// }
+			// if (exception != null) {
+			// System.out.println("Some thing bad happened!");
+			// exception.printStackTrace();
+			// }
+			// }
+			// });
 		}
 	}
 
@@ -535,24 +540,25 @@ public class Login extends Activity implements OnClickListener,
 			session.closeAndClearTokenInformation();
 		}
 	}
-	public static boolean isFacebookConnected(){
-		boolean val=false;
+
+	public static boolean isFacebookConnected() {
+		boolean val = false;
 		Session session = Session.getActiveSession();
 		if (session != null) {
-			if (session.isClosed()) {
-		val=false;
-			}
-			else
-				val=true;
+			if (session.isOpened()) {
+				val = true;
+			} else
+				val = false;
 		}
 		return val;
 	}
+
 	public static boolean isGoogleConnected() {
-		if(mPlusClient!=null)
-		return mPlusClient.isConnected();
+		if (mPlusClient != null)
+			return mPlusClient.isConnected();
 		else
-		return false;
-		
+			return false;
+
 	}
 
 	/**

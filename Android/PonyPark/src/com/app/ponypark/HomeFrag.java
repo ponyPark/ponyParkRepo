@@ -1,7 +1,8 @@
 /*
  * Justin Trantham
- * 11/1/13
+ * 11/23/13
  * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 
@@ -79,8 +80,6 @@ public class HomeFrag extends Fragment implements OnMarkerClickListener {
 					}
 
 				});
-		// Execute background thread to load data on map
-		(new AsyncMapViewLoader()).execute("");
 		// Perform any camera updates here
 		return rootView;
 	}
@@ -115,6 +114,8 @@ public class HomeFrag extends Fragment implements OnMarkerClickListener {
 			map.animateCamera(zoom);
 			// Setting a custom info window adapter for the google map
 			map.setInfoWindowAdapter(new CustomInfoWindowAdapter(result));
+			// Execute background thread to load data on map
+			(new AsyncMapViewLoader()).execute("");
 		}
 	}
 
@@ -135,8 +136,8 @@ public class HomeFrag extends Fragment implements OnMarkerClickListener {
 		String id;
 
 		@Override
-		protected void onPostExecute(ArrayList<GarageEntry> result) {
-			// super.onPostExecute(result);
+		protected void onPostExecute(ArrayList<GarageEntry> results) {
+			super.onPostExecute(result);
 			dialog.dismiss();
 			// Default to the smu campus
 			double latitude = 32.841844;
@@ -147,7 +148,6 @@ public class HomeFrag extends Fragment implements OnMarkerClickListener {
 					addresses = geocoder.getFromLocationName(result.get(i)
 							.getAddress() + " , Dallas, TX", 1);
 					if (addresses.size() > 0) {
-
 						latitude = addresses.get(0).getLatitude();
 						longitude = addresses.get(0).getLongitude();
 					}
@@ -188,6 +188,7 @@ public class HomeFrag extends Fragment implements OnMarkerClickListener {
 				}
 			});
 
+			super.onPostExecute(result);
 		}
 
 		@Override

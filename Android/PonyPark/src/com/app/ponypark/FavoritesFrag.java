@@ -1,12 +1,13 @@
 /*
  * Justin Trantham
- * PonyPark by BAM software
- * Iteration 2 Release
  * 11/23/13
+ * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 import org.json.JSONArray;
@@ -28,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class FavoritesFrag extends ListFragment {
 
@@ -37,20 +39,19 @@ public class FavoritesFrag extends ListFragment {
 	public static FavoritesFrag instance;
 	private String userId, favId;
 	private Context context =getActivity();
-
+	private TextView addFavMessage;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		View rootView = inflater.inflate(R.layout.fragment_myfavs, container,
 				false);
-
 		context = rootView.getContext();
 		dialog = new ProgressDialog(context);
-		adpt = new FavListAdapter(new ArrayList<GarageEntry>(), getActivity());
-
+		adpt = new FavListAdapter(new ArrayList<GarageEntry>(), context);
+		addFavMessage=(TextView)rootView.findViewById(R.id.addFavMessage);
 		setListAdapter(adpt);
-	//	startNewAsyncTask();
+		
 		rootView.findViewById(R.id.refreshFavList).setOnClickListener(
 				new OnClickListener() {
 					@Override
@@ -65,7 +66,8 @@ public class FavoritesFrag extends ListFragment {
 
 	public static FavoritesFrag getInstance() {
 		if (instance == null) {
-			instance = new FavoritesFrag();
+			instance = new FavoritesFrag();		
+			
 		}
 		return instance;
 	}
@@ -78,14 +80,12 @@ public class FavoritesFrag extends ListFragment {
 		instance.result.clear();
 	}
 
-
-
 	/*
 	 * Used to start a refresh or initiate the favorites list with content.
 	 */
 	public void startNewAsyncTask() {
 		if (MainActivity.session.isLoggedIn()) {
-			result.clear();
+			clearData();
 			userId = MainActivity.session.getUserDetails().get(
 					UserActions.KEY_userID);					
 			// Getting latest favs
@@ -134,17 +134,14 @@ public class FavoritesFrag extends ListFragment {
 		@Override
 		protected void onPostExecute(Void results) {
 			dialog.dismiss();
-			adpt.setItemList(result);
-
-			adpt.sort(new Comparator<GarageEntry>() {
-				@Override
+			Collections.sort(result, new Comparator<GarageEntry>() {
 				public int compare(GarageEntry arg0, GarageEntry arg1) {
-					return -arg0.getName().compareTo(arg1.getName());
-				}
-			});
-
-			setListAdapter(adpt);
+					return arg0.getName().compareTo(arg1.getName());
+				}     }
+					);
+			adpt.setItemList(result);			
 			adpt.notifyDataSetChanged();
+			setListAdapter(adpt);
 		}
 	}
 
@@ -160,17 +157,20 @@ public class FavoritesFrag extends ListFragment {
 		// Phone number is agin JSON Object
 		@Override
 		protected void onPostExecute(ArrayList<GarageEntry> results) {
-			super.onPostExecute(result);
-			
-			adpt.setItemList(result);
+			super.onPostExecute(result);			
+			if(result.size()<=0)
+				addFavMessage.setVisibility(View.VISIBLE);
+			else
+				addFavMessage.setVisibility(View.INVISIBLE);
 			// Sort the list by name
-			adpt.sort(new Comparator<GarageEntry>() {
+			Collections.sort(result, new Comparator<GarageEntry>() {
 				public int compare(GarageEntry arg0, GarageEntry arg1) {
 					return arg0.getName().compareTo(arg1.getName());
-				}
-			});
-			setListAdapter(adpt);
+				}     }
+					);
+			adpt.setItemList(result);			
 			adpt.notifyDataSetChanged();
+			setListAdapter(adpt);
 			// Click listener for the fav list
 			getListView().setOnItemLongClickListener(
 					new OnItemLongClickListener() {
@@ -189,7 +189,7 @@ public class FavoritesFrag extends ListFragment {
 		protected void onPreExecute() {
 			super.onPreExecute();
 			dialog.setMessage("Getting latest favorites...");
-		dialog.show();
+			dialog.show();
 		}
 
 		@Override

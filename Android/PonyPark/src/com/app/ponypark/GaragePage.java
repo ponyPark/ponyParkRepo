@@ -1,3 +1,9 @@
+/*
+ * Justin Trantham
+ * 11/23/13
+ * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
+ */
 package com.app.ponypark;
 
 import org.json.JSONException;
@@ -10,8 +16,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +31,7 @@ import android.widget.Toast;
 
 public class GaragePage extends Activity implements OnClickListener {
 	private TextView gName, gAddress, gRating, gRated, dialogName,
-			dialogAddress;
+			dialogAddress, favIcon;
 	private RadioGroup dialogGroup;
 	private Button report, addFav, reportDialog, cancelDialog;
 	private String name, address, parkingId, userId, lastRated, latestRating,
@@ -34,7 +42,8 @@ public class GaragePage extends Activity implements OnClickListener {
 	private ProgressDialog pd;
 	private SharedPreferences mPref;
 
-private	Dialog dialog ;
+	private Dialog dialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,11 +53,10 @@ private	Dialog dialog ;
 		gRating = (TextView) findViewById(R.id.availabilityPage);
 		report = (Button) findViewById(R.id.reportButtonPage);
 		addFav = (Button) findViewById(R.id.addToFavsButton);
-
+		favIcon = (TextView) findViewById(R.id.fav);
 		context = this;
 		report.setOnClickListener(this);
 		addFav.setOnClickListener(this);
-
 		Bundle extras = getIntent().getExtras();
 
 		if (extras != null) {
@@ -57,6 +65,7 @@ private	Dialog dialog ;
 			parkingId = extras.getString("id");
 			lastRated = extras.getString("rated");
 			latestRating = extras.getString("rating");
+			this.setTitle(name);
 		}
 
 		if (MainActivity.getInstance().session.isLoggedIn()) {
@@ -65,44 +74,58 @@ private	Dialog dialog ;
 			hasFavorite = false;
 			checkFav checkFavs = new checkFav();
 			checkFavs.execute((Object[]) null);
-
 		}
 		gName.setText(name);
 		gAddress.setText(address);
 		setRating(latestRating, lastRated);
-
 	}
 
 	private void setRating(String latestRating, String lastRated) {
+		lastRated.replace("<", " less than ");
+		lastRated.replace(">", " more than ");
 		switch (Integer.parseInt(latestRating)) {
 		case 1:
-			gRating.setText("Full" + " apprx " + lastRated);
+			gRating.setTextColor(getResources().getColor(
+					android.R.color.holo_red_dark));
+			gRating.setText("Rated Full " + lastRated);
 			break;
 		case 2:
-			gRating.setText("Scarce (<5 spots)" + " apprx " + lastRated);
+
+			gRating.setTextColor(getResources().getColor(
+					android.R.color.holo_red_dark));
+			gRating.setText("Rated Scarce (<5 spots) " + lastRated);
 			break;
 		case 3:
-			gRating.setText("Some (5-10 spots)" + " apprx " + lastRated);
+
+			gRating.setTextColor(getResources().getColor(
+					android.R.color.holo_green_light));
+			gRating.setText("Rated Some (5-10 spots) " + lastRated);
 			break;
 		case 4:
-			gRating.setText("Plenty (10+ spots)" + " apprx " + lastRated);
+
+			gRating.setTextColor(getResources().getColor(
+					android.R.color.holo_green_dark));
+			gRating.setText("Rated Plenty (10+ spots) " + lastRated);
 			break;
 		default:
-			gRating.setText("Empty" + " apprx " + lastRated);
+
+			gRating.setTextColor(getResources().getColor(
+					android.R.color.holo_green_dark));
+			gRating.setText("Rated Empty " + lastRated);
 			break;
 		}
 
 	}
 
 	public void displayRate() {
-	dialog	= new Dialog(this, R.style.FullHeightDialog); // this
-																			// is
-																			// a
-																			// reference
-																			// to
-																			// the
-																			// style
-																			// above
+		dialog = new Dialog(this, R.style.FullHeightDialog); // this
+																// is
+																// a
+																// reference
+																// to
+																// the
+																// style
+																// above
 		dialog.setContentView(R.layout.report_availability); // I saved the xml
 																// file above as
 																// yesnomessage.xml
@@ -152,7 +175,7 @@ private	Dialog dialog ;
 				addRate = true;
 				addIt task = new addIt();
 				task.execute(true);
-					dialog.dismiss();
+				dialog.dismiss();
 			}
 		});
 		dialog.show();
@@ -216,15 +239,16 @@ private	Dialog dialog ;
 				pd.dismiss();
 			}
 			if (success) {
-				// signUpError.setText("Thank You!");
-				Toast.makeText(getApplicationContext(), "Successfully added!",
-						Toast.LENGTH_SHORT).show();
-
-				addFav.setVisibility(View.INVISIBLE);
-				
-				// finish();
+				if (addRate)
+					Toast.makeText(getApplicationContext(), "Thank You!",
+							Toast.LENGTH_SHORT).show();
+				else {
+					Toast.makeText(getApplicationContext(),
+							"Added sucessfully!", Toast.LENGTH_SHORT).show();
+					addFav.setVisibility(View.INVISIBLE);
+					favIcon.setBackgroundResource(R.drawable.ic_action_favourite);
+				}
 			} else {
-				// signUpError.setText("Error occured in registration");
 				Toast.makeText(getApplicationContext(), "An error occured",
 						Toast.LENGTH_SHORT).show();
 			}
@@ -243,8 +267,6 @@ private	Dialog dialog ;
 			try {
 				if (test.get("hasFavorite").equals(true)) {
 					hasFavorite = true;
-
-					System.out.println("AAAAAAAAAAAa " + hasFavorite);
 				} else
 					hasFavorite = false;
 			} catch (JSONException e) {
@@ -260,6 +282,7 @@ private	Dialog dialog ;
 
 			if (hasFavorite) {
 				addFav.setVisibility(View.INVISIBLE);
+				favIcon.setBackgroundResource(R.drawable.ic_action_favourite);
 			} else
 				addFav.setVisibility(View.VISIBLE);
 

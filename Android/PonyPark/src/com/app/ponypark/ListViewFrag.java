@@ -1,7 +1,8 @@
 /*
  * Justin Trantham
- * 11/1/13
+ * 11/23/13
  * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 
@@ -77,13 +78,15 @@ public class ListViewFrag extends ListFragment {
 	}
 
 	public static void clearData() {
-			instance.result.clear();
+		if(instance.result.size()>0)
+		instance.result.clear();
 	}
 
 	/*
 	 * Used to call or refresh the data within the list view
 	 */
 	public void startNewAsyncTask() {
+		clearData();
 		(new AsyncListsViewLoader()).execute("");
 	}
 
@@ -138,7 +141,6 @@ public class ListViewFrag extends ListFragment {
 
 		@Override
 		protected ArrayList<GarageEntry> doInBackground(String... params) {
-			Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 			JSONArray jArray;
 
 			try {

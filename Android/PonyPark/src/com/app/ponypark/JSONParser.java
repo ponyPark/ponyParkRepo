@@ -4,6 +4,8 @@
  * PonyPark by BAM Software
  * Used example at http://www.androidhive.info/ for
  * help. 
+ * Latest version for Iteration 3 12/7/13
+ *
  */
 package com.app.ponypark;
 

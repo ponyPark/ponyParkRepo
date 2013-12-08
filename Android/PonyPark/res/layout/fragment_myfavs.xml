@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:padding="5dp"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:id="@+id/favlist">
        <TextView
         android:id="@+id/help"
         android:layout_width="wrap_content"
@@ -20,6 +21,14 @@
         android:layout_below="@id/help" >
     </ListView>
 
+    <TextView
+        android:id="@+id/addFavMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="Please add some favorites from the Map or List view."
+        android:visibility="invisible" />
     <Button
         android:id="@+id/refreshFavList"
         android:layout_width="wrap_content"
@@ -28,6 +37,5 @@
         android:layout_centerInParent="true"
         android:text="@string/refresh" />
 
- 
 
 </RelativeLayout>

@@ -2,6 +2,7 @@
  * Justin Trantham
  * 11/23/13
  * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 
@@ -80,7 +81,6 @@ public class MainActivity extends FragmentActivity implements
 		instance = this;
 		viewPager.setAdapter(mAdapter);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 		// Adding Tabs
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
@@ -125,20 +125,8 @@ public class MainActivity extends FragmentActivity implements
 			curLat = location.getLongitude();
 			curLong = location.getLatitude();
 		}
-	}
+		isExternalConnected();
 
-	public static double getLat() {
-
-		String provider = locationManager.getBestProvider(criteria, false);
-		location = locationManager.getLastKnownLocation(provider);
-		return location.getLatitude();
-	}
-
-	public static double getLong() {
-
-		String provider = locationManager.getBestProvider(criteria, false);
-		location = locationManager.getLastKnownLocation(provider);
-		return location.getLongitude();
 	}
 
 	@Override
@@ -154,17 +142,31 @@ public class MainActivity extends FragmentActivity implements
 			displayAlert();
 		} else {
 			if (tab.getText().toString().equals("List View")) {
-				ListViewFrag.getInstance().clearData();
 				ListViewFrag.getInstance().startNewAsyncTask();
 				viewPager.setCurrentItem(tab.getPosition());
 			} else if (tab.getText().toString().equals("Favorites")) {
 				if (session.isLoggedIn()) {
-					FavoritesFrag.getInstance().startNewAsyncTask();
 					viewPager.setCurrentItem(tab.getPosition());
+					FavoritesFrag.getInstance().startNewAsyncTask();
 				} else
 					displayLoginMessage();
 			} else if (tab.getText().toString().equals("Map View"))
 				viewPager.setCurrentItem(tab.getPosition());
+		}
+	}
+
+	private void isExternalConnected() {
+		user = session.getUserDetails();
+		if (session.isLoggedIn()) {
+			if (user.containsValue("Facebook")) {
+				if (!Login.getInstance().isFacebookConnected()) {
+					session.logoutUser();
+				}
+			} else if (user.containsValue("Google")) {
+				if (!Login.getInstance().isGoogleConnected()) {
+					session.logoutUser();
+				}
+			}
 		}
 	}
 
@@ -204,7 +206,6 @@ public class MainActivity extends FragmentActivity implements
 		inflater = getMenuInflater();
 		sub = menu.addSubMenu("More");
 		sub.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-
 		sub.getItem().setIcon(R.drawable.ic_action_person);
 		// Show different dropdown menu depending if user is already logged in
 		// or not
@@ -221,7 +222,6 @@ public class MainActivity extends FragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
-
 		case R.id.action_about:
 			AboutBox helpDialog = new AboutBox(this);
 			helpDialog.setTitle("PonyPark (Ver 1.0.0)");
@@ -238,14 +238,15 @@ public class MainActivity extends FragmentActivity implements
 			}
 			return true;
 		case R.id.action_logout:
-			if (user.get(UserActions.KEY_loginMethod).equals("Facebook"))
+			if (user.containsValue("Facebook")) {
 				Login.getInstance().callFacebookLogout(context);
-			session.logoutUser();
-			if (user.get(UserActions.KEY_loginMethod).equals("Google")) {
+				session.logoutUser();
+			}
+			if (user.containsValue("Google")) {
 				Login.getInstance().googleSignOut();
 				session.logoutUser();
 			}
-			if (user.get(UserActions.KEY_loginMethod).equals("Regular"))
+			if (user.containsValue("Regular"))
 				MainActivity.session.logoutUser();
 			invalidateOptionsMenu();
 			return true;
@@ -304,26 +305,23 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		Login.getInstance().callFacebookLogout(context);
-		Login.getInstance().googleSignOut();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// get user data from session
+		//Check for Google Play
 		int status = GooglePlayServicesUtil
 				.isGooglePlayServicesAvailable(getApplicationContext());
 		if (status != ConnectionResult.SUCCESS) {
-
 			noPlay();
 		}
-
 		if (!isNetworkAvailable()) {
 			displayAlert();
 		} else {
+			// get user data from session
 			user = session.getUserDetails();
-
+			// isExternalConnected();
 			invalidateOptionsMenu();
 		}
 	}

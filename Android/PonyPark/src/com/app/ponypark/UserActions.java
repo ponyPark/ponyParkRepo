@@ -2,6 +2,7 @@
  * Justin Trantham
  * 11/23/13
  * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 
@@ -108,12 +109,19 @@ public class UserActions {
 		return json;
 	}
 
+	/*
+	 * Gets the list of garages for the map and list view using the referenced
+	 * URL making a GET request. 
+	 */
 	public JSONObject getGarages() {
 		// Parameters to send to server
 		JSONObject json = mapJSON.getMapJSONFromUrl(getGaragesURL, null);
 		return json;
 	}
 
+	/*
+	 * Get the favorites based on the userId using GET request.
+	 */
 	public JSONObject getFavorites(String userId) {
 		// Parameters to send to server
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -123,6 +131,10 @@ public class UserActions {
 		return json;
 	}
 
+	/*
+	 * With the user id and parking id, this will send the post message
+	 * to add the parking garage to the user's favorites.
+	 */
 	public JSONObject addFavorite(String userId, String parkingId) {
 		// Parameters to send to server
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -133,6 +145,10 @@ public class UserActions {
 		return json;
 	}
 
+	/*
+	 * Checks to see if the logged in user has the favorite. 
+	 * Accepts the user id and parking id of the garage. 
+	 */
 	public JSONObject hasFavorite(String userId, String parkingId) {
 		// Parameters to send to server
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -143,6 +159,9 @@ public class UserActions {
 		return json;
 	}
 
+	/*
+	 * Get the current parking info based on the garage parking id
+	 */
 	public JSONObject getParkingInfo(String parkingId) {
 		// Parameters to send to server
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -186,7 +205,6 @@ public class UserActions {
 	public JSONObject signOut() {
 		// getting JSON Object
 		JSONObject json = jsonParser.getJSONFromUrl(logoutURL, null);
-
 		MainActivity.session.logoutUser();
 		// return json
 		return json;

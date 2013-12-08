@@ -2,6 +2,7 @@
  * Justin Trantham
  * 11/23/13
  * PonyPark by BAM Software
+ * Latest version for Iteration 3 12/7/13
  */
 package com.app.ponypark;
 
@@ -88,25 +89,6 @@ public class SessionControl {
 		editor.putString(UserActions.KEY_userID, userId);
 		// Submit changes
 		editor.commit();
-	}
-
-	/*
-	 * If user is not logged in then redirect user to login screen
-	 * 
-	 * @ VOID
-	 */
-	public void checkLogin() {
-		// Check login status
-		if (!this.isLoggedIn()) {
-			// If the user wasn't logged, then redirect to login page
-			Intent i = new Intent(mContext, Login.class);
-			// Closing all the Activities
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			// Flag this as a new activity for the intent
-			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			// Staring Login Activity
-			mContext.startActivity(i);
-		}
 	}
 
 	/*
