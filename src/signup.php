@@ -28,13 +28,13 @@ if($_SESSION['logged'] === true)
 	</head>
 	<body>
         <div id="logo"><!-- logo.html --></div>
-        
+
         <section id="signIn"><!-- dashboardSignIn.html --></section>
         <nav id="navigation"><!-- navigation.html --></nav>
-        
+
 		<div class="hpContent" id="signInHP">
 
-    		<p class="details">Already registered? Log in, or sign in with Facebook or Google.</p>
+    		<p class="details">Already registered? Log in.</p>
     		<?
                 if ($_GET["login"] === "false")
                     echo "<span id='badLogin'>**Incorrect login info. Please try again.**</span>";
@@ -45,20 +45,6 @@ if($_SESSION['logged'] === true)
                 <br><br>
     		    <input type="submit" value="Sign In" class="submit">
     		</form>
-            <br>
-            <center>
-                <span id="signinButton">
-                    <span
-                        class="g-signin"
-                        data-callback="signinCallback"
-                        data-clientid="273917884931.apps.googleusercontent.com"
-                        data-cookiepolicy="single_host_origin"
-                        data-requestvisibleactions="http://schemas.google.com/AddActivity"
-                        data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
-                    </span>
-                </span>
-                <fb:login-button perms="email" width="200" max-rows="1" size="large">Sign in</fb:login-button>
-            </center>
 
 		</div>
 
