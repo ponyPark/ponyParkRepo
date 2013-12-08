@@ -48,6 +48,7 @@ jQuery(document).ready(function() {
                     $("#signupResult").html("**Your profile was successfully edited.**");
                     $( "input[name='old_pw']" ).val("");
                     $( "input[name='new_pw']" ).val("");
+                    $("#userOptions").load("dashboardUserOptions.php");
                 }
             }
         });
