@@ -13,7 +13,7 @@ a:hover {
     text-decoration: underline;
 }
 
-nav {
+#navigation {
 	position: absolute;
 	top: 120px;
 	left: 0;
@@ -47,20 +47,20 @@ z-index: 1;
 
 }
 
-nav ol, nav ul{
+#navigation ol, #navigation ul{
 	list-style: none;
 	margin: 0;
 	padding: .3em;
 	/*removes the numbers next to the list items*/
 }
 
-nav li{
+#navigation li{
 	float: left;
 	margin-right: 10px; 
 	/*changes to horizontal*/
 }
 
-nav li a {
+#navigation li a {
 	position: relative;
 	left: 400px;
 	display: block;
@@ -72,7 +72,7 @@ nav li a {
 	/*Further separates the links from one another and the top of browser*/
 }
 
-nav li a:hover {
+#navigation li a:hover {
 	text-decoration: underline;
 	/*gives a "rollover" effect for when a user's mouse is over the link*/
     color: #0F4D92;

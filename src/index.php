@@ -19,11 +19,9 @@
 	<body>
         <div id="logo"><!-- logo.html --></div>
 
-        <div id="signInNav">
-			<section id="signIn"><!-- dashboardSignIn.html --></section>
-			<div id="userOptions"><!-- dashboardUserOptions.php --></div>
-			<nav id="navigation"><!-- navigation.html --></nav>
-		</div>
+		<section id="signIn"><!-- dashboardSignIn.html --></section>
+		<div id="userOptions"><!-- dashboardUserOptions.php --></div>
+		<nav id="navigation"><!-- navigation.html --></nav>
 
 		<div class="hpContent" id="frontpg">
 			<h2>Parking Availability</h2>

@@ -113,7 +113,24 @@ function init() {
 
                 for (var i = 0, len = averages.length; i < len; i++) {
                     var index = averages[i].Hour;
-                    ratings[index] = parseInt(averages[i].Rating, 10);
+                    ratings[index] = new Object();
+                    ratings[index].y = parseInt(averages[i].Rating, 10);
+
+                    var ratingDescription;
+                    if (ratings[index].y === 1)
+                        ratingDescription = "Full";
+                    else if (ratings[index].y === 2)
+                        ratingDescription = "Scarce";
+                    else if (ratings[index].y === 3)
+                        ratingDescription = "Some";
+                    else if (ratings[index].y === 4)
+                        ratingDescription = "Plenty";
+                    else if (ratings[index].y === 5)
+                        ratingDescription = "Empty";
+                    else
+                        ratingDescription = "No rating";
+
+                    ratings[index].name = ratingDescription;
                 }
 
                 console.log(data);
