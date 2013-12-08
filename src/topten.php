@@ -23,8 +23,12 @@
 
 		<div class="hpContent">
 			<h2>Top Ten Users</h2>
-			<p class = "details">At PonyPark, we value those who help make our service a success.  Here are our top ten contributors, updated once a day.  Please, aspire to be like these individuals and contribute!</p>
-			<OL id="topTenList"></OL>
+			<p class="details">At PonyPark, we value those who help make our service a success.  Here are our top ten contributors, updated once a day.  Please, aspire to be like these individuals and contribute!</p>
+			<div id="topTenList" class="biggerFontForStory">
+				<div style="width:150px;float:left;text-align:center;" id="topTenRank"><b>Rank</b><hr></div>
+				<div style="width:175px;float:left;" id="topTenName"><b>Name</b><hr></div>
+				<div style="width:150px;float:left;text-align:center;" id="topTenPoints"><b>Points</b><hr></div>
+			</div>
 		</div>
 
 	</body>

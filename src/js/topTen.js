@@ -45,12 +45,12 @@ function init() {
                 data = JSON.parse(data);
                 data = data.TopTen;
                 for(var i =0; i < data.length; i++){
-                        var parentList = $('#topTenList');
                         var lastName = data[i].LastName;
                         lastName = lastName.charAt(0);
-                        var child1 = $('<li />', {text: data[i].FirstName + 
-                            " " + lastName + ". - " + data[i].Points + " Points"});
-                        parentList.append(child1);
+
+                        $('#topTenRank').append((i+1) + "<br>");
+                        $('#topTenName').append(data[i].FirstName + " " + lastName + "<br>");
+                        $('#topTenPoints').append(data[i].Points + "<br>");
                 }
             }
         }

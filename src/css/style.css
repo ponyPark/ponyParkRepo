@@ -539,3 +539,16 @@ a.list_view_link:active {
 .favoriteLink {
     font-size: 25px;
 }
+
+#topTenList {
+    display: inline-block;
+}
+
+#topTenList b {
+    font-size: 25px;
+}
+
+#topTenList hr {
+    height: 2px;
+    background-color: #000000;
+}
