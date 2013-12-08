@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:text="Report" />
+            android:text="Rate" />
 
         <Button
             android:id="@+id/cancelButtonDialog"
