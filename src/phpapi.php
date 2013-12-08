@@ -158,14 +158,14 @@ class phpapi
                     '$lastName', PhoneNumber = $phoneNumber, Password = '$pw', 
                     PasswordSalt = '$salt' WHERE UserID = '$userID'";
                 mysql_query($query);
-
-                // Update the session variable with the new name.
-                $_SESSION['userName'] = $_POST['fname'];
             }
             else
                 return "wrong_password";
         }
 
+        // Update the session variable with the new name.
+        $_SESSION['userName'] = $_POST['fname'];
+        
         return "";
     }
 
