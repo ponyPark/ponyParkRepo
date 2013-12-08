@@ -32,18 +32,18 @@
         <div class="hpContent" id="whatsPonyPark">
             <h2>Edit Your Profile Info</h2>
                 <span id="signupResult"></span>
-                <form id="submitEditUser" method="POST">
-                <label for="fname">First Name:</label>
+                <form id="submitEditUser" class="biggerFontForStory" method="POST">
+                <label for="fname"><b>First Name:</b></label>
                 <input type="text" name="fname" pattern="[a-zA-Z]+" title="Letters only" placeholder="First Name" class="editProfileInput" required><br>
-                <label for="lname">Last Name:</label>
+                <label for="lname"><b>Last Name:</b></label>
                 <input type="text" name="lname" placeholder="Last Name" title="Letters only" pattern="[a-zA-Z]+" class="editProfileInput" required><br>
-                <label for="phone">Phone Number:</label>
+                <label for="phone"><b>Phone Number:</b></label>
                 <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" title="10 Digit Phone Number, Numbers only" class="editProfileInput"><br>
                 <div id="changePassword">
                     <p>If you want to change your password, please enter your current password, then enter your new password.</p>
-                    <label for="old_pw">Current password:</label>
+                    <label for="old_pw"><b>Current password:</b></label>
                     <input type="password" name="old_pw" placeholder="Current Password" class="editProfileInput"><br>
-                    <label for="new_pw">New password:</label>
+                    <label for="new_pw"><b>New password:</b></label>
                     <input type="password" name="new_pw" placeholder="New Password" pattern=".{8,}" title="Need at least 8 characters" class="editProfileInput"><br>
                 </div>
                 <br>

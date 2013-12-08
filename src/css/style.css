@@ -369,11 +369,12 @@ footer a:hover {
 
 #submitEditUser label {
     display: inline-block;
-    width: 160px;
+    width: 190px;
 }
 
 .editProfileInput {
     width: 300px;
+    font-size: 20px;
 }
 
 #garageImg {
@@ -505,6 +506,25 @@ a.list_view_link:active {
 }
 
 #favListDisp li {
+    list-style: none;
+    font-size: 20px;
+}
+
+#favList ul {
+    padding-left: 0;
+    font-size: 20px;
+}
+
+#favList li {
+    list-style: none;
+    font-size: 20px;
+}
+
+#myAccount ul {
+    font-size: 20px;
+}
+
+#myAccount li {
     list-style: none;
     font-size: 20px;
 }

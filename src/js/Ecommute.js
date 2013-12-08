@@ -47,9 +47,11 @@ function init() {
             }
 
             if(data.length === 0 ){
-                $('#mainPar').text("Whoops, you don't have any notification times.  ");
-                $('#mainPar').append($('<a />', {text: "Click here to add some.", href: "ctimes.php"}));
+                $('#mainPar').append("Whoops, you don't have any notification times.");
                 return;
+            }
+            else {
+                $('#mainPar').append("Please use the form below to modify your notification times.");
             }
 
         for(var i = 0; i < data.length; i++){

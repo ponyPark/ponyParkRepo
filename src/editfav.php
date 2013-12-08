@@ -23,6 +23,7 @@
 
 		<div class="hpContent">
 			<h2>Edit Favorite Garages</h2>
+            <a class="submit" href="favlist.php">View Favorites</a>
 
 			<p class = "details"><? 
 			if($_GET['stat'] == 1) echo("<b>**Your Favorite Modification Was Successful**</b><BR>"); ?>
@@ -30,7 +31,6 @@
 				
 				<ul id="favList">
 				</ul>
-				<a class="submit" href="favlist.php">Done</a>
 				</p>
 
 
