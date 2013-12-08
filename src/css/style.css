@@ -552,3 +552,7 @@ a.list_view_link:active {
     height: 2px;
     background-color: #000000;
 }
+
+.welcomeMessage {
+    padding-bottom: 7px;
+}
