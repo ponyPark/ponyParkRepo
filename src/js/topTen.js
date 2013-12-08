@@ -49,7 +49,7 @@ function init() {
                         lastName = lastName.charAt(0);
 
                         $('#topTenRank').append((i+1) + "<br>");
-                        $('#topTenName').append(data[i].FirstName + " " + lastName + "<br>");
+                        $('#topTenName').append(data[i].FirstName + " " + lastName + ".<br>");
                         $('#topTenPoints').append(data[i].Points + "<br>");
                 }
             }
