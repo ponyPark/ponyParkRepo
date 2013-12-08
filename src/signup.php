@@ -34,7 +34,7 @@ if($_SESSION['logged'] === true)
     		<p class="details">Already registered? Log in, or sign in with Facebook or Google.</p>
     		<?
                 if ($_GET["login"] === "false")
-                    echo "<span id= 'badLogin' >Incorrect login information.<BR>Please try again.</span>";
+                    echo "<span id='badLogin'>**Incorrect login info. Please try again.**</span>";
             ?>
     		<form id="signInForm" method="POST" action="verify.php">
     		    <input type="email" name="email" title="Enter the email address associated with your account" placeholder="* Email Address" required>

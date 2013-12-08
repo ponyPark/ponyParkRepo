@@ -37,9 +37,10 @@
 
 		<div class="hpContent" id = "whatsPonyPark">
 			<h2>Request Status</h2>
-			<p class = "details">
-				The status of your garage addition(s) are below:</p>
-			<UL id="requestStatus"></UL>
+            <br>
+            <a href="request.php" class="submit">Make a Garage Request</a><br><br>
+			<p class="details biggerFontForStory">The status of your garage addition(s):</p>
+			<ul id="requestStatus"></ul>
 		</div>
 
 	</body>

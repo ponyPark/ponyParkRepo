@@ -23,8 +23,9 @@
 
 		<div class="hpContent" >
 			<h2>Favorite List</h2>
-			<p class = "details" id="favGLDisp">
-				Below are your favorite garages.  Click on a garage to get more detailed real time info.  Click <a href="editfav.php">Here</a> to edit your favorites.
+			<a href="editfav.php" class="submit">Edit Favorites</a><br>
+			<p class="details biggerFontForStory" id="favGLDisp">
+				Below are your favorite garages.  Click on a garage to get more detailed real time info.
 				<ul id="favListDisp">
 				</ul>
 			</p>

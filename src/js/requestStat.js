@@ -68,24 +68,18 @@ function init() {
                         comments = "None Entered";
                     }
                         var parentList = $('#requestStatus');
-                        var child1 = $('<li />', {text: "Name of Garage: " + data[i].Name});
-                        var child1child1 = $('<ul />');
-                        var child1child1child = $('<li />', {text: "Address: " + data[i].Address});
-                        child1child1.append(child1child1child);
-                        var child1child1child2 = $('<li />', {text: "Cost: " + cost});
-                        child1child1.append(child1child1child2);
-                        var child1child1child3 = $('<li />', {text: "Levels: " + data[i].NumberOfLevels});
-                        child1child1.append(child1child1child3);
-                        var child1child1child4 = $('<li />', {text: "Comments: " + comments});
-                        child1child1.append(child1child1child4);
-                        var child1child1child5 = $('<li />', {text: "Status: " + status});
-                        child1child1.append(child1child1child5);
-                        child1.append(child1child1);
 
+                        var info = "<li><font size='5'><font class='requestLabels'>Name of Garage:</font> " + data[i].Name + "</font></li>";
+                        info += "<ul>";
+                        info += "<li><font class='requestLabels'>Address:</font> " + data[i].Address + "</li>";
+                        info += "<li><font class='requestLabels'>Cost:</font> " + cost + "</li>";
+                        info += "<li><font class='requestLabels'>Levels:</font> " + data[i].NumberOfLevels + "</li>";
+                        info += "<li><font class='requestLabels'>Comments:</font> " + comments + "</li>";
+                        info += "<li><font class='requestLabels'>Status:</font> <font class='" + status + "'>" + status + "</font></li>";
+                        info += "</ul>";
+                        info += "<br><br>";
 
-
-
-                        parentList.append(child1);
+                        parentList.append(info);
                     }
                 }
 

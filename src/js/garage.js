@@ -71,11 +71,11 @@ function init() {
                         rating_message = "Average";
                     else
                         rating_message = "Most Recent (" + data.LevelInfo[0].Last_Rated + ")";
-                    if(rating === 1) rating = "FULL";
-                    else if(rating === 2) rating = "SCARCE";
-                    else if(rating === 3) rating = "SOME";
-                    else if(rating === 4) rating = "PLENTY";
-                    else if(rating === 5) rating = "EMPTY";
+                    if(rating === 1) rating = "Full";
+                    else if(rating === 2) rating = "Scarce";
+                    else if(rating === 3) rating = "Some";
+                    else if(rating === 4) rating = "Plenty";
+                    else if(rating === 5) rating = "Empty";
 
                     var info = $("<li />", {
                                     text: "Level " + i + ": "});

@@ -31,21 +31,21 @@ jQuery(document).ready(function() {
             type: "POST",
             url: "editUser.php",
             data: $(this).serialize(),
-            beforeSend: function() { $("#signupResult").html("Processing, please wait..."); },
+            beforeSend: function() { $("#signupResult").html("**Processing, please wait...**"); },
             success: function(output) {
                 if (output === "missing_info")
                 {
-                    $("#signupResult").html("First name and last name are required.");
+                    $("#signupResult").html("**First name and last name are required.**");
                 }
                 else if (output === "wrong_password")
                 {
-                    $("#signupResult").html("The password confirmation failed.");
+                    $("#signupResult").html("**The password confirmation failed.**");
                     $( "input[name='old_pw']" ).val("");
                     $( "input[name='new_pw']" ).val("");
                 }
                 else
                 {
-                    $("#signupResult").html("Your profile was successfully edited.");
+                    $("#signupResult").html("**Your profile was successfully edited.**");
                     $( "input[name='old_pw']" ).val("");
                     $( "input[name='new_pw']" ).val("");
                 }

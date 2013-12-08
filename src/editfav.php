@@ -25,7 +25,7 @@
 			<h2>Edit Favorite Garages</h2>
 
 			<p class = "details"><? 
-			if($_GET['stat'] == 1) echo("**Your Favorite Modification Was Successful**<BR>"); ?>
+			if($_GET['stat'] == 1) echo("<b>**Your Favorite Modification Was Successful**</b><BR>"); ?>
 				Please select the garages you wish to keep in your favorites.
 				
 				<ul id="favList">

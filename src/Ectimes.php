@@ -26,8 +26,8 @@
 			<h2>Modify/Delete Notification Times</h2>
 
 			<p class = "details" id="mainPar"><? 
-			if($_GET['stat'] == 1) echo("**Your Notification Time Modification Was Successful**<BR>"); 
-			if($_GET['stat'] == 2) echo("**Your Notification Time Modification Contained a Duplicate.  The duplicate was not added.**<BR>");?>
+			if($_GET['stat'] == 1) echo("<b>**Your Notification Time Modification Was Successful**</b><BR>"); 
+			if($_GET['stat'] == 2) echo("<b>**Your Notification Time Modification Contained a Duplicate.  The duplicate was not added.**</b><BR>");?>
 				Please use the form below to modify your notification times.
 				</p>
 
@@ -40,10 +40,7 @@
 
 	</body>
 
-	<footer>
-		PonyPark | Southern Methodist University | Dallas, Texas 2013
-		<p id ="footerLinks"> <a href="http://nhl.com">Contact Us</a> <a href="http://nhl.com">Policies</a></p>
-	</footer>
+	<footer id="footer"><!-- footer.html --></footer>
 
 </html>
 

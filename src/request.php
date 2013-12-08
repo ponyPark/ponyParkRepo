@@ -36,7 +36,7 @@
 			<h2>Add a Garage to the PonyPark System</h2>
 			<p class = "details">
 				<? 
-			if($_GET['stat'] == 1) echo("**Your request was sent and is being reviewed**<BR>"); ?>
+			if($_GET['stat'] == 1) echo("<b>**Your request was sent and is being reviewed**</b><BR>"); ?>
 				Please fill out all required fields.  </p>
 				<p>Please ensure your garage is located on the SMU Campus or your request will be denied.  Please do not include any zip codes, states, or cities when submitting the address. All fields are required except Comments and Cost.
 				<form id="submitRequest" method="POST" action="addRequest.php">
@@ -47,7 +47,8 @@
                 <input type="text" name="comments" id="comments" placeholder="Comments" title="Enter any comments, 250 characters or less" maxlength="250" style="width: 300px;">
                 <input type="submit" d="subRequestBut" class="submit" value="Submit Request">
                 </form>
-
+                <br>
+                <a href="requestStat.php" class="submit">View Your Garage Requests</a>
 
 			</p>
 			

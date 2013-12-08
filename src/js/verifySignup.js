@@ -9,11 +9,11 @@ jQuery(document).ready(function() {
             type: "POST",
             url: "create.php",
             data: $(this).serialize(),
-            beforeSend: function() { $("#signupResult").html("Processing, please wait..."); },
+            beforeSend: function() { $("#signupResult").html("**Processing, please wait...**"); },
             success: function(output) {
                 if (output === "signup_failure")
                 {
-                    $("#signupResult").html("That email is already in use.");
+                    $("#signupResult").html("**That email is already in use.**");
                 }
                 else if (output === "login_success")
                 {

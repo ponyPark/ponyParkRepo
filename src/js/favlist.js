@@ -73,47 +73,29 @@ function init() {
                             var rating = !average_rating ? latest_rating : average_rating;
                             var rating_message;
                             if (average_rating)
-                                rating_message = "Average rating from past 2 hours";
+                                rating_message = "Average";
                             else
-                                rating_message = "Most recent rating (" + g.Last_Rated + ")";
+                                rating_message = "Most Recent (" + g.Last_Rated + ")";
 
-                            var parent;
-                            var child = $('<ul />');
-                            var c1 = $('<li />', {
-                                text: g.Address}).appendTo(child);
-                            var c2;
-                            if (rating === 1) {
-                                parent = $('<li />');
-                                c2 = $('<li />', {
-                                    text: rating_message + ': Full'}).appendTo(child);
-                            }
-                            else if (rating === 2) {
-                                parent = $('<li />');
-                                c2 = $('<li />', {
-                                    text: rating_message + ': Scarce'}).appendTo(child);
-                            }
-                            else if (rating === 3) {
-                                parent = $('<li />');
-                                c2 = $('<li />', {
-                                    text: rating_message + ': Some'}).appendTo(child);
-                            }
-                            else if (rating === 4) {
-                                parent = $('<li />');
-                                c2 = $('<li />', {
-                                    text: rating_message + ': Plenty'}).appendTo(child);
-                            }
-                            else {
-                                parent = $('<li />');
-                                c2 = $('<li />', {
-                                    text: rating_message + ': Empty'}).appendTo(child);
-                            }
+                            if (rating === 1)
+                                rating = "Full";
+                            else if (rating === 2)
+                                rating = "Scarce";
+                            else if (rating === 3)
+                                rating = "Some";
+                            else if (rating === 4)
+                                rating = "Plenty";
+                            else if (rating === 5)
+                                rating = "Empty";
+                            
+                            var info = "<a href='garage.php?garageID=" + g.ParkingID + "' class='favoriteLink'>" + g.Name + "</a>";
+                            info += "<ul>";
+                            info += "<li><font class='requestLabels'>Address:</font> " + g.Address + "</li>";
+                            info += "<li><font class='requestLabels'>" + rating_message + ":</font> " + rating + "</li>";
+                            info += "</ul>";
+                            info += "<br><br>";
 
-                            var anchor = $('<a />', {
-                                href: "garage.php?garageID=" + g.ParkingID,
-                                text: g.Name}).appendTo(parent);
-
-                            child.appendTo(parent);
-                            parent.appendTo(list);
+                            list.innerHTML += info;
 
                         }
                     
