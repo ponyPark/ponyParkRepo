@@ -6,6 +6,8 @@
  */
 class phpapi
 {
+    private $con;
+
     /**
      * The constructor for our php api. Opens a connection to the mySQL
      * database. 
@@ -15,11 +17,8 @@ class phpapi
         ob_start();
         session_start();
 
-        $con = mysql_connect("localhost", "ponypark", "ponypark");
-        if(!$con)
-            die('Could not connect: ' . mysql_error());
-        mysql_select_db("PonyPark", $con)
-        or die("Unable to select database: " . mysql_error());
+        $this->con = mysqli_connect("localhost", "root", "root", "PonyPark")
+                    or die ("Error: " . mysqli_error($con));
     }
 
     /**
@@ -45,10 +44,10 @@ class phpapi
     public function addUser()
     {   
         // Obtain user info
-        $fname = mysql_real_escape_string($_POST['fname']);
-        $lname = mysql_real_escape_string($_POST['lname']);
-        $email = mysql_real_escape_string($_POST['email']);
-        $phone = mysql_real_escape_string($_POST['phone']);
+        $fname = mysqli_real_escape_string($this->con, $_POST['fname']);
+        $lname = mysqli_real_escape_string($this->con, $_POST['lname']);
+        $email = mysqli_real_escape_string($this->con, $_POST['email']);
+        $phone = mysqli_real_escape_string($this->con, $_POST['phone']);
         $raw_pw = $_POST['pw'];
 
         // Check to make sure all required values have been inputted.
@@ -68,7 +67,7 @@ class phpapi
         $query = "INSERT INTO Users(FirstName, LastName, Email,
             Password,PasswordSalt,PhoneNumber,UserType,ExternalType) VALUES 
             ('$fname','$lname','$email','$pw','$salt','$phone','$auth','$externalType')";
-        if(!mysql_query($query))
+        if(!mysqli_query($this->con, $query))
         {
             return false;
         }
@@ -91,10 +90,10 @@ class phpapi
         //Query to get user's information
         $query = "SELECT FirstName, LastName, Email, PhoneNumber, UserType, ExternalType 
             FROM Users WHERE Users.UserID = '$userID'";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         //Change mysql result to array so that it can be exported in JSON.
-        $rows = mysql_fetch_assoc($result);
+        $rows = mysqli_fetch_assoc($result);
         return json_encode(array('UserInfo' => $rows));
     }
 
@@ -113,8 +112,8 @@ class phpapi
         $userID = $_SESSION['userID'];
 
         //Get information from POST
-        $firstName = mysql_real_escape_string($_POST['fname']);
-        $lastName = mysql_real_escape_string($_POST['lname']);
+        $firstName = mysqli_real_escape_string($this->con, $_POST['fname']);
+        $lastName = mysqli_real_escape_string($this->con, $_POST['lname']);
         $phoneNumber = $_POST['phone'];
         $oldPassword = $_POST['old_pw'];
         $newPassword = $_POST['new_pw'];
@@ -129,13 +128,13 @@ class phpapi
         {
             $query = "UPDATE Users SET FirstName = '$firstName', LastName = 
                 '$lastName', PhoneNumber = $phoneNumber WHERE UserID = '$userID'";
-            mysql_query($query);
+            mysqli_query($this->con, $query);
         }
         else
         {
             // Obtain the salt for the user.
             $query = "SELECT * FROM Users WHERE UserId = '$userID'";
-            $info = mysql_fetch_array(mysql_query($query));
+            $info = mysqli_fetch_array(mysqli_query($this->con, $query));
             $salt = $info['PasswordSalt'];
 
             // Add the salt to the password, and hash the whole thing.
@@ -145,9 +144,9 @@ class phpapi
             // Validate the user. Using the native system.
             $query = "SELECT * FROM Users WHERE UserID = '$userID' AND 
                 Password = '$pw'";
-            $result = mysql_query($query);
+            $result = mysqli_query($this->con, $query);
 
-            if(mysql_num_rows($result) != 0)
+            if(mysqli_num_rows($result) != 0)
             {
                 // Create the salt. Then salt and hash the password.
                 $salt = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB), MCRYPT_DEV_RANDOM);
@@ -157,7 +156,7 @@ class phpapi
                 $query = "UPDATE Users SET FirstName = '$firstName', LastName = 
                     '$lastName', PhoneNumber = $phoneNumber, Password = '$pw', 
                     PasswordSalt = '$salt' WHERE UserID = '$userID'";
-                mysql_query($query);
+                mysqli_query($this->con, $query);
             }
             else
                 return "wrong_password";
@@ -183,10 +182,10 @@ class phpapi
             !isset($_SESSION['userID']) || !isset($_SESSION['userName']))
         {
             // Obtain user info
-            $fname = mysql_real_escape_string($_POST['fname']);
-            $lname = mysql_real_escape_string($_POST['lname']);
-            $email = mysql_real_escape_string($_POST['email']);
-            $externalID = mysql_real_escape_string($_POST['externalID']);
+            $fname = mysqli_real_escape_string($this->con, $_POST['fname']);
+            $lname = mysqli_real_escape_string($this->con, $_POST['lname']);
+            $email = mysqli_real_escape_string($this->con, $_POST['email']);
+            $externalID = mysqli_real_escape_string($this->con, $_POST['externalID']);
             $auth = 0;
             $externalType = "Google";
 
@@ -196,24 +195,24 @@ class phpapi
             //Query to see if the user already exists
             $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
                 ExternalType = '$externalType'";
-            $result = mysql_query($query);
+            $result = mysqli_query($this->con, $query);
 
             //If the user doesn't exist.
-            if(mysql_num_rows($result)==0)
+            if(mysqli_num_rows($result)==0)
             {
                 //Add the info into the users table.
                 $query = "INSERT INTO Users(FirstName, LastName, Email, UserType,
                     ExternalType, ExternalID) VALUES ('$fname','$lname','$email','$auth',
                     '$externalType', '$externalID')";
-                mysql_query($query);
+                mysqli_query($this->con, $query);
 
                 //Get everything from the row just inserted.
                 $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
                     ExternalType = '$externalType'";
-                $result = mysql_query($query);
+                $result = mysqli_query($this->con, $query);
             }
 
-            $info = mysql_fetch_array($result);
+            $info = mysqli_fetch_array($result);
             $_SESSION['logged'] = true;
             $_SESSION['userEmail'] = $info['Email'];
             
@@ -245,10 +244,10 @@ class phpapi
             !isset($_SESSION['userID']) || !isset($_SESSION['userName']))
         {
             // Obtain user info
-            $fname = mysql_real_escape_string($_POST['fname']);
-            $lname = mysql_real_escape_string($_POST['lname']);
-            $email = mysql_real_escape_string($_POST['email']);
-            $externalID = mysql_real_escape_string($_POST['externalID']);
+            $fname = mysqli_real_escape_string($this->con, $_POST['fname']);
+            $lname = mysqli_real_escape_string($this->con, $_POST['lname']);
+            $email = mysqli_real_escape_string($this->con, $_POST['email']);
+            $externalID = mysqli_real_escape_string($this->con, $_POST['externalID']);
             $auth = 0;
             $externalType = "Facebook";
 
@@ -258,24 +257,24 @@ class phpapi
             //Query to see if the user already exists
             $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
                 ExternalType = '$externalType'";
-            $result = mysql_query($query);
+            $result = mysqli_query($this->con, $query);
 
             //If the user doesn't exist.
-            if(mysql_num_rows($result)==0)
+            if(mysqli_num_rows($result)==0)
             {
                 //Add the info into the users table.
                 $query = "INSERT INTO Users(FirstName, LastName, Email, UserType,
                     ExternalType, ExternalID) VALUES ('$fname','$lname','$email','$auth',
                     '$externalType', '$externalID')";
-                mysql_query($query);
+                mysqli_query($this->con, $query);
                 
                 //Get everything from the row just inserted.
                 $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
                     ExternalType = '$externalType'";
-                $result = mysql_query($query);
+                $result = mysqli_query($this->con, $query);
             }
 
-            $info = mysql_fetch_array($result);
+            $info = mysqli_fetch_array($result);
             $_SESSION['logged'] = true;
             $_SESSION['userEmail'] = $info['Email'];
             
@@ -302,34 +301,34 @@ class phpapi
     public function verifyGoogleUserAndroid()
     {
         // Obtain user info
-        $fname = mysql_real_escape_string($_POST['fname']);
-        $lname = mysql_real_escape_string($_POST['lname']);
-        $email = mysql_real_escape_string($_POST['email']);
-        $externalID = mysql_real_escape_string($_POST['externalID']);
+        $fname = mysqli_real_escape_string($this->con, $_POST['fname']);
+        $lname = mysqli_real_escape_string($this->con, $_POST['lname']);
+        $email = mysqli_real_escape_string($this->con, $_POST['email']);
+        $externalID = mysqli_real_escape_string($this->con, $_POST['externalID']);
         $auth = 0;
         $externalType = "Google";
 
         //Query to see if the user already exists
         $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
             ExternalType = '$externalType'";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         //If the user doesn't exist.
-        if(mysql_num_rows($result)==0)
+        if(mysqli_num_rows($result)==0)
         {
             //Add the info into the users table.
             $query = "INSERT INTO Users(FirstName, LastName, Email, UserType,
                 ExternalType, ExternalID) VALUES ('$fname','$lname','$email','$auth',
                 '$externalType', '$externalID')";
-            mysql_query($query);
+            mysqli_query($this->con, $query);
 
             //Get everything from the row just inserted.
             $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
                 ExternalType = '$externalType'";
-            $result = mysql_query($query);
+            $result = mysqli_query($this->con, $query);
         }
 
-        $info = mysql_fetch_array($result);
+        $info = mysqli_fetch_array($result);
 
         // Change mysql result to array so that it can be exported in JSON.
         // Returns an empty array if no info is inside.
@@ -345,10 +344,10 @@ class phpapi
     public function verifyFacebookUserAndroid()
     {
         // Obtain user info
-        $fname = mysql_real_escape_string($_POST['fname']);
-        $lname = mysql_real_escape_string($_POST['lname']);
-        $email = mysql_real_escape_string($_POST['email']);
-        $externalID = mysql_real_escape_string($_POST['externalID']);
+        $fname = mysqli_real_escape_string($this->con, $_POST['fname']);
+        $lname = mysqli_real_escape_string($this->con, $_POST['lname']);
+        $email = mysqli_real_escape_string($this->con, $_POST['email']);
+        $externalID = mysqli_real_escape_string($this->con, $_POST['externalID']);
         $auth = 0;
         $externalType = "Facebook";
 
@@ -358,24 +357,24 @@ class phpapi
         //Query to see if the user already exists
         $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
             ExternalType = '$externalType'";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         //If the user doesn't exist.
-        if(mysql_num_rows($result)==0)
+        if(mysqli_num_rows($result)==0)
         {
             //Add the info into the users table.
             $query = "INSERT INTO Users(FirstName, LastName, Email, UserType,
                 ExternalType, ExternalID) VALUES ('$fname','$lname','$email','$auth',
                 '$externalType', '$externalID')";
-            mysql_query($query);
+            mysqli_query($this->con, $query);
             
             //Get everything from the row just inserted.
             $query = "SELECT * FROM Users WHERE ExternalID = '$externalID' AND 
                 ExternalType = '$externalType'";
-            $result = mysql_query($query);
+            $result = mysqli_query($this->con, $query);
         }
 
-        $info = mysql_fetch_array($result);
+        $info = mysqli_fetch_array($result);
 
         // Change mysql result to array so that it can be exported in JSON.
         // Returns an empty array if no info is inside.
@@ -391,7 +390,7 @@ class phpapi
     public function verifyUser()
     {
         // Check that email and password are not empty.
-        $email = mysql_real_escape_string($_POST['email']);
+        $email = mysqli_real_escape_string($this->con, $_POST['email']);
         $raw_password = $_POST['pw'];
         if (empty($email) || empty($raw_password))
         {
@@ -402,7 +401,7 @@ class phpapi
         // Obtain the salt for the user.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND 
             ExternalType = 'Native'";
-        $info = mysql_fetch_array(mysql_query($query));
+        $info = mysqli_fetch_array(mysqli_query($this->con, $query));
         $salt = $info['PasswordSalt'];
         $info = NULL;
 
@@ -413,19 +412,19 @@ class phpapi
         // Validate the user. Using the native system.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND    
             ExternalType = 'Native' AND Password = '$pw'";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Redirect the user to an error if validation was unsucessful.
         // Otherwise, set the logged in state by setting session variables,
         // then redirect the user to the home page.
-        if(mysql_num_rows($result) == 0)
+        if(mysqli_num_rows($result) == 0)
         {
             header ('Location: signup.php?login=false');
             return false;
         }
         else
         {
-            $info = mysql_fetch_array($result);
+            $info = mysqli_fetch_array($result);
             $_SESSION['logged'] = true;
             $_SESSION['userEmail'] = $info['Email'];
             //Added the user to the session since we use
@@ -447,13 +446,13 @@ class phpapi
      */
     public function verifyUserAndroid()
     {
-        $email = mysql_real_escape_string($_POST['email']);
+        $email = mysqli_real_escape_string($this->con, $_POST['email']);
         $raw_password = $_POST['pw'];
 
         // Obtain the salt for the user.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND 
             ExternalType = 'Native'";
-        $info = mysql_fetch_array(mysql_query($query));
+        $info = mysqli_fetch_array(mysqli_query($this->con, $query));
         $salt = $info['PasswordSalt'];
         $info = NULL;
         
@@ -464,12 +463,12 @@ class phpapi
         // Validate the user. Using the native system.
         $query = "SELECT * FROM Users WHERE Email = '$email' AND    
             ExternalType = 'Native' AND Password = '$pw'"; 
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
         
-        if(mysql_num_rows($result) > 0)
+        if(mysqli_num_rows($result) > 0)
         {
             //Get the user info.
-            $info = mysql_fetch_assoc($result);
+            $info = mysqli_fetch_assoc($result);
 
             // We need to keep all the session varaibles despite outputting the 
             // JSON because the server will need to be "involved" as well.
@@ -539,10 +538,10 @@ class phpapi
             ParkingLocations.ParkingID ORDER BY timestamp DESC LIMIT 1), '>24 hours ago') AS 
             Last_Rated FROM ParkingLocations WHERE ParkingLocations.parkingID
             = '$parkingID'";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Change mysql result to array so that it can be exported in JSON.
-        $rows = mysql_fetch_assoc($result);
+        $rows = mysqli_fetch_assoc($result);
         return json_encode(array('ParkingInfo' => $rows));
     }
 
@@ -567,11 +566,11 @@ class phpapi
             ParkingLocations.ParkingID AND Ratings.Level = '$level' 
             ORDER BY timestamp DESC LIMIT 1) AS Last_Rated FROM 
             ParkingLocations WHERE ParkingLocations.parkingID = '$parkingID'";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('LevelInfo' => $rows));
     }
@@ -598,11 +597,11 @@ class phpapi
             ParkingLocations.ParkingID ORDER BY timestamp DESC LIMIT 1), 
             '>24 hours ago') AS Last_Rated FROM ParkingLocations ORDER BY ParkingLocations.Name";
 
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('ParkingLocations' => $rows));
     }
@@ -620,8 +619,8 @@ class phpapi
 
         // Read the JSON.
         $parkingInfo = (array) json_decode($parkingInfoJSON);
-        $name = mysql_real_escape_string($parkingInfo['name']);
-        $address = mysql_real_escape_string($parkingInfo['address']);
+        $name = mysqli_real_escape_string($this->con, $parkingInfo['name']);
+        $address = mysqli_real_escape_string($this->con, $parkingInfo['address']);
         $cost = $parkingInfo['cost'];
         $numberOfLevels = $parkingInfo['numberOfLevels'];
 
@@ -632,7 +631,7 @@ class phpapi
         $query = "UPDATE ParkingLocations SET Name = '$name', 
             Address = '$address', Cost = '$cost', NumberOfLevels = 
             '$numberOfLevels' WHERE ParkingID = '$parkingID'";
-        if (mysql_query($query))
+        if (mysqli_query($this->con, $query))
             return true;
         else
             return false;
@@ -653,7 +652,7 @@ class phpapi
         $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
             Rating) VALUES ('$parkingID', '" . $_POST['level'] . 
             "', NOW(), '$userID', '" . $_POST['availability'] . "')";
-        mysql_query($query);
+        mysqli_query($this->con, $query);
         header ('Location: ratingsub.html'); //this will need to change 
     }
 
@@ -669,7 +668,7 @@ class phpapi
         $query = "INSERT INTO Ratings (ParkingID, Level, Timestamp, UserID, 
             Rating) VALUES ('$parkingID', '" . $_POST['level'] . 
             "', NOW(), '$userID', '" . $_POST['availability'] . "')";
-        mysql_query($query); 
+        mysqli_query($this->con, $query); 
     }
 
      /**
@@ -687,15 +686,15 @@ class phpapi
         //Change comments and cost if NULL
         $cost = empty($_POST['cost']) ? "NULL" : "'" . $_POST['cost'] . "'";
         $comments = empty($_POST['comments']) ? "NULL" : "'" .
-            mysql_real_escape_string($_POST['comments']) . "'";
+            mysqli_real_escape_string($this->con, $_POST['comments']) . "'";
         
         //Query to insert request into the table
         $query = "INSERT INTO Requests (UserID, Name, Address, Cost, 
             NumberOfLevels, Comments, Status) VALUES ('$userID', '" . 
-            mysql_real_escape_string($_POST['name']) . "','" .
-            mysql_real_escape_string($_POST['address']) . "', $cost,'" . 
+            mysqli_real_escape_string($this->con, $_POST['name']) . "','" .
+            mysqli_real_escape_string($this->con, $_POST['address']) . "', $cost,'" . 
             $_POST['numLevels'] . "', $comments, 0)"; 
-        mysql_query($query);
+        mysqli_query($this->con, $query);
     }
 
     /**
@@ -710,11 +709,11 @@ class phpapi
         // Get the list of requests that a user has made.
         $query = "SELECT Name, Address, Cost, NumberOfLevels, Comments, Status 
             FROM Requests WHERE UserID = '$userID' ORDER BY RequestID DESC";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('RequestedGarages' => $rows));
     }
@@ -728,11 +727,11 @@ class phpapi
         // Get the list of requests.
         $query = "SELECT RequestID, Name, Address, Cost, NumberOfLevels, Comments, Status 
             FROM Requests WHERE Status = 0 ORDER BY RequestID ASC";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('Requested' => $rows));        
     }
@@ -745,14 +744,14 @@ class phpapi
     public function editRequests($requestID, $status)
     {
         $query = "UPDATE Requests SET Status = $status WHERE RequestID = $requestID";
-        mysql_query($query);
+        mysqli_query($this->con, $query);
 
         if($status == 2)
         {
             $query = "INSERT INTO ParkingLocations (Name, Address, Cost, 
                 NumberOfLevels) SELECT Name, Address, Cost, NumberOfLevels FROM 
                 Requests WHERE RequestID = $requestID";
-            mysql_query($query);
+            mysqli_query($this->con, $query);
         }
     }
 
@@ -768,12 +767,12 @@ class phpapi
         //Get the highest priority plus 1
         $query = "SELECT IFNULL(max(Priority)+1,1) priority FROM FavoriteGarages
             WHERE UserID = '$userID'";
-        $priority = mysql_fetch_assoc(mysql_query($query));
+        $priority = mysqli_fetch_assoc(mysqli_query($this->con, $query));
 
         //Add a favorite garage.
         $query = "INSERT INTO FavoriteGarages(UserID, ParkingID, Priority)
             VALUES('$userID', '$parkingID', '" . $priority["priority"] . "')";
-        mysql_query($query);    
+        mysqli_query($this->con, $query);    
     }
 
     /**
@@ -787,11 +786,11 @@ class phpapi
 
         //Get the list of favorite garages.
         $query = "SELECT * FROM FavoriteGarages WHERE UserID = '$userID' ORDER BY Priority";          
-        $result = mysql_query($query);    
+        $result = mysqli_query($this->con, $query);    
     
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('Favorites' => $rows));
     }
@@ -804,7 +803,7 @@ class phpapi
     {
         //Delete a favorite garage.
         $query = "DELETE FROM FavoriteGarages WHERE FavoriteID = '$favoriteID'";
-        mysql_query($query);    
+        mysqli_query($this->con, $query);    
     }
 
     /**
@@ -817,12 +816,12 @@ class phpapi
         //Get the highest priority plus 1
         $query = "SELECT IFNULL(max(Priority)+1,1) priority FROM FavoriteGarages
             WHERE UserID = '$userID'";
-        $priority = mysql_fetch_assoc(mysql_query($query));
+        $priority = mysqli_fetch_assoc(mysqli_query($this->con, $query));
 
         //Add a favorite garage.
         $query = "INSERT INTO FavoriteGarages(UserID, ParkingID, Priority)
             VALUES('$userID', '$parkingID', '" . $priority["priority"] . "')";
-        mysql_query($query);    
+        mysqli_query($this->con, $query);    
     }
 
     /**
@@ -834,11 +833,11 @@ class phpapi
     {
         //Get the list of favorite garages.
         $query = "SELECT * FROM FavoriteGarages WHERE UserID = '$userID' ORDER BY Priority";          
-        $result = mysql_query($query);    
+        $result = mysqli_query($this->con, $query);    
     
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('Favorites' => $rows));
     }
@@ -855,11 +854,11 @@ class phpapi
         //Get the user's favorite, if it exsists, that corresponds with the parkingID
         $query = "SELECT * FROM FavoriteGarages WHERE parkingID = '$parkingID' 
             AND UserID = '$userID'";
-        $result = mysql_query($query);
-        $info = mysql_fetch_assoc($result);
+        $result = mysqli_query($this->con, $query);
+        $info = mysqli_fetch_assoc($result);
 
         //If the garage is not one of the user's favorites, return false
-        if(mysql_num_rows($result) == 0)
+        if(mysqli_num_rows($result) == 0)
         {
             echo("False");
             return false;
@@ -887,11 +886,11 @@ class phpapi
         //Get the user's favorite, if it exsists, that corresponds with the parkingID
         $query = "SELECT * FROM FavoriteGarages WHERE parkingID = '$parkingID' 
             AND UserID = '$userID'";
-        $result = mysql_query($query);
-        $info = mysql_fetch_assoc($result);
+        $result = mysqli_query($this->con, $query);
+        $info = mysqli_fetch_assoc($result);
 
         //If the garage is not one of the user's favorites, return false
-        if(mysql_num_rows($result) == 0)
+        if(mysqli_num_rows($result) == 0)
             echo("False");
         
         //Return true if the garage is one of the user's favorites
@@ -932,7 +931,7 @@ class phpapi
             // Add the commute time.
             $query = "INSERT INTO CommuteTimes (UserID, WarningTime, Day)
             VALUES ('$userID', '$warningTime', '$value')";
-            if (!mysql_query($query))
+            if (!mysqli_query($this->con, $query))
             {
                 array_push($existing , $value);
             }
@@ -954,11 +953,11 @@ class phpapi
         //Get the list of commute times.
         $query = "SELECT CommuteID, Day, WarningTime FROM CommuteTimes 
         WHERE UserID = '$userID'";          
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
     
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('CommuteTimes' => $rows));
     }
@@ -971,7 +970,7 @@ class phpapi
     {
         //Delete a commute time.
         $query = "DELETE FROM CommuteTimes WHERE CommuteID = '$commuteID'";
-        mysql_query($query);    
+        mysqli_query($this->con, $query);    
     }
 
     /**
@@ -988,9 +987,9 @@ class phpapi
             Day=DAYOFWEEK(NOW()) AND ABS(TIME_TO_SEC(TIMEDIFF(TIME(NOW()), 
             WarningTime)))<3*60 AND ABS(TIME_TO_SEC(TIMEDIFF(NOW(), 
             TimeOfNotification)))>5*60";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
-        while ($row = mysql_fetch_assoc($result))
+        while ($row = mysqli_fetch_assoc($result))
         {
             //Query to get the ratings of a users favorite garage.
             $query = "SELECT ParkingLocations.Name, ParkingLocations.Address,
@@ -1007,15 +1006,15 @@ class phpapi
                 FavoriteGarages WHERE ParkingLocations.parkingID = 
                 FavoriteGarages.parkingID AND FavoriteGarages.UserID = '". 
                 $row['UserID'] . "' ORDER BY FavoriteGarages.Priority";
-            $result2 = mysql_query($query);
+            $result2 = mysqli_query($this->con, $query);
 
             $query = "UPDATE CommuteTimes SET TimeOfNotification = NOW() WHERE 
                 CommuteID = '" . $row['CommuteID'] . "'";
-            mysql_query($query);
+            mysqli_query($this->con, $query);
 
             $message = "Hello " . $row['FirstName'] . " " . $row['LastName'] . 
                     "!\n\n";
-            if(mysql_num_rows($result2) == 0)
+            if(mysqli_num_rows($result2) == 0)
             {
                 $message .= "You currently do not have any favorite garages. " .
                     "Therefore, we cannot send you any garage ratings at this time. " .
@@ -1026,7 +1025,7 @@ class phpapi
             {
                 $message .= "Here's a list of the capacity of your favorite " . 
                     "garages!\n\n";
-                while ($row2 = mysql_fetch_assoc($result2))
+                while ($row2 = mysqli_fetch_assoc($result2))
                 {
                     $message .= $row2['Name'] . " (" . $row2['Address'] . "):\n";
 
@@ -1082,11 +1081,11 @@ class phpapi
     {
         $query = "SELECT FirstName, LastName, Points FROM Users JOIN TopTen
         WHERE Users.UserID = TopTen.UserID ORDER BY Points desc";     
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
         {
             // Censor the email
             $rows[] = $temp;
@@ -1101,19 +1100,19 @@ class phpapi
     {
         //Delete everything from the top ten users table.
         $query = "Delete FROM TopTen";
-        mysql_query($query);
+        mysqli_query($this->con, $query);
 
         $query = "SELECT Ratings.UserID, count(Ratings.Rating) AS Points FROM 
         Ratings JOIN Users WHERE Users.UserID = Ratings.UserID GROUP BY Email
         ORDER BY Points DESC LIMIT 10";  
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Implode results to insert values in one query.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             array_push($rows, "(". $temp['UserID'] . ", " . $temp['Points'] . ")");
         $query = "INSERT INTO TopTen (UserID, Points) VALUES " . implode(',', $rows);
-        mysql_query($query);
+        mysqli_query($this->con, $query);
     }
 
     /**
@@ -1126,11 +1125,11 @@ class phpapi
         //Query to get the average ratings for each hour there is a rating.
         $query = "SELECT HOUR(TIME(Timestamp)) AS Hour, avg(Rating) AS Rating
         FROM Ratings WHERE Ratings.ParkingID = '$parkingID' GROUP BY Hour ORDER BY Hour";
-        $result = mysql_query($query);
+        $result = mysqli_query($this->con, $query);
 
         // Change mysql result to array so that it can be exported in JSON.
         $rows = array();
-        while($temp = mysql_fetch_assoc($result))
+        while($temp = mysqli_fetch_assoc($result))
             $rows[] = $temp;
         return json_encode(array('Ratings' => $rows)); 
     }
